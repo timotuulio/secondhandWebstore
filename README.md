@@ -1,4 +1,4 @@
-*Welcome to the home of your group's TIETA12, part 2 coursework code and documentation!*
+***Welcome to the home of your group's TIETA12, part 2 coursework code and documentation!***
 
 This README.md file is where your group writes your project plan/project report.
 
