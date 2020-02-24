@@ -21,3 +21,6 @@ For instructions on what to add under these headers, see the course project assi
 ## React and Redux
 ## Testing    
 ## Project timetable and division of work    
+
+
+*Good luck and happy WWWdevvin’!*
