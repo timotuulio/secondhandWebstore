@@ -4,6 +4,8 @@ This README.md file is where your group writes your project plan/project report.
 
 When you write it, you must use Markdown. [Documentation for GitLab Flavored Markdown (GFM)](https://docs.gitlab.com/ee/user/markdown.html).
 
+The directory structure of the code is up to your group to decide, but this README.md file must remain in place.
+
 
 # Initial project plan document
 The headers that must be present in this document are shown here. 
