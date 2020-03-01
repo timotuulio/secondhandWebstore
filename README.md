@@ -31,11 +31,14 @@ graph TD
   MP --> |click item| Item
   LU(List of users) --> |A:Check profile<br/>of a single user| Prof
   Prof(Users profile) --> |A:Check what <br/>shopkeeper sells|OwnSells
+  Prof --> |A: Chek users offerings|OwnOff
+  Prof --> |USA: Edit info| Edit(Edit profile)
   OwnOff(Own offerings <br/>that haven't<br/> been sold yet)
   OwnSells(Items that the <br/>shopkeeper sells) --> |S:click item|Item
   Item(Info about<br/>single item) --> |U:buy|Buy
   Buy(Payment page)
   Offers(Offers that <br/>users have<br/> given)
+
 ```
 
 ---
