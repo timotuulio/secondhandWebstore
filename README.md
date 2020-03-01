@@ -11,9 +11,13 @@ Tapio Nevalainen | Timo Tuulio
 
 ---
 
-## Planned functionality    
+## Planned functionality
 
-We will start by designing the database and Mongoose schemas  
+<div style="text-align: justify">
+We will start by designing the database and Mongoose schemas that can be done without worrying about the frontend. After this API can be designed and implemented. Next, basic frontend is implemented with React, along with the Redux state design. Authentication is designed at this point; we are planning to use JSON webtoken authentication. Frontend is finalized and all the parts are tied together. Finally, some tests are implemented.
+
+</div>
+
 ---
 ## Pages and navigation
 ``` mermaid
