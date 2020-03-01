@@ -14,7 +14,7 @@ Tapio Nevalainen | Timo Tuulio
 ## Planned functionality
 
 <div style="text-align: justify">
-We will start by designing the database and Mongoose schemas that can be done without worrying about the frontend. After this API can be designed and implemented. Next, basic frontend is implemented with React, along with the Redux state design. Authentication is designed at this point; we are planning to use JSON webtoken authentication. Frontend is finalized and all the parts are tied together. Finally, some tests are implemented.
+We will start by designing the database and Mongoose schemas that can be done without worrying about the frontend. After this API can be designed and implemented. Next, basic frontend is implemented with React, along with the Redux state design. Authentication is designed at this point; we are planning to use JSON webtoken authentication. Frontend is finalized and all the parts are tied together. Finally, some tests are implemented. See project timetable in the end of this file.
 
 </div>
 
@@ -113,33 +113,40 @@ ListItem
 
 ---
 ## API
+We use api-calls as such  GET for fetches, POST for adding new content, PUT for update and DELETE for deleting.  
 For the API, we use the following URLs.
-All users:                /api/user
-Single user:              /api/user/:id
-All items:                /api/item
-Single item:              /api/item/:id
-List of users with items: /api/listitems
-Single users all items:   /api/listitems/:id
-We use api-calls as such: GET for fetches, POST for adding new content, PUT for update and DELETE for deleting.
----
-## React and Redux
 
-There will be frontend.
+Description | API path
+------------ | -------------
+All users | /api/user
+Single user | /api/user/:id
+All items | /api/item
+Single item | /api/item/:id
+List of users with items | /api/listitems
+Single users all items | /api/listitems/:id
+
+
 ---
 ## Testing    
 
 Automatic testing is considered. Otherwise manually testing urls with different authentication, and users/items with different kinds of values.
+
+---
+## React and Redux  
+
+React-redux will be utilized. React for UI and redux for handling the state of the app.
+
 ---
 ## Project timetable and division of work    
 
 Due date | Functionality | Person responsible | Current status | Completed
 ------------ | ------------- | ------------- | -------------| -------------
-**1.3.2020** | Initial Project plan | X | ***In progress*** | &#9745;
-**4.3.2020** | Database model design | Y | Todo | &#9744;
-**7.3.2020** | React setup | X | Todo | &#9744;
-**9.3.2020** | Redux state design | Y | Todo |&#9744;
-**11.3.2020** | Authentication design and implementation | X | Todo |&#9744;
-**13.3.2020** | Finalize frontend | Y | Todo | &#9744;
-**15.3.2020** | Combine database,state, and frontend functionality | Y | Todo | &#9744;
-**18.3.2020** | Test implementation | X | Todo | &#9744;
-**20.3.2020** | Return work | Y | Todo | &#9744;
+**1.3.2020** | Initial Project plan | Tapio,Timo | DONE | &#9745;
+**4.3.2020** | Database model design | Tapio | ***In progress*** | &#9744;
+**7.3.2020** | React setup | Timo | ***In progress*** | &#9744;
+**9.3.2020** | Redux state design | Timo | Todo |&#9744;
+**11.3.2020** | Authentication design and implementation | Tapio | Todo |&#9744;
+**13.3.2020** | Finalize frontend | Timo | Todo | &#9744;
+**15.3.2020** | Combine database,state, and frontend functionality | Tapio,Timo | Todo | &#9744;
+**18.3.2020** | Test implementation | Tapio | Todo | &#9744;
+**20.3.2020** | Return work | - | Todo | &#9744;
