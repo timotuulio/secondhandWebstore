@@ -53,13 +53,20 @@ graph TD
 
 ---
 ## API
-
+For the API, we use the following URLs.
+All users:                /api/user
+Single user:              /api/user/:id
+All items:                /api/item
+Single item:              /api/item/:id
+List of users with items: /api/listitems
+Single users all items:   /api/listitems/:id
+We use api-calls as such: GET for fetches, POST for adding new content, PUT for update and DELETE for deleting.
 ---
 ## React and Redux
-
+There will be frontend.
 ---
 ## Testing    
-
+Automatic testing is considered. Otherwise manually testing urls with different authentication, and users/items with different kinds of values.
 ---
 ## Project timetable and division of work    
 
