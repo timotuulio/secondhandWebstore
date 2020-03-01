@@ -1,6 +1,7 @@
 ***Welcome to the home of your group's TIETA12, part 2 coursework code and documentation!***
 
 This README.md file is where your group writes your project plan/project report.
+// Testing setup
 
 When you write it, you must use Markdown. [Documentation for GitLab Flavored Markdown (GFM)](https://docs.gitlab.com/ee/user/markdown.html).
 
