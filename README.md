@@ -47,6 +47,40 @@ graph TD
 
 ---
 ## Mongo database and Mongoose schemas    
+<div style="text-align: justify">
+There will be two main models for User and Item, and an additional model for ListItems, that links users and items together.
+User model models individual user that is assigned one of the available roles. Email is used to identify an individual user and in login.
+</div>
+
+<pre><code>
+USER
+- name: STRING
+- role: STRING
+- bankAccount: STRING
+- email: STRING
+- phoneNumber: STRING
+- address: STRING
+- password: STRING
+- selfLink: STRING
+</code></pre>
+
+Item model models individual item that is sold in the shop. OwnerID links every item to individual user. There might be an option to add image of the item.
+<pre><code>
+ITEM
+- ownerID: STRING
+- price: FLOAT
+- image: img
+- description: STRING
+- selfLink: STRING
+</code></pre>
+
+ListItem model models relations between users and items. List of items that relate to an individual user consists of those that belong to that user. There will be dummy users for retrieving all sold items and all offered items. 
+<pre><code>
+ListItem
+- userID: STRING
+- Items: List of Items
+</code></pre>
+
 
 ---
 ## API
