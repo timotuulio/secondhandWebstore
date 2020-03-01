@@ -114,7 +114,7 @@ ListItem
 ---
 ## API
 We use api-calls as such  GET for fetches, POST for adding new content, PUT for update and DELETE for deleting.  
-For the API, we use the following URLs.
+For the API, we use the following URLs.  
 Description|API path
 ------------ | ------------- |
 All users | /api/user
@@ -126,11 +126,16 @@ Single users all items | /api/listitems/:id
 
 
 ---
-## React and Redux
+## React and Redux  
+
+
 There will be frontend.
+
 ---
-## Testing    
-Automatic testing is considered. Otherwise manually testing urls with different authentication, and users/items with different kinds of values.
+## Testing
+
+Automatic testing is considered. Otherwise manuallt testing urls with different authentication, and users/items with different kinds of values.
+
 ---
 ## Project timetable and division of work    
 
