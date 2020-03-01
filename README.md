@@ -1,43 +1,48 @@
-***Welcome to the home of your group's TIETA12, part 2 coursework code and documentation!***
 
-# WWW Programming Part 2 Coursework
-### Group information:
-#### Group X
+# WWW Programming Part 2 Coursework Project plan
+## Course project group information
+#### Group Name: X
+Tapio Nevalainen | Timo Tuulio
+------------ | ------------- 
+80997 | 415428
+<tapio.nevalainen@tuni.fi> | <timo.tuulio@tuni.fi>
 
-* Tapio Nevalainen 80997 tapio.nevalainen@tuni.fi 
-* Timo Tuulio 415428 timo.tuulio@tuni.fi
+#### GitLab repository: <https://course-gitlab.tuni.fi/tieta12-2019-2020/x>
 
-
-```mermaid
-graph TD;
-  A-->B;
-  A-->C;
-  B-->D;
-  C-->D;
-```
-
-
-GitLab repository: https://course-gitlab.tuni.fi/tieta12-2019-2020/x
-
-When you write it, you must use Markdown. [Documentation for GitLab Flavored Markdown (GFM)](https://docs.gitlab.com/ee/user/markdown.html).
-
-The directory structure of the code is up to your group to decide, but this README.md file must remain in place.
-
-
-# Initial project plan document
-The headers that must be present in this document are shown here. 
-
-For instructions on what to add under these headers, see the course project assignment document, [see the coursework assignment document](https://docs.google.com/document/d/1ctG6mURrs1WlqwwPnMOFE_mSIEhZVCjp2XGefAZMdxQ/edit#heading=h.vsanic5plbto)
-
-## Course project group information    
+---
+    
 ## Planned functionality    
+
+We will start by designing the database and Mongoose schemas  
+---
 ## Pages and navigation    
+
+---
 ## Modules your group created in your Node project    
+
+---
 ## Mongo database and Mongoose schemas    
+
+---
 ## API
+
+---
 ## React and Redux
+
+---
 ## Testing    
+
+---
 ## Project timetable and division of work    
 
-
-*Good luck and happy WWWdevvin’!*
+Due date | Functionality | Person responsible | Current status | Completed
+------------ | ------------- | ------------- | -------------| -------------
+**1.3.2020** | Initial Project plan | X | ***In progress*** | &#9745;
+**4.3.2020** | Database model design | Y | Todo | &#9744; 
+**7.3.2020** | React setup | X | Todo | &#9744; 
+**9.3.2020** | Redux state design | Y | Todo |&#9744; 
+**11.3.2020** | Authentication design and implementation | X | Todo |&#9744; 
+**13.3.2020** | Finalize frontend | Y | Todo | &#9744; 
+**15.3.2020** | Combine database,state, and frontend functionality | Y | Todo | &#9744; 
+**18.3.2020** | Test implementation | X | Todo | &#9744; 
+**20.3.2020** | Return work | Y | Todo | &#9744; 
