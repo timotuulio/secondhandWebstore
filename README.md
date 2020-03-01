@@ -116,13 +116,13 @@ ListItem
 We use api-calls as such  GET for fetches, POST for adding new content, PUT for update and DELETE for deleting.  
 For the API, we use the following URLs.  
 Description|API path
------------- | ------------- |
-All users | /api/user
-Single user | /api/user/:id
-All items | /api/item
-Single item | /api/item/:id
-List of users with items | /api/listitems
-Single users all items | /api/listitems/:id
+------------ | -------------
+All users | /api/user 
+Single user | /api/user/:id 
+All items | /api/item 
+Single item | /api/item/:id 
+List of users with items | /api/listitems 
+Single users all items | /api/listitems/:id 
 
 
 ---
