@@ -114,9 +114,10 @@ ListItem
 ---
 ## API
 We use api-calls as such  GET for fetches, POST for adding new content, PUT for update and DELETE for deleting.  
-For the API, we use the following URLs.  
-Description|API path
------------- | -------------
+For the API, we use the following URLs. 
+
+Description | API path 
+------------ | ------------- 
 All users | /api/user 
 Single user | /api/user/:id 
 All items | /api/item 
@@ -128,8 +129,8 @@ Single users all items | /api/listitems/:id
 ---
 ## React and Redux  
 
+React-redux will be utilized. React for UI and redux for handling the state of the app.
 
-There will be frontend.
 
 ---
 ## Testing
@@ -141,9 +142,9 @@ Automatic testing is considered. Otherwise manuallt testing urls with different 
 
 Due date | Functionality | Person responsible | Current status | Completed
 ------------ | ------------- | ------------- | -------------| -------------
-**1.3.2020** | Initial Project plan | Tapio,Timo | ***In progress*** | &#9745;
-**4.3.2020** | Database model design | Tapio | Todo | &#9744;
-**7.3.2020** | React setup | Timo | Todo | &#9744;
+**1.3.2020** | Initial Project plan | Tapio,Timo | DONE | &#9745;
+**4.3.2020** | Database model design | Tapio | ***In progress*** | &#9744;
+**7.3.2020** | React setup | Timo | ***In progress*** | &#9744;
 **9.3.2020** | Redux state design | Timo | Todo |&#9744;
 **11.3.2020** | Authentication design and implementation | Tapio | Todo |&#9744;
 **13.3.2020** | Finalize frontend | Timo | Todo | &#9744;
