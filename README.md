@@ -47,7 +47,33 @@ graph TD
 
 ---
 ## Modules your group created in your Node project    
-
+Our planned working directory is as follows:
+<pre><code>
+USER
+- package
+- Public
+  - index.html
+- src
+  - Actions
+    - actions.js
+  - Reducers
+    - rootReducer.js
+    - reducer1.js
+    - reducer2.js
+  - Routes
+    - api.js
+    - user.js
+    - shop.js
+  - Components
+    - header.js
+    - item.js
+    - user.js
+    - allItems.js
+    - allUsers.js
+  - App.js
+  - api.js
+- readme.md
+</code></pre>
 ---
 ## Mongo database and Mongoose schemas    
 <div style="text-align: justify">
@@ -77,7 +103,7 @@ ITEM
 - selfLink: STRING
 </code></pre>
 
-ListItem model models relations between users and items. List of items that relate to an individual user consists of those that belong to that user. There will be dummy users for retrieving all sold items and all offered items. 
+ListItem model models relations between users and items. List of items that relate to an individual user consists of those that belong to that user. There will be dummy users for retrieving all sold items and all offered items.
 <pre><code>
 ListItem
 - userID: STRING
