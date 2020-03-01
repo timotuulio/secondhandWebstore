@@ -49,12 +49,12 @@ graph TD
 ## Modules your group created in your Node project    
 Our planned working directory is as follows:
 <pre><code>
-USER
+Directory
 - package
 - Public
   - index.html
 - src
-  - Actions
+   - Actions
     - actions.js
   - Reducers
     - rootReducer.js
@@ -70,7 +70,7 @@ USER
     - user.js
     - allItems.js
     - allUsers.js
-  - App.js
+  - app.js
   - api.js
 - readme.md
 </code></pre>
