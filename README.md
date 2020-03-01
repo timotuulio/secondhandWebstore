@@ -64,6 +64,10 @@ Directory
     - api.js
     - user.js
     - shop.js
+  - Models
+    - item
+    - itemList
+    - user
   - Components
     - header.js
     - item.js
