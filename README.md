@@ -54,7 +54,7 @@ Directory
 - Public
   - index.html
 - src
-   - Actions
+  - Actions
     - actions.js
   - Reducers
     - rootReducer.js
@@ -123,9 +123,11 @@ Single users all items:   /api/listitems/:id
 We use api-calls as such: GET for fetches, POST for adding new content, PUT for update and DELETE for deleting.
 ---
 ## React and Redux
+
 There will be frontend.
 ---
 ## Testing    
+
 Automatic testing is considered. Otherwise manually testing urls with different authentication, and users/items with different kinds of values.
 ---
 ## Project timetable and division of work    
