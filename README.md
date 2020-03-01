@@ -35,11 +35,14 @@ graph TD
   MP --> |click item| Item
   LU(List of users) --> |A:Check profile<br/>of a single user| Prof
   Prof(Users profile) --> |A:Check what <br/>shopkeeper sells|OwnSells
+  Prof --> |A: Chek users offerings|OwnOff
+  Prof --> |USA: Edit info| Edit(Edit profile)
   OwnOff(Own offerings <br/>that haven't<br/> been sold yet)
   OwnSells(Items that the <br/>shopkeeper sells) --> |S:click item|Item
   Item(Info about<br/>single item) --> |U:buy|Buy
   Buy(Payment page)
   Offers(Offers that <br/>users have<br/> given)
+
 ```
 
 ---
@@ -84,13 +87,20 @@ ListItem
 
 ---
 ## API
-
+For the API, we use the following URLs.
+All users:                /api/user
+Single user:              /api/user/:id
+All items:                /api/item
+Single item:              /api/item/:id
+List of users with items: /api/listitems
+Single users all items:   /api/listitems/:id
+We use api-calls as such: GET for fetches, POST for adding new content, PUT for update and DELETE for deleting.
 ---
 ## React and Redux
-
+There will be frontend.
 ---
 ## Testing    
-
+Automatic testing is considered. Otherwise manually testing urls with different authentication, and users/items with different kinds of values.
 ---
 ## Project timetable and division of work    
 
