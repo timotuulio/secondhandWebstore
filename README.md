@@ -16,20 +16,21 @@ Tapio Nevalainen | Timo Tuulio
 We will start by designing the database and Mongoose schemas  
 ---
 ## Pages and navigation
+The site includes a static navigation bar that has links to main page and most other pages. Depending on the users authentication only some navigation links are shown. On the graph this is marked with letters. U for user, S for shopkeeper and A for admin. Note that shopkeepers authetication includes the users authentication.
 ``` mermaid
 graph TD
   Log(Login) --> |not<br/> Registered?| Reg
   Reg(Register)
 	MP{{Mainpage that includes <br/>all vendible items}} --> |log in| Log
   MP --> |register| Reg
-  MP --> |U:Check <br/>own profile| Prof
+  MP --> |USA:Check <br/>own profile| Prof
   MP --> |A:check users| LU
   MP --> |S:Own sellings|OwnSells
   MP --> |U:Own offers|OwnOff
-  MP --> |S:CheckOffers|Offers
+  MP --> |SA:CheckOffers|Offers
   MP --> |click item| Item
   LU(List of users) --> |A:Check profile<br/>of a single user| Prof
-  Prof(Users profile)
+  Prof(Users profile) --> |A:Check what <br/>shopkeeper sells|OwnSells
   OwnOff(Own offerings <br/>that haven't<br/> been sold yet)
   OwnSells(Items that the <br/>shopkeeper sells) --> |S:click item|Item
   Item(Info about<br/>single item) --> |U:buy|Buy
