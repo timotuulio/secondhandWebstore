@@ -11,5 +11,8 @@
     "url": "git@course-gitlab.tuni.fi:tieta12-2019-2020/x.git"
   },
   "author": "TN/TT",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
