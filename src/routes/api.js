@@ -1,1 +1,3 @@
-// api routes here
+var api = "moi kaikki";
+
+module.exports = api;

@@ -1,5 +1,4 @@
-//import api from 'asd.js'/*'/routes/api.js'*/;
-const api = require('asd.js');
+const api = require('./routes/api.js');
 const express = require('express');
 
 const app = express();
