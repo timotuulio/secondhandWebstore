@@ -1,3 +1,9 @@
-var api = "moi kaikki";
+const express = require('express');
 
-module.exports = api;
+const app = express();
+
+app.get('/api', (req, res) => {
+  res.send("This is api");
+});
+
+module.exports = app;
