@@ -81,7 +81,7 @@ Directory
 ---
 ## Mongo database and Mongoose schemas    
 <div style="text-align: justify">
-There will be two main models for User and Item, and an additional model for ListItems, that links users and items together.
+There will be two main models for User and Item, and an additional model for itemsofuser, that links users and items together.
 User model models individual user that is assigned one of the available roles. Email is used to identify an individual user and in login.
 </div>
 
@@ -107,9 +107,9 @@ ITEM
 - selfLink: STRING
 </code></pre>
 
-ListItem model models relations between users and items. List of items that relate to an individual user consists of those that belong to that user. There will be dummy users for retrieving all sold items and all offered items.
+Itemsofuser model models relations between users and items. List of items that relate to an individual user consists of those that belong to that user. There will be dummy users for retrieving all sold items and all offered items.
 <pre><code>
-ListItem
+Itemsofuser
 - userID: STRING
 - Items: List of Items
 </code></pre>
@@ -126,8 +126,8 @@ All users | /api/user
 Single user | /api/user/:id
 All items | /api/item
 Single item | /api/item/:id
-List of users with items | /api/listitems
-Single users all items | /api/listitems/:id
+List of users with items | /api/itemsofuser
+Single users all items | /api/itemsofuser/:id
 
 
 ---
