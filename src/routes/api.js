@@ -27,8 +27,7 @@ router.put('/item', (req, res) => {res.send("PUT: This is items");});
 router.delete('/item', (req, res) => {res.send("DELETE: This is items");});
 
 router.get('/item/:id', (req, res) => {res.send("GET: This is single item");});
-router.post('/item/:id', (req, res) => {res.send("POST: This is single item");});
-router.put('/item/:id', (req, res) => {res.send("PUT: This is single item");});
+router.put('/item/:id', itemController.updateItem);
 router.delete('/item/:id', (req, res) => {res.send("DELETE: This is single item");});
 
 router.get('/itemsofusers', (req, res) => {res.send("GET: This is list of users with items");});

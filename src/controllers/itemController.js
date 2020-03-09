@@ -16,6 +16,22 @@ module.exports = {
         newItem.save();
 
         res.send(newItem);
+    },
+
+    async updateItem(req,res){
+        const itemUpdateInfo = req.body;
+        console.log(itemUpdateInfo);
+          // Check that player exists, that is to be modified
+        var updatedItem = await Item.findById(req.params.id).exec()
+            .catch(function(error){return 'Error occured'});
+
+        updatedItem.price = itemUpdateInfo.price;
+        updatedItem.description = itemUpdateInfo.description;
+
+        updatedItem.save();
+        
+        console.log(updatedItem);
+        res.send(updatedItem);
     }
 
    
