@@ -41,4 +41,11 @@ router.post('/itemsofusers/:id', (req, res) =>  {res.send("POST: This is list of
 router.put('/itemsofusers/:id', (req, res) =>  {res.send("PUT: This is list of a certain users items");});
 router.delete('/itemsofusers/:id', (req, res) =>  {res.send("DELETE: This is list of a certain users items");});
 
+
+router.get('/test', testItem);
+
+function testItem(req, res) {
+  res.send("Api.js testItem funktiossa ollaan");
+}
+
 module.exports = router;
