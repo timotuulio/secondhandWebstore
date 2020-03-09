@@ -14,5 +14,6 @@ app.get('/', (req, res) => {
 
 app.use("/api", api);
 app.listen(port, () => {
+
   console.log(`App listening on port ${port}!`);
 });
