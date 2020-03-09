@@ -32,8 +32,26 @@ module.exports = {
         
         console.log(updatedItem);
         res.send(updatedItem);
+    },
+
+    async deleteItem(req,res){
+
+        const itemToBeDeleted = await Item.findById(req.params.id).exec()
+            .catch(function(error){return 'Error occured'});
+
+        Item.findByIdAndDelete(req.params.id).exec();
+
+        res.send(itemToBeDeleted);
+    },
+
+    deleteAllItems(req,res){
+        Item.deleteMany({}, function(err){
+            if(err){
+                return err;
+            }else{
+                console.log("Removed all items successfully!");
+            }
+            res.send({});
+        });
     }
-
-   
-
 }
