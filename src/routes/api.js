@@ -3,8 +3,11 @@
 const express = require('express');
 const router = express.Router();
 const itemController = require('../controllers/itemController');
+const bodyParser = require('body-parser');
 
-
+//router.use(bodyParser.urlencoded({ extended: true }))
+router.use(express.urlencoded({ extended: true }));
+router.use(bodyParser.json());
 
 router.get('/api', (req, res) => {res.send("This is api");});
 
@@ -19,7 +22,7 @@ router.put('/user/:id', (req, res) => {res.send("PUT: This is single user");});
 router.delete('/user/:id', (req, res) => {res.send("DELETE: This is single user");});
 
 router.get('/item', (req, res) => {res.send("GET: This is items");});
-router.post('/item', (req, res) => {res.send("POST: This is items");});
+router.post('/item', itemController.addItem);
 router.put('/item', (req, res) => {res.send("PUT: This is items");});
 router.delete('/item', (req, res) => {res.send("DELETE: This is items");});
 

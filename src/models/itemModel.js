@@ -4,7 +4,7 @@ const ItemSchema = new mongoose.Schema({
   
   ownerID: {
     type: String,
-    required: true
+    //required: true
   },
   price: {
     type: Number,
@@ -22,6 +22,4 @@ const ItemSchema = new mongoose.Schema({
 
 const Item = mongoose.model('Item', ItemSchema);
 
-module.exports = {
-  Item: Item
-}
+module.exports = Item;
