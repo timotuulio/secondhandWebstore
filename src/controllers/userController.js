@@ -44,9 +44,9 @@ module.exports = {
 
       if (req.body && req.body.name && req.body.password && req.body.role) {
         console.log('adding user');
-    
+
         bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-    
+
           var newUser = new User({
             name: xssFilters.inHTMLData(userToBeAdded.name),
             password: hash,
@@ -62,13 +62,13 @@ module.exports = {
             };
 
             console.log("Inserted new user");
-    
+            console.log("This is ID:" + newUser._id)
             // Create token and return it
-            jwt.sign({name:req.body.name},secret,{algorithm:'HS256'},function(err, token){
+            jwt.sign({name:newUser._id},secret,{algorithm:'HS256'},function(err, token){
               res.json(token);
             });
           });
-    
+
         });
       } else {
         res.sendStatus(400);
@@ -94,6 +94,42 @@ module.exports = {
 
         console.log(updatedUser);
         res.send(updatedUser);
+    },
+
+    async deleteUser(req,res){
+
+        const userToBeDeleted = await User.findById(req.params.id).exec()
+            .catch(function(error){return 'Error occured'});
+
+        Item.findByIdAndDelete(req.params.id).exec();
+
+        res.send(userToBeDeleted);
+    },
+
+    deleteAllUsers(req,res){
+        User.deleteMany({}, function(err){
+            if(err){
+                return err;
+            }else{
+                console.log("Removed all users successfully!");
+            }
+            res.send({});
+        });
+    },
+
+    async getSingleUser(req,res){
+
+        var fetchedUser = await User.findById(req.params.id).exec()
+            .catch(function(error){return 'Error occured'});
+
+        res.send(fetchedUser);
+    },
+
+    async getAllUsers(req,res){
+
+        var fetchedUsers = await User.find().exec()
+            .catch(function(error){return 'Error occured'});
+        res.send(fetchedUsers);
     }
 
 }

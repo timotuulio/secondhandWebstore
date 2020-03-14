@@ -10,15 +10,13 @@ router.use(bodyParser.json());
 
 router.get('/api', (req, res) => {res.send("This is api");});
 
-router.get('/user', (req, res) => {res.send("GET: This is all users");});
+router.get('/user', userController.getAllUsers);
 router.post('/user', userController.addUser);
-router.put('/user', userController.updateUser);
-router.delete('/user', (req, res) => {res.send("DELETE: This is all users");});
+router.delete('/user', userController.deleteAllUsers);
 
-router.get('/user/:id', (req, res) => {res.send("GET: This is single user");});
-router.post('/user/:id', (req, res) => {res.send("POST: This is single user");});
-router.put('/user/:id', (req, res) => {res.send("PUT: This is single user");});
-router.delete('/user/:id', (req, res) => {res.send("DELETE: This is single user");});
+router.get('/user/:id', userController.getSingleUser);
+router.put('/user/:id', userController.updateUser);
+router.delete('/user/:id', userController.deleteUser);
 
 router.get('/item', itemController.getAllItems);
 router.post('/item', itemController.addItem);
