@@ -8,14 +8,33 @@ module.exports = {
     addItem(req,res){
 
         const itemToBeAdded = req.body;
-        console.log(itemToBeAdded);
+
         newItem = new Item();
-        newItem.price = xssFilters.inHTMLData(itemToBeAdded.price);
-        newItem.description = xssFilters.inHTMLData(itemToBeAdded.description);
 
-        newItem.save();
+        // Check that the added data has required properties
+        if('title' in itemToBeAdded && 'description' in itemToBeAdded){
 
-        res.send(newItem);
+            
+            newItem.price = xssFilters.inHTMLData(itemToBeAdded.price);
+            newItem.title = xssFilters.inHTMLData(itemToBeAdded.title);
+    
+            newItem.save(function(err){
+                if(err){
+                    return handleError(err);
+                }else{
+                    console.log("Item "+newItem.title+" added.");
+                }
+            });
+    
+        
+        // In case there are no required fields, give bad request
+        }else{
+            res.statusCode = 400;
+            res.send("Check the required fields");
+        }
+
+        console.log(itemToBeAdded);
+       
     },
 
     async updateItem(req,res){
