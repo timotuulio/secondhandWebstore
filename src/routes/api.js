@@ -20,11 +20,11 @@ router.post('/user/:id', (req, res) => {res.send("POST: This is single user");})
 router.put('/user/:id', (req, res) => {res.send("PUT: This is single user");});
 router.delete('/user/:id', (req, res) => {res.send("DELETE: This is single user");});
 
-router.get('/item', (req, res) => {res.send("GET: This is items");});
+router.get('/item', itemController.getAllItems);
 router.post('/item', itemController.addItem);
 router.delete('/item', itemController.deleteAllItems);
 
-router.get('/item/:id', (req, res) => {res.send("GET: This is single item");});
+router.get('/item/:id', itemController.getSingleItem);
 router.put('/item/:id', itemController.updateItem);
 router.delete('/item/:id', itemController.deleteItem);
 

@@ -53,5 +53,20 @@ module.exports = {
             }
             res.send({});
         });
+    },
+
+    async getSingleItem(req,res){
+
+        var fetchedItem = await Item.findById(req.params.id).exec()
+            .catch(function(error){return 'Error occured'});
+        
+        res.send(fetchedItem);
+    },
+
+    async getAllItems(req,res){
+
+        var fetchedItems = await Item.find().exec()
+            .catch(function(error){return 'Error occured'});
+        res.send(fetchedItems);
     }
 }
