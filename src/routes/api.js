@@ -10,9 +10,8 @@ router.use(bodyParser.json());
 
 router.get('/api', (req, res) => {res.send("This is api");});
 
-router.get('/user', (req, res) => {res.send("GET: This is all users");});
+router.get('/user', userController.getAllUsers);
 router.post('/user', userController.addUser);
-router.put('/user', (req, res) => {res.send("PUT: This is all users");});
 router.delete('/user', userController.deleteAllUsers);
 
 router.get('/user/:id', userController.getSingleUser);
