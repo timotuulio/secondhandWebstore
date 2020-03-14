@@ -38,6 +38,35 @@ module.exports = {
 
         console.log(updatedUser);
         res.send(updatedUser);
-    }
+    },
+
+    async deleteUser(req,res){
+
+        const userToBeDeleted = await User.findById(req.params.id).exec()
+            .catch(function(error){return 'Error occured'});
+
+        Item.findByIdAndDelete(req.params.id).exec();
+
+        res.send(userToBeDeleted);
+    },
+
+    deleteAllUsers(req,res){
+        User.deleteMany({}, function(err){
+            if(err){
+                return err;
+            }else{
+                console.log("Removed all users successfully!");
+            }
+            res.send({});
+        });
+    },
+
+    async getSingleUser(req,res){
+
+        var fetchedUser = await User.findById(req.params.id).exec()
+            .catch(function(error){return 'Error occured'});
+
+        res.send(fetchedUser);
+    },
 
 }
