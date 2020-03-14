@@ -6,12 +6,18 @@ const ItemSchema = new mongoose.Schema({
     type: String,
     //required: true
   },
+  title:{
+    type:String,
+    required:true
+  },
+
   price: {
     type: Number,
     min: 1,
     required: true,
     validate: Number.isInteger
   },
+  
   image: {
       type:String
   },
