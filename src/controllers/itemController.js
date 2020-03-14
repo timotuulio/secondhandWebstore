@@ -2,77 +2,151 @@
 
 const Item = require('../models/itemModel');
 const xssFilters = require('xss-filters');
+const jwt = require('jsonwebtoken');
+
+
+var secret = 'tosisecret';
+
+
+// This will authenticate token
+function authToken(tokenAuth){
+
+    var authed = false;
+
+    if(!tokenAuth){
+
+        // No header 
+    
+    }else if(tokenAuth.startsWith('Bearer' )){
+
+        var token = tokenAuth.slice(7,tokenAuth.length);
+        console.log(token)
+    
+        jwt.verify(token,secret, function(err,decoded){
+            if(err){
+                console.log("invalid token");
+            }else{
+                authed = true;
+                console.log('authenticated');
+            }
+        });
+    }
+    return authed;
+  }
+  
+
 
 module.exports = {
 
     addItem(req,res){
 
-        const itemToBeAdded = req.body;
 
-        newItem = new Item();
+        if(authToken(req.headers.authorization)){
+            const itemToBeAdded = req.body;
 
-        // Check that the added data has required properties
-        if('title' in itemToBeAdded && 'description' in itemToBeAdded){
+            newItem = new Item();
 
-            
-            newItem.price = xssFilters.inHTMLData(itemToBeAdded.price);
-            newItem.title = xssFilters.inHTMLData(itemToBeAdded.title);
-    
-            newItem.save(function(err){
-                if(err){
-                    return handleError(err);
-                }else{
-                    console.log("Item "+newItem.title+" added.");
-                    res.send(newItem);
-                }
-            });
-            
+            // Check that the added data has required properties
+            if('title' in itemToBeAdded && 'description' in itemToBeAdded){
+
+                
+                newItem.price = xssFilters.inHTMLData(itemToBeAdded.price);
+                newItem.title = xssFilters.inHTMLData(itemToBeAdded.title);
         
-        // In case there are no required fields, give bad request
+                newItem.save(function(err){
+                    if(err){
+                        return handleError(err);
+                    }else{
+                        console.log("Item "+newItem.title+" added.");
+                        res.send(newItem);
+                    }
+                });
+                
+            
+            // In case there are no required fields, give bad request
+            }else{
+                res.statusCode = 400;
+                res.send("Check the required fields");
+            }
+
+            console.log(itemToBeAdded);
+
         }else{
-            res.statusCode = 400;
-            res.send("Check the required fields");
+            console.log("Authentication failed")
+            // Check format of this
+            res.send("Not authorized")
         }
 
-        console.log(itemToBeAdded);
+        
        
     },
 
     async updateItem(req,res){
-        const itemUpdateInfo = req.body;
-        console.log(itemUpdateInfo);
-          // Check that player exists, that is to be modified
-        var updatedItem = await Item.findById(req.params.id).exec()
-            .catch(function(error){return 'Error occured'});
 
-        updatedItem.price = itemUpdateInfo.price;
-        updatedItem.description = itemUpdateInfo.description;
+        if(authToken(req.headers.authorization)){
+            const itemUpdateInfo = req.body;
+            console.log(itemUpdateInfo);
+            // Check that player exists, that is to be modified
+            var updatedItem = await Item.findById(req.params.id).exec()
+                .catch(function(error){return 'Error occured'});
 
-        updatedItem.save();
+            updatedItem.price = itemUpdateInfo.price;
+            updatedItem.description = itemUpdateInfo.description;
+
+            updatedItem.save();
+            
+            console.log(updatedItem);
+            res.send(updatedItem);
+
+        }else{
+            console.log("Authentication failed")
+            // Check format of this
+            res.send("Not authorized")
+        }
+
+
+
         
-        console.log(updatedItem);
-        res.send(updatedItem);
     },
 
     async deleteItem(req,res){
 
-        const itemToBeDeleted = await Item.findById(req.params.id).exec()
+        if(authToken(req.headers.authorization)){
+            const itemToBeDeleted = await Item.findById(req.params.id).exec()
             .catch(function(error){return 'Error occured'});
 
-        Item.findByIdAndDelete(req.params.id).exec();
+            Item.findByIdAndDelete(req.params.id).exec();
 
-        res.send(itemToBeDeleted);
+            res.send(itemToBeDeleted);
+
+        }else{
+            console.log("Authentication failed")
+            // Check format of this
+            res.send("Not authorized")
+        }
+
+
+       
     },
 
     deleteAllItems(req,res){
-        Item.deleteMany({}, function(err){
-            if(err){
-                return err;
-            }else{
-                console.log("Removed all items successfully!");
-            }
-            res.send({});
-        });
+
+        if(authToken(req.headers.authorization)){
+            Item.deleteMany({}, function(err){
+                if(err){
+                    return err;
+                }else{
+                    console.log("Removed all items successfully!");
+                }
+                res.send({});
+            });
+
+        }else{
+            console.log("Authentication failed")
+            // Check format of this
+            res.send("Not authorized")
+        }
+        
     },
 
     async getSingleItem(req,res){
