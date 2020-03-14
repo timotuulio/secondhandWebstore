@@ -1,25 +1,52 @@
 // Controller for api when searching users
 const User = require('../models/userModel');
 const xssFilters = require('xss-filters');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
+var secret = 'tosisecret';
+const saltRounds = 12;
 
 module.exports = {
 
+
+    //TODO: Add every info to be added (email, number, etc)
+    //TODO: Check that every required info exist)
     addUser(req,res){
-      //TODO: Add every info to be added (email, number, etc)
-      //TODO: Check that every required info exist)
-      // TODO: hash password
+
       const userToBeAdded = req.body;
-      console.log(userToBeAdded);
-      newUser = new User();
-      newUser.name = xssFilters.inHTMLData(userToBeAdded.name);
-      newUser.role = xssFilters.inHTMLData(userToBeAdded.role);
-      newUser.password = xssFilters.inHTMLData(userToBeAdded.password);
 
-      newUser.save();
+      if (req.body && req.body.name && req.body.password && req.body.role) {
+        console.log('adding user');
+    
+        bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    
+          var newUser = new User({
+            name: xssFilters.inHTMLData(userToBeAdded.name),
+            password: hash,
+            role: xssFilters.inHTMLData(userToBeAdded.role)
+          });
 
-      res.send(newUser);
+          console.log(newUser)
 
+          newUser.save(function(err) {
+            if (err) {
+              res.sendStatus(500);
+              return console.error(err);
+            };
+
+            console.log("Inserted new user");
+    
+            // Create token and return it
+            jwt.sign({name:req.body.name},secret,{algorithm:'HS256'},function(err, token){
+              res.json(token);
+            });
+          });
+    
+        });
+      } else {
+        res.sendStatus(400);
+      }
     },
 
     async updateUser(req,res){
