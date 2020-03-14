@@ -6,12 +6,14 @@ const xssFilters = require('xss-filters');
 module.exports = {
 
     addUser(req,res){
+      //TODO: Add every info to be added (email, number, etc)
+      //TODO: Check that every required info exist)
+      // TODO: hash password
       const userToBeAdded = req.body;
       console.log(userToBeAdded);
       newUser = new User();
       newUser.name = xssFilters.inHTMLData(userToBeAdded.name);
       newUser.role = xssFilters.inHTMLData(userToBeAdded.role);
-      // TODO: hash password
       newUser.password = xssFilters.inHTMLData(userToBeAdded.password);
 
       newUser.save();
@@ -20,20 +22,22 @@ module.exports = {
 
     },
 
-    async updateItem(req,res){
-        const itemUpdateInfo = req.body;
-        console.log(itemUpdateInfo);
+    async updateUser(req,res){
+        // Something is wrong with this thing. It cant find with findById >,<
+        const userUpdateInfo = req.body;
+        console.log(userUpdateInfo);
           // Check that player exists, that is to be modified
-        var updatedItem = await Item.findById(req.params.id).exec()
+        var updatedUser = await User.findById(req.params.id).exec()
             .catch(function(error){return 'Error occured'});
 
-        updatedItem.price = itemUpdateInfo.price;
-        updatedItem.description = itemUpdateInfo.description;
+        updatedUser.name = userUpdateInfo.name;
+        updatedUser.role = userUpdateInfo.role;
+        updatedUser.password = userUpdateInfo.password;
 
-        updatedItem.save();
+        updatedUser.save();
 
-        console.log(updatedItem);
-        res.send(updatedItem);
+        console.log(updatedUser);
+        res.send(updatedUser);
     }
 
 }

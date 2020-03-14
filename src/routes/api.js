@@ -12,7 +12,7 @@ router.get('/api', (req, res) => {res.send("This is api");});
 
 router.get('/user', (req, res) => {res.send("GET: This is all users");});
 router.post('/user', userController.addUser);
-router.put('/user', (req, res) => {res.send("PUT: This is all users");});
+router.put('/user', userController.updateUser);
 router.delete('/user', (req, res) => {res.send("DELETE: This is all users");});
 
 router.get('/user/:id', (req, res) => {res.send("GET: This is single user");});
