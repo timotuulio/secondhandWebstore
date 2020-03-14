@@ -1,0 +1,22 @@
+<div id="root"> </div>
+
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<script src="https://unpkg.com/react-redux@5.0.7/dist/react-redux.js"></script>
+
+<script type="text/babel">
+//import store from './store/store';
+const store = require('./src/store/store');
+const AllItems = require('./src/components/itemComponent');
+//import AllItems from './components/itemComponent';
+
+const ReactApp = () => (
+  <Provider store={store}>
+    <AllItems />
+  </Provider>
+);
+
+render(<ReactApp />, document.getElementById('root'));
+</script>

@@ -6,7 +6,7 @@ const db = require('./models/db');
 db.connectDB();
 
 const app = express();
-
+app.use(express.static('../public'));
 
 const port = 3000
 
