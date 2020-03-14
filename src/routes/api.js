@@ -1,8 +1,7 @@
-//<<<<<<< HEAD
-
 const express = require('express');
 const router = express.Router();
 const itemController = require('../controllers/itemController');
+const userController = require('../controllers/userController');
 const bodyParser = require('body-parser');
 
 //router.use(bodyParser.urlencoded({ extended: true }))
@@ -12,7 +11,7 @@ router.use(bodyParser.json());
 router.get('/api', (req, res) => {res.send("This is api");});
 
 router.get('/user', (req, res) => {res.send("GET: This is all users");});
-router.post('/user', (req, res) => {res.send("POST: This is all users");});
+router.post('/user', userController.addUser);
 router.put('/user', (req, res) => {res.send("PUT: This is all users");});
 router.delete('/user', (req, res) => {res.send("DELETE: This is all users");});
 
