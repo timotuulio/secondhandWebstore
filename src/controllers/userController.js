@@ -5,7 +5,33 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 var secret = 'tosisecret';
+
 const saltRounds = 12;
+
+
+// This will authenticate token
+function authenticate(tokenAuth){
+
+  if(tokenAuth.startsWith('Bearer' )){
+
+    var token = tokenAuth.slice(7,tokenAuth.length);
+    console.log(token)
+
+    jwt.verify(token,secret, function(err,decoded){
+      if(err){
+          return false;
+      }else{
+          console.log('authenticated');
+          console.log("aasdd:"+decoded.typ);
+          return true;
+      }
+    });
+  }else{
+    return false;
+  }
+}
+
+
 
 module.exports = {
 
@@ -50,6 +76,9 @@ module.exports = {
     },
 
     async updateUser(req,res){
+
+        //console.log(authenticate(req.headers.authorization))
+
         // Something is wrong with this thing. It cant find with findById >,<
         const userUpdateInfo = req.body;
         console.log(userUpdateInfo);
