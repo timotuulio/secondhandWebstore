@@ -10,27 +10,30 @@ const saltRounds = 12;
 
 
 // This will authenticate token
-function authenticate(tokenAuth){
+function authToken(tokenAuth){
 
-  if(tokenAuth.startsWith('Bearer' )){
+    var authed = false;
 
-    var token = tokenAuth.slice(7,tokenAuth.length);
-    console.log(token)
+    if(!tokenAuth){
 
-    jwt.verify(token,secret, function(err,decoded){
-      if(err){
-          return false;
-      }else{
-          console.log('authenticated');
-          console.log("aasdd:"+decoded.typ);
-          return true;
-      }
-    });
-  }else{
-    return false;
+        // No header 
+    
+    }else if(tokenAuth.startsWith('Bearer' )){
+
+        var token = tokenAuth.slice(7,tokenAuth.length);
+        console.log(token)
+    
+        jwt.verify(token,secret, function(err,decoded){
+            if(err){
+                console.log("invalid token");
+            }else{
+                authed = true;
+                console.log('authenticated');
+            }
+        });
+    }
+    return authed;
   }
-}
-
 
 
 module.exports = {
@@ -98,38 +101,71 @@ module.exports = {
 
     async deleteUser(req,res){
 
-        const userToBeDeleted = await User.findById(req.params.id).exec()
+        if(authToken(req.headers.authorization)){
+
+            const userToBeDeleted = await User.findById(req.params.id).exec()
             .catch(function(error){return 'Error occured'});
 
-        Item.findByIdAndDelete(req.params.id).exec();
+            User.findByIdAndDelete(req.params.id).exec();
 
-        res.send(userToBeDeleted);
+            res.send(userToBeDeleted);
+
+        }else{
+            console.log("Authentication failed")
+            // Check format of this
+            res.send("Not authorized")
+        }
+
+       
     },
 
     deleteAllUsers(req,res){
+
+      if(authToken(req.headers.authorization)){
         User.deleteMany({}, function(err){
-            if(err){
-                return err;
-            }else{
-                console.log("Removed all users successfully!");
-            }
-            res.send({});
+          if(err){
+              return err;
+          }else{
+              console.log("Removed all users successfully!");
+          }
+          res.send({});
         });
+      }else{
+            console.log("Authentication failed")
+            // Check format of this
+            res.send("Not authorized")
+      }
     },
 
     async getSingleUser(req,res){
 
-        var fetchedUser = await User.findById(req.params.id).exec()
-            .catch(function(error){return 'Error occured'});
+      if(authToken(req.headers.authorization)){
+          var fetchedUser = await User.findById(req.params.id).exec()
+          .catch(function(error){return 'Error occured'});
 
-        res.send(fetchedUser);
+          res.send(fetchedUser);
+
+      }else{
+        console.log("Authentication failed")
+        // Check format of this
+        res.send("Not authorized")
+      }
+    
     },
 
     async getAllUsers(req,res){
 
+      if(authToken(req.headers.authorization)){
         var fetchedUsers = await User.find().exec()
-            .catch(function(error){return 'Error occured'});
+        .catch(function(error){return 'Error occured'});
         res.send(fetchedUsers);
+
+      }else{
+        console.log("Authentication failed")
+        // Check format of this
+        res.send("Not authorized")
+      }
+       
     }
 
 }
