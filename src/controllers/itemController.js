@@ -23,9 +23,10 @@ module.exports = {
                     return handleError(err);
                 }else{
                     console.log("Item "+newItem.title+" added.");
+                    res.send(newItem);
                 }
             });
-    
+            
         
         // In case there are no required fields, give bad request
         }else{

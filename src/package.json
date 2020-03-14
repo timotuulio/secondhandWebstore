@@ -13,8 +13,10 @@
   "author": "TN/TT",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.3",
     "xss-filters": "^1.2.7"
   }
