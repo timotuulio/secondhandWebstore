@@ -47,11 +47,12 @@ module.exports = {
             newItem = new Item();
 
             // Check that the added data has required properties
-            if('title' in itemToBeAdded && 'description' in itemToBeAdded){
+            if('title' in itemToBeAdded && 'price' in itemToBeAdded && 'ownerId' in itemToBeAdded){
 
                 
                 newItem.price = xssFilters.inHTMLData(itemToBeAdded.price);
                 newItem.title = xssFilters.inHTMLData(itemToBeAdded.title);
+                newItem.ownerId = itemToBeAdded.ownerId;
         
                 newItem.save(function(err){
                     if(err){
