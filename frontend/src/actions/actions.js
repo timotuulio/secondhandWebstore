@@ -1,5 +1,5 @@
 // Actions for Redux part of the page
-import { INCREMENT, DECREASE } from "./actionTypes";
+import { INCREMENT, DECREASE, MAIN } from "./actionTypes";
 
 export function incrementAction() {
   return {
@@ -9,5 +9,12 @@ export function incrementAction() {
 export function decreaseAction() {
   return{
     type: DECREASE,
+  };
+}
+
+export function mainAction() {
+  return{
+    type: MAIN,
+
   };
 }

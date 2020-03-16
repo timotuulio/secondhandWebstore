@@ -18,6 +18,7 @@ const store = createStore(reducers, composeEnchancers());
     const variable = true;
 
     function Players(){
+      console.log(store.getState().pageReducer.page)
       return(
           <Provider store={store}>
             <Header />
@@ -25,7 +26,7 @@ const store = createStore(reducers, composeEnchancers());
             <Test />
 
             {(() => {
-            if (variable) {
+            if (store.getState().pageReducer.page=='LOGIN') {
             return <Signup />;
             }
             })()}

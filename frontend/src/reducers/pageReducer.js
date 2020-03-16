@@ -1,7 +1,7 @@
 import {MAIN, LOGIN} from '../stateNames.js'
 
 const initialState = {
-  page: MAIN,
+  page: LOGIN,
 };
 
 function pageReducer(state = initialState, action) {
@@ -9,6 +9,7 @@ function pageReducer(state = initialState, action) {
     case 'LOGIN':
       return { ...state, page: LOGIN };
     case 'MAIN':
+      console.log("changed state to main")
       return { ...state, page: MAIN };
     default:
       return state;

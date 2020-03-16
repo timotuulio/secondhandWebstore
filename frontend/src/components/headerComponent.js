@@ -8,17 +8,20 @@ import {
   ButtonToolbar,ButtonGroup,Button,Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,NavItem,NavLink,UncontrolledDropdown,DropdownToggle, DropdownMenu, DropdownItem, NavbarText
 } from 'reactstrap';
 
-const Header =(props) => {
+import { connect } from 'react-redux';
+
+import {
+  incrementAction,
+  decreaseAction,
+  mainAction
+} from '../actions/actions.js';
+
+
+
+const Header =({page,mainAction}) => {
   
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
-
-
- function asd(e){
-  e.preventDefault();
-  alert("sad");
- }
 
   return (
     <div>
@@ -35,11 +38,16 @@ const Header =(props) => {
           </ButtonGroup>
             
             <Button>Jotain</Button>
+            {(() => {
+            if (page=='LOGIN') {
+            return <Button >Kasdsadt</Button> ;
+            }
+            })()}
     
     </ButtonToolbar>
             
           </Nav>
-          <Button onClick={(e) => alert("keke")}>Kirjaudu sisään</Button>
+          <Button onClick={mainAction}>Kirjaudu sisään</Button>
           
         </Collapse>
             
@@ -48,4 +56,18 @@ const Header =(props) => {
   );
 }
 
-export default Header;
+//export default Header;
+
+
+const mapStateToProps = (state) => ({
+  value: state.addReducer.value,
+  page: state.pageReducer.page
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  incrementAction: () => dispatch(incrementAction()),
+  decreaseAction: () => dispatch(decreaseAction()),
+  mainAction: () => dispatch(mainAction())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
