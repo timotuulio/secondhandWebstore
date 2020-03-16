@@ -30,7 +30,7 @@ const { useState, useEffect } = React;
 
         // Get single player
         async function fetchPlayer(id) {
-            const res = await fetch('/players/'+id);    
+            const res = await fetch('/players/'+id);
             res
                 .json()
                 .then(res => setPlayer(res))
@@ -79,18 +79,18 @@ const { useState, useEffect } = React;
             setCreated(false);
         },[path,deleted,created]);
 
-      
- 
+
+
 
 
         //returns
         if (players==null) {
             return <p>No data</p>;
         }
-      
-    
+
+
         const playerItems = players.map((player) => <li key={player._id}><button onClick={() => fetchPlayer(player._id)}>{player.name}</button></li>);
-        
+
 
          // This will render in the beginning when player attribute is null
         if(player == null){
@@ -124,7 +124,7 @@ const { useState, useEffect } = React;
                         <button>Submit</button>
                         </form>
                     </div>
-                    
+
                 )
         }
 
@@ -172,7 +172,7 @@ const { useState, useEffect } = React;
                 </div>
             )
 
-        
+
     };
 
 
