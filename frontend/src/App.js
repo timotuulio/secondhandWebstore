@@ -2,6 +2,7 @@ import React from 'react';
 import useFetch from "use-http";
 import { Provider } from 'react-redux';
 import { createStore, compose } from 'redux';
+import Signup from './components/signupComponent.js';
 
 import reducers from './reducers/rootReducer';
 import Header from './components/headerComponent.js';
@@ -14,12 +15,22 @@ const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(reducers, composeEnchancers());
 
+    const variable = true;
+
     function Players(){
       return(
           <Provider store={store}>
             <Header />
             <AllItems />
             <Test />
+
+            {(() => {
+            if (variable) {
+            return <Signup />;
+            }
+            })()}
+
+           
           </Provider>
       )
     }
