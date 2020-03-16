@@ -29,7 +29,9 @@ function AllItems() {
   console.log(items);
   items.map(itm => {
     itemsToRender.push(<div>
-      <p>{itm.title}</p>
+      <h3>{itm.title}</h3>
+      <p>{itm.price}€</p>
+      <hr/>
     </div>)
   });
 
