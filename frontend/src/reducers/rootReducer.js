@@ -1,5 +1,8 @@
-// Combine other reducers together
-// I am not sure yet what kinds of reducers will be needed
+import pageReducer from './pageReducer.js'
+import { combineReducers } from 'redux';
+
+//const {combineReducers} = Redux;
+
 const initialState = {
   value: 0,
 };
@@ -15,4 +18,9 @@ function addReducer(state = initialState, action) {
   }
 }
 
-export default addReducer;
+const ultimateReducer = combineReducers({
+  addReducer,
+  pageReducer
+});
+
+export default ultimateReducer;

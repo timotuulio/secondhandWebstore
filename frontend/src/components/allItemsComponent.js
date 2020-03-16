@@ -13,14 +13,14 @@ function AllItems() {
   const testItems = [
     {
         "_id": "5e6d1dd29339230cc6f8076c",
-        "price": 100,
-        "title": "A thingie",
+        "price": 1,
+        "title": "A Blääg",
         "__v": 0
     },
     {
         "_id": "5e6d34d4f5b37b0ecc4821ac",
-        "price": 90,
-        "title": "A secret thingie",
+        "price": 1290,
+        "title": "A secret JOeebix",
         "__v": 0
     }
 ];

@@ -21,7 +21,7 @@ class Page extends PureComponent {
 
 
 const mapStateToProps = (state) => ({
-  value: state.value,
+  value: state.addReducer.value,
 });
 
 const mapDispatchToProps = (dispatch) => ({
