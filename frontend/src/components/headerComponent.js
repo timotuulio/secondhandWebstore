@@ -5,7 +5,7 @@ import React,{ useState } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-  MdHome,Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,NavItem,NavLink,UncontrolledDropdown,DropdownToggle, DropdownMenu, DropdownItem, NavbarText
+  ButtonToolbar,ButtonGroup,Button,Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,NavItem,NavLink,UncontrolledDropdown,DropdownToggle, DropdownMenu, DropdownItem, NavbarText
 } from 'reactstrap';
 
 const Header =(props) => {
@@ -14,39 +14,35 @@ const Header =(props) => {
 
   const toggle = () => setIsOpen(!isOpen);
 
+
+ function asd(e){
+  e.preventDefault();
+  alert("sad");
+ }
+
   return (
     <div>
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">Verkkokauppa</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink href="/components/">Profiili</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">Kaupat</NavLink>
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+          <ButtonToolbar aria-label="Toolbar with button groups">
+          <ButtonGroup className="mr-2">
+          <Button size="lg">Profiili</Button>
+          </ButtonGroup>
+          <ButtonGroup className="mr-2">
+          <Button >Kaupat</Button>
+          </ButtonGroup>
+            
+            <Button>Jotain</Button>
+    
+    </ButtonToolbar>
+            
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
+          <Button onClick={(e) => alert("keke")}>Kirjaudu sisään</Button>
+          
         </Collapse>
+            
       </Navbar>
     </div>
   );
