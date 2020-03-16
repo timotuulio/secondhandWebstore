@@ -6,9 +6,13 @@ const db = require('./models/db');
 db.connectDB();
 
 const app = express();
-app.use(express.static('../public'));
 
-const port = 3000
+var cors = require('cors');
+
+
+app.use(cors());
+
+const port = 3001;
 
 app.use("/api", api);
 
