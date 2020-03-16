@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Login = ({ }) => (
+const Main = ({ }) => (
     <div>
         <form action="http://localhost:3001/api/user" method="post">
             <label for="fname">Email address:</label>
@@ -16,4 +16,4 @@ const Login = ({ }) => (
   )
 
 
-export default Login;
+export default Main;
