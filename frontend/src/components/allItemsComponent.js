@@ -2,8 +2,6 @@ import React from 'react';
 import useFetch from "use-http";
 import { connect } from 'react-redux';
 import {
-  incrementAction,
-  decreaseAction,
   loadedAction,
   mainAction,
   loadingAction
@@ -63,8 +61,6 @@ const mapStateToProps = (state) => ({
   });
 
 const mapDispatchToProps = (dispatch) => ({
-    incrementAction: () => dispatch(incrementAction()),
-    decreaseAction: () => dispatch(decreaseAction()),
     mainAction: () => dispatch(mainAction()),
     loadedAction: () => dispatch(loadedAction()),
     loadingAction: () => dispatch(loadingAction()),
