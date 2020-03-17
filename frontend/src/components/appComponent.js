@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './headerComponent.js';
 //import Hdr from './containers/login.js';
 import AllItems from './allItemsComponent.js'
+import AllUsers from './allUsersComponent.js'
 import Test from './test.js'
 import Signup from './signupComponent.js';
 import Login from './loginComponent.js';
@@ -16,18 +17,19 @@ const App = ({page,mainAction}) =>{
                 <Login />
             </div>
         );
-        
+
     }else{
         return(
             <div>
                 <Header />
-                <AllItems />
+                {/*<AllItems />*/}
                 <Test />
                 <Signup />
+                <AllUsers />
             </div>
         );
     }
-    
+
 }
 
 
