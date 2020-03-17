@@ -1,5 +1,5 @@
 // Actions for Redux part of the page
-import { INCREMENT, DECREASE, MAIN } from "./actionTypes";
+import { INCREMENT, DECREASE, MAIN, LOADING, LOADED } from "./actionTypes";
 
 export function incrementAction() {
   return {
@@ -15,6 +15,16 @@ export function decreaseAction() {
 export function mainAction() {
   return{
     type: MAIN,
+  };
+}
 
+export function loadingAction() {
+  return{
+    type: LOADING,
+  };
+}
+export function loadedAction() {
+  return{
+    type: LOADED,
   };
 }

@@ -1,4 +1,3 @@
-// React component for when all items are shown
 import React from 'react';
 import useFetch from "use-http";
 
@@ -27,15 +26,28 @@ function AllItems() {
   const items = testItems/*fetchData()*/;
   const itemsToRender = [];
   console.log(items);
-  items.map(itm => {
-    itemsToRender.push(<div>
-      <h3>{itm.title}</h3>
-      <p>{itm.price}€</p>
-      <hr/>
-    </div>)
-  });
-
-  return itemsToRender;
+  if (store.getState().loadReducer.page=='LOADED') {
+    items.map(itm => {
+      {(() => {
+        return itemsToRender.push(
+          <div>
+            <h3>{itm.title}</h3>
+            <p>{itm.price}€</p>
+            <hr/>
+          </div>)
+      })}
+    });
+  }
+  else {
+    itemsToRender.push(
+      <div>
+        <p>Loading</p>
+      </div>)
+  }
+  return (
+    <Provider store={store}>
+      {itemsToRender}
+    </Provider>)
 }
 
 export default AllItems;
