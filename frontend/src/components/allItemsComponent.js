@@ -5,23 +5,21 @@ import {
   incrementAction,
   decreaseAction,
   loadedAction,
-  mainAction
+  mainAction,
+  loadingAction
 } from '../actions/actions.js';
 
 
 var item;
 function setData(data){
   item = data;
-  console.log(item)
 }
 
-function AllItems({loadState, loadedAction}) {
+function AllItems({loadState, loadedAction, loadingAction}) {
 
-  //var items = testItems;
-  
-
+  //loadingAction();
   fetch('http://localhost:3001/api/item').then(res=>res.json()).then(data => setData(data)).then(loadedAction);
-  
+
   const testItems = [
     {
         "_id": "5e6d1dd29339230cc6f8076c",
@@ -35,28 +33,22 @@ function AllItems({loadState, loadedAction}) {
         "title": "A secret JOeebix",
         "__v": 0
     }
-];
+  ];
   const itemsToRender = /*testItems*/[];
   var items = testItems;
   console.log(items);
   if (loadState=='LOADED') {
-    
-    console.log("...................." +items);
 
       item.map(itm => itemsToRender.push(
         <div>
-        <h2>asdsafsaf</h2>
         <h3>{itm.title}</h3>
-        <div>{itm.price}</div>
+        <div>{itm.price}€</div>
         <hr/>
       </div>
-
       ))
 
- 
   }
   else {
-  //if (loadState=='LOADING') {
     itemsToRender.push(
       <div>
         <p>Loading...</p>
@@ -75,6 +67,7 @@ const mapDispatchToProps = (dispatch) => ({
     decreaseAction: () => dispatch(decreaseAction()),
     mainAction: () => dispatch(mainAction()),
     loadedAction: () => dispatch(loadedAction()),
+    loadingAction: () => dispatch(loadingAction()),
 });
 
 
