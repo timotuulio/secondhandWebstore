@@ -8,31 +8,20 @@ import {
   mainAction
 } from '../actions/actions.js';
 
+
+var item;
+function setData(data){
+  item = data;
+  console.log(item)
+}
+
 function AllItems({loadState, loadedAction}) {
-  async function fetchData() {
-      const res = await fetch('http://localhost:3001/api/item');
 
-      res
-          .json()
-          .then(res => {
-            asd(res)
-            // res.map(itm => {
-            //   return itemsToRender.push(
-            //     <div>
-            //       <h3>{itm.title}</h3>
-            //       <p>{itm.price}€</p>
-            //       <hr/>
-            //     </div>)
-            // });
-            // console.log("This is itemsToRender: " + itemsToRender);
-          });
+  //var items = testItems;
+  
 
-  }
-  function asd(res) {
-    //console.log("I am in asd!");
-    //console.log(res);
-    loadedAction();
-  }
+  fetch('http://localhost:3001/api/item').then(res=>res.json()).then(data => setData(data)).then(loadedAction);
+  
   const testItems = [
     {
         "_id": "5e6d1dd29339230cc6f8076c",
@@ -47,17 +36,24 @@ function AllItems({loadState, loadedAction}) {
         "__v": 0
     }
 ];
-  const itemsToRender = testItems/*[]*/;
-  const items = fetchData();
+  const itemsToRender = /*testItems*/[];
+  var items = testItems;
   console.log(items);
   if (loadState=='LOADED') {
+    
     console.log("...................." +items);
-      return itemsToRender.push(
+
+      item.map(itm => itemsToRender.push(
         <div>
-          <h3>{items.title}</h3>
-          <p>{items.price}€</p>
-          <hr/>
-        </div>)
+        <h2>asdsafsaf</h2>
+        <h3>{itm.title}</h3>
+        <div>{itm.price}</div>
+        <hr/>
+      </div>
+
+      ))
+
+ 
   }
   else {
   //if (loadState=='LOADING') {
