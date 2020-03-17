@@ -17,3 +17,7 @@ export const QUEST = 'QUEST';
 export const USER = 'USER';
 export const SHOPKEEPER = 'SHOPKEEPER';
 export const ADMIN = 'ADMIN';
+
+// State to check if data has been loaded from applyMiddleware
+export const LOADING = 'LOADING';
+export const LOADED = 'LOADED';
