@@ -1,12 +1,12 @@
 // React component for the header
-import Login from './loginComponent';
-import Main from './mainButtonComponent';
+
 import React,{ useState } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-  ButtonToolbar,ButtonGroup,Button,Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,NavItem,NavLink,UncontrolledDropdown,DropdownToggle, DropdownMenu, DropdownItem, NavbarText
+  ButtonToolbar,ButtonGroup,Button,Collapse,Navbar,NavbarBrand,Nav
 } from 'reactstrap';
+
 
 import { connect } from 'react-redux';
 
@@ -15,7 +15,6 @@ import {
   decreaseAction,
   mainAction
 } from '../actions/actions.js';
-
 
 
 const Header =({page,mainAction}) => {
