@@ -12,6 +12,7 @@ const Login = ({ }) => (
             <br></br>
             <input type="submit" value="Submit"/>
         </form>
+        <p>Not signed up? Sign up here!</p>
     </div>
   )
 

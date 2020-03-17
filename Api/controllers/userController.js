@@ -44,8 +44,8 @@ module.exports = {
     addUser(req,res){
 
       const userToBeAdded = req.body;
-
-      if (req.body && req.body.name && req.body.password && req.body.role) {
+      console.log("adduser");
+      if (req.body && req.body.name && req.body.password) {
         console.log('adding user');
 
         bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
@@ -138,7 +138,7 @@ module.exports = {
     },
 
     async getSingleUser(req,res){
-
+      console.log("getsingleuser");
       if(authToken(req.headers.authorization)){
           var fetchedUser = await User.findById(req.params.id).exec()
           .catch(function(error){return 'Error occured'});
@@ -154,7 +154,7 @@ module.exports = {
     },
 
     async getAllUsers(req,res){
-
+      console.log("getallusers");
       if(authToken(req.headers.authorization)){
         var fetchedUsers = await User.find().exec()
         .catch(function(error){return 'Error occured'});
