@@ -1,13 +1,37 @@
 import React from 'react';
 import useFetch from "use-http";
+import { connect } from 'react-redux';
+import {
+  incrementAction,
+  decreaseAction,
+  loadedAction,
+  mainAction
+} from '../actions/actions.js';
 
-function AllItems() {
+function AllItems({loadState, loadedAction}) {
   async function fetchData() {
       const res = await fetch('http://localhost:3001/api/item');
 
       res
           .json()
-          .then(res => console.log(res));
+          .then(res => {
+            asd(res)
+            // res.map(itm => {
+            //   return itemsToRender.push(
+            //     <div>
+            //       <h3>{itm.title}</h3>
+            //       <p>{itm.price}€</p>
+            //       <hr/>
+            //     </div>)
+            // });
+            // console.log("This is itemsToRender: " + itemsToRender);
+          });
+
+  }
+  function asd(res) {
+    //console.log("I am in asd!");
+    //console.log(res);
+    loadedAction();
   }
   const testItems = [
     {
@@ -23,31 +47,39 @@ function AllItems() {
         "__v": 0
     }
 ];
-  const items = testItems/*fetchData()*/;
-  const itemsToRender = [];
+  const itemsToRender = testItems/*[]*/;
+  const items = fetchData();
   console.log(items);
-  if (store.getState().loadReducer.page=='LOADED') {
-    items.map(itm => {
-      {(() => {
-        return itemsToRender.push(
-          <div>
-            <h3>{itm.title}</h3>
-            <p>{itm.price}€</p>
-            <hr/>
-          </div>)
-      })}
-    });
+  if (loadState=='LOADED') {
+    console.log("...................." +items);
+      return itemsToRender.push(
+        <div>
+          <h3>{items.title}</h3>
+          <p>{items.price}€</p>
+          <hr/>
+        </div>)
   }
   else {
+  //if (loadState=='LOADING') {
     itemsToRender.push(
       <div>
-        <p>Loading</p>
+        <p>Loading...</p>
       </div>)
   }
-  return (
-    <Provider store={store}>
-      {itemsToRender}
-    </Provider>)
+  return itemsToRender
 }
 
-export default AllItems;
+
+const mapStateToProps = (state) => ({
+    loadState: state.loadReducer.loadState
+  });
+
+const mapDispatchToProps = (dispatch) => ({
+    incrementAction: () => dispatch(incrementAction()),
+    decreaseAction: () => dispatch(decreaseAction()),
+    mainAction: () => dispatch(mainAction()),
+    loadedAction: () => dispatch(loadedAction()),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllItems);

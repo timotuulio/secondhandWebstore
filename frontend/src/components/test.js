@@ -4,15 +4,16 @@ import { connect } from 'react-redux';
 import {
   incrementAction,
   decreaseAction,
+  loadedAction,
 } from '../actions/actions.js';
 
 class Page extends PureComponent {
   render() {
-    const { value, incrementAction, decreaseAction } = this.props;
+    const { value, incrementAction, decreaseAction, loadedAction } = this.props;
     return (
       <div>
         <h1>{value}</h1>
-        <button onClick={incrementAction}>increment</button>
+        <button onClick={loadedAction}>increment</button>
         <button onClick={decreaseAction}>decrease</button>
       </div>
     );
@@ -27,6 +28,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   incrementAction: () => dispatch(incrementAction()),
   decreaseAction: () => dispatch(decreaseAction()),
+  loadedAction: () => dispatch(loadedAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

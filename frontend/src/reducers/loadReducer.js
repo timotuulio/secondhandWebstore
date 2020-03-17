@@ -9,7 +9,7 @@ function loadReducer(state = initialState, action) {
     case 'LOADING':
       return { loadState: LOADING };
     case 'LOADED':
-      console.log("changed state to main")
+      console.log("changed state to LOADED")
       return { loadState: LOADED };
     default:
       return state;
