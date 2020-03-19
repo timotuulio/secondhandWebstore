@@ -1,7 +1,9 @@
 import {QUEST, USER, SHOPKEEPER, ADMIN} from '../stateNames.js'
 
 const initialState = {
-  role: QUEST
+  role: QUEST,
+  user: null,
+  token: null
 };
 
 function userReducer(state = initialState, action) {
@@ -9,7 +11,7 @@ function userReducer(state = initialState, action) {
   switch(action.type) {
     case 'QUEST':
       console.log("changed state to QUEST")
-      return { ...state, role: QUEST };
+      return { ...state, role: QUEST, user:null, token: null };
     case 'USER':
       console.log("changed state to USER")
       return { ...state, role: USER };

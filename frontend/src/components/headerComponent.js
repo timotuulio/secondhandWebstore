@@ -53,9 +53,9 @@ const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction}) => {
           </Nav>
           {(() => {
             if (login!='LOGGEDIN') {
-              return <Button size="lg" onClick={loginAction}>Kirjaudu sisään</Button>;
+              return <Button color="primary" onClick={loginAction}>Kirjaudu sisään</Button>;
             }else{
-              return <Button size="lg" onClick={loggedOutAction}>Kirjaudu ulos</Button>;
+              return <Button color="primary" onClick={loggedOutAction}>Kirjaudu ulos</Button>;
             }
           })()}
           
