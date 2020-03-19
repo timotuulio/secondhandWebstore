@@ -13,11 +13,13 @@ import { connect } from 'react-redux';
 import {
   incrementAction,
   decreaseAction,
-  mainAction
+  mainAction,
+  loggedOutAction,
+  loginSuccessAction
 } from '../actions/actions.js';
 
 
-const Header =({page,mainAction}) => {
+const Header =({page,login,mainAction,loggedOutAction,loginSuccessAction}) => {
   
   const [isOpen, setIsOpen] = useState(false);
 
@@ -29,24 +31,32 @@ const Header =({page,mainAction}) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
           <ButtonToolbar aria-label="Toolbar with button groups">
+          
           <ButtonGroup className="mr-2">
-          <Button size="lg">Profiili</Button>
-          </ButtonGroup>
-          <ButtonGroup className="mr-2">
-          <Button >Kaupat</Button>
           </ButtonGroup>
             
-            <Button>Jotain</Button>
             {(() => {
-            if (page=='LOGIN') {
-            return <Button >Kasdsadt</Button> ;
+            if (login=='LOGGEDIN') {
+            return <div>
+                    <ButtonGroup className="mr-2">
+                    <Button size="lg">Kaupat</Button>
+                    <Button size="lg">Profiili</Button>
+                    <Button size="lg">Jotain</Button>
+                    </ButtonGroup>
+                    </div> ;
             }
             })()}
     
     </ButtonToolbar>
             
           </Nav>
-          <Button onClick={mainAction}>Kirjaudu sisään</Button>
+          {(() => {
+            if (login!='LOGGEDIN') {
+              return <Button size="lg" onClick={mainAction}>Kirjaudu sisään</Button>;
+            }else{
+              return <Button size="lg" onClick={loggedOutAction}>Kirjaudu ulos</Button>;
+            }
+          })()}
           
         </Collapse>
             
@@ -60,13 +70,16 @@ const Header =({page,mainAction}) => {
 
 const mapStateToProps = (state) => ({
   value: state.addReducer.value,
-  page: state.pageReducer.page
+  page: state.pageReducer.page,
+  login: state.loginReducer.login
 });
 
 const mapDispatchToProps = (dispatch) => ({
   incrementAction: () => dispatch(incrementAction()),
   decreaseAction: () => dispatch(decreaseAction()),
-  mainAction: () => dispatch(mainAction())
+  mainAction: () => dispatch(mainAction()),
+  loggedOutAction: () => dispatch(loggedOutAction()),
+  loginSuccessAction: () => dispatch(loginSuccessAction())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
