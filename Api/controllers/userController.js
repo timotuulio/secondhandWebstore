@@ -97,7 +97,8 @@ module.exports = {
 
       const userToBeAdded = req.body;
       console.log("adduser");
-      if (req.body && req.body.name && req.body.password) {
+      console.log(userToBeAdded);
+      if (req.body && req.body.name && req.body.password, req.body.email, req.body.role) {
         console.log('adding user');
 
         bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
@@ -106,7 +107,10 @@ module.exports = {
             name: xssFilters.inHTMLData(userToBeAdded.name),
             password: hash,
             role: xssFilters.inHTMLData(userToBeAdded.role),
-            email: xssFilters.inHTMLData(userToBeAdded.email)
+            email: xssFilters.inHTMLData(userToBeAdded.email),
+            bankAccout:xssFilters.inHTMLData(userToBeAdded.bank),
+            phoneNumber:xssFilters.inHTMLData(userToBeAdded.phone),
+            address:xssFilters.inHTMLData(userToBeAdded.address)
           });
 
           console.log(newUser)
@@ -127,6 +131,7 @@ module.exports = {
 
         });
       } else {
+        console.log("not enough data")
         res.sendStatus(400);
       }
     },

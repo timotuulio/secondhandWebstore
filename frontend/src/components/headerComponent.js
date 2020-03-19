@@ -15,11 +15,12 @@ import {
   decreaseAction,
   mainAction,
   loggedOutAction,
-  loginSuccessAction
+  loginSuccessAction,
+  loginAction
 } from '../actions/actions.js';
 
 
-const Header =({page,login,mainAction,loggedOutAction,loginSuccessAction}) => {
+const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction}) => {
   
   const [isOpen, setIsOpen] = useState(false);
 
@@ -52,7 +53,7 @@ const Header =({page,login,mainAction,loggedOutAction,loginSuccessAction}) => {
           </Nav>
           {(() => {
             if (login!='LOGGEDIN') {
-              return <Button size="lg" onClick={mainAction}>Kirjaudu sisään</Button>;
+              return <Button size="lg" onClick={loginAction}>Kirjaudu sisään</Button>;
             }else{
               return <Button size="lg" onClick={loggedOutAction}>Kirjaudu ulos</Button>;
             }
@@ -79,7 +80,8 @@ const mapDispatchToProps = (dispatch) => ({
   decreaseAction: () => dispatch(decreaseAction()),
   mainAction: () => dispatch(mainAction()),
   loggedOutAction: () => dispatch(loggedOutAction()),
-  loginSuccessAction: () => dispatch(loginSuccessAction())
+  loginSuccessAction: () => dispatch(loginSuccessAction()),
+  loginAction: () => dispatch(loginAction())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

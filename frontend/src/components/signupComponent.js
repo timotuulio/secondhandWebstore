@@ -10,6 +10,50 @@ import {
 } from '../actions/actions.js';
 import { connect } from 'react-redux';
 
+
+
+ // take over its submit event.
+ let submit = (e,data) => {
+  e.preventDefault();
+
+  // Extract data from the form
+  var name = document.getElementById('name').value;
+  var email = document.getElementById('email').value;
+  var pass = document.getElementById('password').value;
+  var phone = document.getElementById('phone').value;
+  var address = document.getElementById('address').value;
+  var bank = document.getElementById('bank').value;
+  
+  var role;
+
+  if(document.getElementById('r1').checked){
+    role = 'user';
+  }else if(document.getElementById('r2').checked){
+    role = 'shopkeeper';
+  }else if(document.getElementById('r3').checked){
+    role = 'admin';
+  }
+
+  // Build body for the POST request
+  var body  = JSON.stringify({"name":name,"email":email,"password":pass,"phone":phone,"address":address,"role":role,"bank":bank});
+
+  // Use fetch to send the data
+  const url = "http://localhost:3001/api/user";
+  fetch(url, {
+      method : "post",
+      headers: {'Content-Type': 'application/json'},
+      body: body
+  }).then(
+      response => response.text() 
+      
+  ).then(
+      html => console.log(html)
+  );  
+}
+
+
+
+
 const Signup = ({registerAction}) => {
   return (
     <div style={{
@@ -18,7 +62,7 @@ const Signup = ({registerAction}) => {
       justifyContent: "center",
           alignItems: "center"
       }}>
-  <Form>
+  <Form onSubmit={submit}>
     <h2 className="display-4">Rekisteröityminen</h2>
     <hr className="my-2" />
     <br/><br/>
@@ -48,19 +92,19 @@ const Signup = ({registerAction}) => {
         <legend>Rooli</legend>
         <FormGroup check>
           <Label check>
-            <Input type="radio" name="radio1" />{' '}
+            <Input type="radio" id="r1" name="radio1" />{' '}
             Käyttäjä
           </Label>
         </FormGroup>
         <FormGroup check>
           <Label check>
-            <Input type="radio" name="radio1" />{' '}
+            <Input type="radio" id="r2" name="radio1" />{' '}
             Kauppias
           </Label>
         </FormGroup>
         <FormGroup check>
           <Label check>
-            <Input type="radio" name="radio1"/>{' '}
+            <Input type="radio" id="r3" name="radio1"/>{' '}
             Ylläpitäjä
           </Label>
         </FormGroup>

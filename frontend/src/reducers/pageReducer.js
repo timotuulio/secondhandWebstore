@@ -1,7 +1,7 @@
 import {MAIN, ALLITEMS, SINGLEITEM, LOGIN, SIGNIN, OWNPROFILE, OWNSELLABLES, USERADDNEWITEM, ALLSELLABLES, SHOPKEEPERBUYITEM, ALLUSERS, SIGNUP} from '../stateNames.js'
 
 const initialState = {
-  page: LOGIN,
+  page: MAIN,
 };
 
 function pageReducer(state = initialState, action) {

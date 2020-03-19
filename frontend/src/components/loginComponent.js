@@ -2,7 +2,7 @@
 import React from 'react';
 
 import store from '../store/store.js'
-import { Input, InputGroup, Card, CardHeader,CardBody, CardTitle,CardText,CardFooter, Button } from 'reactstrap';
+import { Input, InputGroup, Card, CardHeader,CardBody,CardFooter, Button } from 'reactstrap';
 
 import {
     incrementAction,
@@ -51,6 +51,8 @@ let submit = (e,data) => {
             //store.dispatch(incrementAction);
         }else{
             store.dispatch(loginSuccessAction());
+            // This will show the main page
+            store.dispatch(mainAction());
         }
         // Set token and role to state
 

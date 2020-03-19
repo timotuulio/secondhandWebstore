@@ -11,7 +11,7 @@ import Login from '../containers/loginContainer.js';
 const App = ({page,mainAction,login}) =>{
 
     // This is for showing login form
-    if (page=='MAIN' && login!='LOGGEDIN'){
+    if (page=='LOGIN' && login!='LOGGEDIN'){
         return(
             <div>
                 <Header />
