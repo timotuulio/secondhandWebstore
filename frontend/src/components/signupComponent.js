@@ -1,79 +1,94 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input,Card, CardHeader,CardBody,CardFooter } from 'reactstrap';
+import {
+  mainAction,
+  loginSuccessAction,
+  loginFailedAction,
+  loggedOutAction,
+  registerAction
 
-const Signup = (props) => {
+} from '../actions/actions.js';
+import { connect } from 'react-redux';
+
+const Signup = ({registerAction}) => {
   return (
-    <Form>
-      <FormGroup>
-        <Label for="exampleEmail">Email</Label>
-        <Input type="email" name="email" id="exampleEmail" placeholder="with a placeholder" />
+    <div style={{
+      display: "flex",
+      margin: "70px",
+      justifyContent: "center",
+          alignItems: "center"
+      }}>
+  <Form>
+    <h2 className="display-4">Rekisteröityminen</h2>
+    <hr className="my-2" />
+    <br/><br/>
+    <Card className="text-center">
+                        
+      <CardHeader></CardHeader>
+        <CardBody>
+        <FormGroup>
+        <Input type="text" name="name" id="name" placeholder="Nimi" />
       </FormGroup>
       <FormGroup>
-        <Label for="examplePassword">Password</Label>
-        <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
+        <Input type="email" name="email" id="email" placeholder="Sähköposti" />
       </FormGroup>
       <FormGroup>
-        <Label for="exampleSelect">Select</Label>
-        <Input type="select" name="select" id="exampleSelect">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </Input>
+        <Input type="password" name="password" id="password" placeholder="Salasana" />
       </FormGroup>
       <FormGroup>
-        <Label for="exampleSelectMulti">Select Multiple</Label>
-        <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </Input>
+        <Input type="text" name="bank" id="bank" placeholder="Tilinumero" />
       </FormGroup>
       <FormGroup>
-        <Label for="exampleText">Text Area</Label>
-        <Input type="textarea" name="text" id="exampleText" />
+        <Input type="text" name="phone" id="phone" placeholder="Puhelinnumero" />
       </FormGroup>
       <FormGroup>
-        <Label for="exampleFile">File</Label>
-        <Input type="file" name="file" id="exampleFile" />
-        <FormText color="muted">
-          This is some placeholder block-level help text for the above input.
-          It's a bit lighter and easily wraps to a new line.
-        </FormText>
+        <Input type="text" name="address" id="address" placeholder="Osoite" />
       </FormGroup>
       <FormGroup tag="fieldset">
-        <legend>Radio Buttons</legend>
+        <legend>Rooli</legend>
         <FormGroup check>
           <Label check>
             <Input type="radio" name="radio1" />{' '}
-            Option one is this and that—be sure to include why it's great
+            Käyttäjä
           </Label>
         </FormGroup>
         <FormGroup check>
           <Label check>
             <Input type="radio" name="radio1" />{' '}
-            Option two can be something else and selecting it will deselect option one
+            Kauppias
           </Label>
         </FormGroup>
-        <FormGroup check disabled>
+        <FormGroup check>
           <Label check>
-            <Input type="radio" name="radio1" disabled />{' '}
-            Option three is disabled
+            <Input type="radio" name="radio1"/>{' '}
+            Ylläpitäjä
           </Label>
         </FormGroup>
-      </FormGroup>
-      <FormGroup check>
-        <Label check>
-          <Input type="checkbox" />{' '}
-          Check me out
-        </Label>
-      </FormGroup>
-      <Button>Submit</Button>
+      </FormGroup>                        
+        </CardBody>
+        <CardFooter>
+        <Button color="primary" size="lg" >Rekisteröidy</Button>
+        </CardFooter>               
+      </Card>
     </Form>
+
+    </div>
+    
   );
 }
 
-export default Signup;
+
+
+const mapStateToProps = (state) => ({
+  value: state.addReducer.value,
+  page: state.pageReducer.page,
+  login: state.loginReducer.login
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  mainAction: () => dispatch(mainAction()),
+  registerAction: () => dispatch(registerAction())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+

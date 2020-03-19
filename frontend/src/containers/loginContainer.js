@@ -8,7 +8,8 @@ import {
   mainAction,
   loginSuccessAction,
   loginFailedAction,
-  loggedOutAction
+  loggedOutAction,
+  registerAction
 
 } from '../actions/actions.js';
 
@@ -26,7 +27,8 @@ const mapStateToProps = (state) => ({
     mainAction: () => dispatch(mainAction()),
     loginSuccessAction: () => dispatch(loginSuccessAction()),
     loginFailedAction: ()  => dispatch(loginFailedAction()),
-    loggedOutAction: () => dispatch(loggedOutAction())
+    loggedOutAction: () => dispatch(loggedOutAction()),
+    registerAction: () => dispatch(registerAction())
   });
   
   export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -25,3 +25,5 @@ export const LOADED = 'LOADED';
 export const LOGINFAILED = 'LOGINFAILED';
 export const LOGGEDIN = 'LOGGEDIN';
 export const LOGGEDOUT = 'LOGGEDOUT';
+
+export const SIGNUP = 'SIGNUP';

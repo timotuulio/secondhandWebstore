@@ -12,7 +12,8 @@ import {
 
 const mapStateToProps = (state) => ({
     value: state.addReducer.value,
-    page: state.pageReducer.page
+    page: state.pageReducer.page,
+    login: state.loginReducer.login
   });
   
 const mapDispatchToProps = (dispatch) => ({

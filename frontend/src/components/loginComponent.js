@@ -10,7 +10,8 @@ import {
     mainAction,
     loginFailedAction,
     loginSuccessAction,
-    loggedOutAction
+    loggedOutAction,
+    registerAction
   } from '../actions/actions.js';
 
     
@@ -72,7 +73,7 @@ let submit = (e,data) => {
 
 
 
-const Login = ({login,loginSuccessAction, loginFailedAction,loggedOutAction}) => (
+const Login = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,registerAction}) => (
     <div style={{
         position: 'absolute', left: '50%', top: '50%',
         transform: 'translate(-50%, -50%)',  
@@ -113,7 +114,7 @@ const Login = ({login,loginSuccessAction, loginFailedAction,loggedOutAction}) =>
             <br/><br/>
             <hr className="my-2" />
             <p>{login}</p>
-            <p>Ei vielä tunnusta? Luo uusi tunnus tästä.</p>
+            <div>Ei vielä tunnusta? Luo uusi tunnus <Button onClick={registerAction}>Tästä</Button></div>
     </div>
   )
 
