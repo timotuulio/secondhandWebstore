@@ -39,6 +39,58 @@ function authToken(tokenAuth){
 module.exports = {
 
 
+    loginUser(req,res){
+
+      // Chcekt that header exists, email and password are encoded in the authorization header
+      if (req.headers.authorization) {
+        var encodedHeader = req.headers.authorization.split(' ')[1];
+        var decodedHeader = new Buffer(encodedHeader, 'base64').toString();
+        var email = decodedHeader.split(':')[0];
+        var password = decodedHeader.split(':')[1];
+        
+        console.log(email)
+
+        User.findOne({
+          'email': email
+        }, function(err,user) {
+          if (err) return console.error(err);
+          if (user) {
+            bcrypt.compare(password, user.password, function(err, result) {
+              
+              // Here username and password matches so create and return a token to user which can be used to perform the operations
+              if (result) {
+                console.log("ok")
+                var role = user.role;
+                jwt.sign({name:user._id},secret,{algorithm:'HS256'},function(err, token){
+                  res.json({token, role});
+                });
+                
+              } else {
+                // password didnt match
+                console.log("password did not match")
+                res.sendStatus(401);
+              }
+            });
+          }else{
+            // No user found
+            console.log("no user found")
+            res.sendStatus(401);
+          }
+        });
+
+        console.log("loginuser");
+        console.log(req.headers.authorization)
+
+      
+      }else{
+        console.log("no authorization header")
+        res.sendStatus(401);
+      // No authorization header
+    }
+    
+  },
+
+
     //TODO: Add every info to be added (email, number, etc)
     //TODO: Check that every required info exist)
     addUser(req,res){
@@ -53,7 +105,8 @@ module.exports = {
           var newUser = new User({
             name: xssFilters.inHTMLData(userToBeAdded.name),
             password: hash,
-            role: xssFilters.inHTMLData(userToBeAdded.role)
+            role: xssFilters.inHTMLData(userToBeAdded.role),
+            email: xssFilters.inHTMLData(userToBeAdded.email)
           });
 
           console.log(newUser)

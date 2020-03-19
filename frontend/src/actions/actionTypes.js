@@ -21,3 +21,7 @@ export const ADMIN = 'ADMIN';
 
 export const LOADING = 'LOADING';
 export const LOADED = 'LOADED';
+
+export const LOGINFAILED = 'LOGINFAILED';
+export const LOGGEDIN = 'LOGGEDIN';
+export const LOGGEDOUT = 'LOGGEDOUT';

@@ -1,6 +1,7 @@
 import pageReducer from './pageReducer.js';
 import loadReducer from './loadReducer.js';
 import userReducer from './userReducer.js';
+import loginReducer from './loginReducer.js';
 import { combineReducers } from 'redux';
 
 //const {combineReducers} = Redux;
@@ -24,7 +25,8 @@ const ultimateReducer = combineReducers({
   addReducer,
   pageReducer,
   loadReducer,
-  userReducer
+  userReducer,
+  loginReducer
 });
 
 export default ultimateReducer;

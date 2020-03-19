@@ -18,6 +18,8 @@ router.get('/user/:id', userController.getSingleUser);
 router.put('/user/:id', userController.updateUser);
 router.delete('/user/:id', userController.deleteUser);
 
+router.post('/login', userController.loginUser);
+
 router.get('/item', itemController.getAllItems);
 router.post('/item', itemController.addItem);
 router.delete('/item', itemController.deleteAllItems);

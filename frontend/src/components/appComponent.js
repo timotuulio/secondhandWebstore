@@ -5,7 +5,7 @@ import AllItems from './allItemsComponent.js'
 import AllUsers from './allUsersComponent.js'
 import Test from './test.js'
 import Signup from './signupComponent.js';
-import Login from './loginComponent.js';
+import Login from '../containers/loginContainer.js';
 
 
 const App = ({page,mainAction}) =>{
