@@ -14,7 +14,7 @@ import {
     registerAction
   } from '../actions/actions.js';
 
-    
+
   // take over its submit event.
 let submit = (e,data) => {
     e.preventDefault();
@@ -22,18 +22,17 @@ let submit = (e,data) => {
 
     var email=document.getElementById('email').value;
     var pass=document.getElementById('password').value;
-    
-    
+
+
     var string  = email+':'+pass;
 
     var encoded = window.btoa(string);
-
 
     const XHR = new XMLHttpRequest();
 
     XHR.open('POST','http://localhost:3001/api/login');
     XHR.setRequestHeader('Authorization','Basic '+encoded);
-    
+
     XHR.send();
 
     // Define what happens on successful data submission
@@ -41,12 +40,11 @@ let submit = (e,data) => {
 
         var response = event.target.responseText;
         console.log(response)
-        
 
         // Tähän toiminta kun unauthorized
         if(response == 'Unauthorized'){
-            //alert("EIPÄ OLLU")
-
+            // TODO: That's just funny so I'll leave it that way for now
+            alert("EIPÄ OLLU")
             store.dispatch(loginFailedAction());
             //store.dispatch(incrementAction);
         }else{
@@ -60,9 +58,9 @@ let submit = (e,data) => {
       //JSONtoken = JSONtoken.replace(/["']/g, "");
 
 
-      
+
       //hardcoded = JSONtoken;
-    
+
       //store.dispatch(saveToken(JSONtoken));
       //alert( event.target.responseText );
     } );
@@ -78,45 +76,54 @@ let submit = (e,data) => {
 const Login = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,registerAction}) => (
     <div style={{
         position: 'absolute', left: '50%', top: '50%',
-        transform: 'translate(-50%, -50%)',  
+        transform: 'translate(-50%, -50%)',
     }}>
-     
-        <h2 className="display-4">Sisäänkirjautuminen</h2>
+
+        <h2 className="display-4">Log in</h2>
             <hr className="my-2" />
             <br/><br/>
-        
+
             <form id="login" onSubmit={submit}>
-                <div style={{width:"100%"}}>    
+                <div style={{width:"100%"}}>
                     <Card className="text-center">
-                        
-                        <CardHeader></CardHeader>
+
+                        <CardHeader>
+                          {(() => {
+                              if (login=='LOGINFAILED') {
+                                  // The div
+                                  return <div style={{
+                                    backgroundColor: 'tomato',
+                                    width: '100%',
+                                    textAlign: 'center',
+                                    fontWeight: 'bold',
+                                    borderRadius: '5px'
+                                  }}
+                                  >Wrong email and/or password</div> ;
+                              }
+                          })()}
+                        </CardHeader>
                         <CardBody>
                             <InputGroup>
-                                <Input type="text" id="email" placeholder="Sähköposti" />
+                                <Input type="text" id="email" placeholder="Email" />
                             </InputGroup>
                             <br></br>
                             <InputGroup>
-                                <Input type="password" id="password" placeholder="Salasana" />
+                                <Input type="password" id="password" placeholder="Password" />
                             </InputGroup>
                             <br></br>
-                            
+
                         </CardBody>
                         <CardFooter>
-                        <Button color="primary" size="lg" >Kirjaudu sisään</Button>
+                        <Button color="primary" size="lg" >Log in</Button>
                         </CardFooter>
-                     
+
                     </Card>
                 </div>
             </form>
-            {(() => {
-                if (login=='LOGINFAILED') {
-                return <div >Sähköpostiosoite tai salasana väärin</div> ;
-                }
-                })()}
             <br/><br/>
             <hr className="my-2" />
             <p>{login}</p>
-            <div>Ei vielä tunnusta? Luo uusi tunnus <Button onClick={registerAction}>Tästä</Button></div>
+            <div>Not signed in yet? Create a new user <Button onClick={registerAction}>Here</Button></div>
     </div>
   )
 

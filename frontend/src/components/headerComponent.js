@@ -34,10 +34,10 @@ const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddN
        
           <Nav className="mr-auto" navbar>
           <ButtonToolbar aria-label="Toolbar with button groups">
-          
+
           <ButtonGroup className="mr-2">
           </ButtonGroup>
-            
+
             {(() => {
             if (login=='LOGGEDIN') {
             return <div>
@@ -56,8 +56,9 @@ const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddN
           {(() => {
             if (login!='LOGGEDIN') {
               return <Button color="primary" onClick={loginAction}>Kirjaudu sisään</Button>;
-           
+
             }else{
+
               //return(<div><Button>asdad</Button></div>);
               return (<div style={{display: 'inline-block'}}><div style={{color: "white"}}>Welcome {user.user.name}</div><Button color="primary" onClick={loggedOutAction}>Log out</Button></div>);
               
@@ -65,7 +66,10 @@ const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddN
           })()}
           
       
-            
+        
+
+
+
       </Navbar>
   
   );

@@ -13,10 +13,10 @@ export const SHOPKEEPERBUYITEM = 'SHOPKEEPERBUYITEM';
 export const ALLUSERS = 'ALLUSERS';
 
 // State names for users-authorization
-export const QUEST = 'QUEST';
-export const USER = 'USER';
-export const SHOPKEEPER = 'SHOPKEEPER';
-export const ADMIN = 'ADMIN';
+export const QUEST = 'Quest';
+export const USER = 'User';
+export const SHOPKEEPER = 'Shopkeeper';
+export const ADMIN = 'Admin';
 
 // State to check if data has been loaded from applyMiddleware
 export const LOADING = 'LOADING';

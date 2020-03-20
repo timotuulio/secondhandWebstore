@@ -8,6 +8,7 @@ import {
   registerAction
 
 } from '../actions/actions.js';
+import { USER, SHOPKEEPER, ADMIN } from '../stateNames.js'
 import { connect } from 'react-redux';
 
 
@@ -24,14 +25,15 @@ import { connect } from 'react-redux';
   var address = document.getElementById('address').value;
   var bankAccount = document.getElementById('bankAccount').value;
   
+
   var role;
 
   if(document.getElementById('r1').checked){
-    role = 'user';
+    role = USER;
   }else if(document.getElementById('r2').checked){
-    role = 'shopkeeper';
+    role = SHOPKEEPER;
   }else if(document.getElementById('r3').checked){
-    role = 'admin';
+    role = ADMIN;
   }
 
   // Build body for the POST request
@@ -44,10 +46,11 @@ import { connect } from 'react-redux';
       headers: {'Content-Type': 'application/json'},
       body: body
   }).then(
-      response => response.text() 
+      response => response.text()
+
   ).then(
       html => console.log(html)
-  );  
+  );
 }
 
 
@@ -66,7 +69,7 @@ const Signup = ({registerAction}) => {
     <hr className="my-2" />
     <br/><br/>
     <Card className="text-center">
-                        
+
       <CardHeader></CardHeader>
         <CardBody>
         <FormGroup>
@@ -107,16 +110,16 @@ const Signup = ({registerAction}) => {
             Ylläpitäjä
           </Label>
         </FormGroup>
-      </FormGroup>                        
+      </FormGroup>
         </CardBody>
         <CardFooter>
         <Button color="primary" size="lg" >Rekisteröidy</Button>
-        </CardFooter>               
+        </CardFooter>
       </Card>
     </Form>
 
     </div>
-    
+
   );
 }
 
@@ -134,4 +137,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
-

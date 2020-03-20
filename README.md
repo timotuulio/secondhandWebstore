@@ -1,3 +1,6 @@
+## TODO: Comment that well, anyone who has Postman and knows to find the webtoken can search for all api-data
+## TODO: Update readme
+## TODO: To add localization possibilities, we could add a file that has all the text fields as variables so that they are easy to chance
 
 # WWW Programming Part 2 Coursework Project plan
 ## Course project group information
