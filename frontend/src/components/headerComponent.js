@@ -57,11 +57,7 @@ const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction,user,o
               return <Button color="primary" onClick={loginAction}>Kirjaudu sisään</Button>;
 
             }else{
-<<<<<<< HEAD
-              return (<div>Hei {user.user.name}
-=======
               return (<div>Welcome {user.user.name}
->>>>>>> 86f9b2378fe1bb547ed3e4ce1f0b9caad8eb081e
               <Button color="primary" onClick={loggedOutAction}>Kirjaudu ulos</Button></div>);
             }
           })()}
