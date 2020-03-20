@@ -21,7 +21,7 @@ import {
 
 
 const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction,user}) => {
-  
+
   const [isOpen, setIsOpen] = useState(false);
 
 
@@ -32,10 +32,10 @@ const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction,user})
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
           <ButtonToolbar aria-label="Toolbar with button groups">
-          
+
           <ButtonGroup className="mr-2">
           </ButtonGroup>
-            
+
             {(() => {
             if (login=='LOGGEDIN') {
             return <div>
@@ -47,22 +47,22 @@ const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction,user})
                     </div> ;
             }
             })()}
-    
+
     </ButtonToolbar>
-            
+
           </Nav>
           {(() => {
             if (login!='LOGGEDIN') {
               return <Button color="primary" onClick={loginAction}>Kirjaudu sisään</Button>;
-           
+
             }else{
-              return (<div>Hei {user.user.name}    
+              return (<div>Hei {user.user.name}
               <Button color="primary" onClick={loggedOutAction}>Kirjaudu ulos</Button></div>);
             }
           })()}
-          
+
         </Collapse>
-            
+
       </Navbar>
     </div>
   );

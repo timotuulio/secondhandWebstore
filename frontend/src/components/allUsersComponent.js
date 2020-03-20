@@ -6,6 +6,7 @@ import {
   mainAction,
   loadingAction
 } from '../actions/actions.js';
+import { QUEST, USER, SHOPKEEPER, ADMIN } from '../stateNames.js'
 
 
 var user;
@@ -13,9 +14,9 @@ function setData(data){
   user = data;
 }
 
-function AllUsers({loadState, loadedAction, loadingAction}) {
-  // TODO: Authkey needs to be in a state and come from logging in or out
-  const authKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiNWU3MGVhOGU1M2VkN2YyMDc3YjljZDRlIiwiaWF0IjoxNTg0NDU4MzgyfQ.FCfdW5Piw2BuAGMmRDNB9QrBtcOStOwR_XxJQ5QCkPY"
+function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
+  //const authKey = token
+  const authKey =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiNWU3MGVhOGU1M2VkN2YyMDc3YjljZDRlIiwiaWF0IjoxNTg0NDU4MzgyfQ.FCfdW5Piw2BuAGMmRDNB9QrBtcOStOwR_XxJQ5QCkPY"
   var obj = {
     method: 'GET',
     headers: {
@@ -25,7 +26,7 @@ function AllUsers({loadState, loadedAction, loadingAction}) {
   //loadingAction();
   fetch('http://localhost:3001/api/user', obj).then(res=>res.json()).then(data => setData(data)).then(loadedAction);
 
-  const testUsers = [
+  /*const testUsers = [
     {
         "_id": "5e6d1dd29339230cc6f8076c",
         "name": "1",
@@ -38,34 +39,58 @@ function AllUsers({loadState, loadedAction, loadingAction}) {
         "password": "A secret JOeebix",
         "__v": 0
     }
-  ];
-  const usersToRender = /*testUsers*/[];
-  var users = testUsers;
+  ];*/
+  var usersToRender = /*testUsers*/[];
+  //var users = testUsers;
   //console.log(users);
   console.log(user);
   if (loadState=='LOADED') {
-
-      user.map(usr => usersToRender.push(
-        <div>
-        <h3>{usr.name}</h3>
-        <div>{usr.password}€</div>
-        <hr/>
-      </div>
-      ))
-
+      var singleRoleArray = [];
+      console.log(user);
+      singleRoleArray = user.filter(usr => usr.role == ADMIN);
+      usersToRender = singleRoleArray.map(usr => pushToArray);
+      console.log(usersToRender);
+      singleRoleArray = user.filter(usr => usr.role == SHOPKEEPER);
+      usersToRender = singleRoleArray.map(usr => pushToArray);
+console.log(usersToRender);
+      singleRoleArray = user.filter(usr => usr.role == USER);
+      usersToRender = singleRoleArray.map(usr => pushToArray);
+console.log(usersToRender);
   }
   else {
-    usersToRender.push(
-      <div>
-        <p>Loading...</p>
-      </div>)
+      usersToRender.push(
+          <div>
+              <p>Loading...</p>
+          </div>)
   }
   return usersToRender
 }
 
+function pushToArray(usr, usersToRender) {
+  return usersToRender.push(
+  <div>
+    <h3>{usr.name}</h3>
+    <p>Role: {usr.role}</p>
+    <p>Email: {usr.email}</p>
+      {(() => {
+        if (usr.address!='') {
+          return <p>Adress: {usr.address}</p>;
+        }
+      })()}
+    {(() => {
+      if (usr.phoneNumber!='') {
+        return <p>Phone number: {usr.phoneNumber}</p>;
+      }
+    })()}
+    <hr/>
+  </div>
+  )
+}
 
 const mapStateToProps = (state) => ({
-    loadState: state.loadReducer.loadState
+    loadState: state.loadReducer.loadState,
+    role: state.loginReducer.role,
+    token: state.loginReducer.token
   });
 
 const mapDispatchToProps = (dispatch) => ({
