@@ -7,10 +7,11 @@ import Signup from './signupComponent.js';
 import Login from '../containers/loginContainer.js';
 import Profile from '../containers/profileContainer.js'
 import Sell from '../components/sellComponent.js';
-
+import store from '../store/store.js';
+import { loadingAction } from '../actions/actions.js';
 
 const App = ({page,mainAction,login}) =>{
-
+    store.dispatch(loadingAction());
     // This is for showing login form
     if (page=='LOGIN' && login!='LOGGEDIN'){
         return(
@@ -44,9 +45,14 @@ const App = ({page,mainAction,login}) =>{
         return(<div>
                 <Header />
                 <Sell />
-                <div>Addnew item here</div>
             </div>);
 
+    }else if(page=='ALLUSERS' && login == 'LOGGEDIN') {
+
+        return(<div>
+                <Header />
+                <AllUsers />
+            </div>);
 
     }else{
         return(

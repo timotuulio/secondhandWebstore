@@ -16,11 +16,13 @@ import {
   loginSuccessAction,
   loginAction,
   ownProfileAction,
-  userAddNewItemAction
+  userAddNewItemAction,
+  allUsersAction
 } from '../actions/actions.js';
+import { ADMIN } from '../stateNames'
 
 
-const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction}) => {
+const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction,allUsersAction}) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,7 +30,7 @@ const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddN
   return (
 
       <Navbar sticky="top" style={{backgroundColor:'#2B3856'}}>
-        <NavbarBrand href="/">Verkkokauppa</NavbarBrand>
+        <NavbarBrand style={{color:"#007bff"}}>Paavon Putiikki</NavbarBrand>
 
           <Nav className="mr-auto" navbar>
           <ButtonToolbar aria-label="Toolbar with button groups">
@@ -43,6 +45,11 @@ const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddN
                     <Button color="primary" onClick={mainAction}>Shop</Button>
                     <Button color="primary" onClick={ownProfileAction}>Profile</Button>
                     <Button color="primary" onClick={userAddNewItemAction}>Sell product</Button>
+                      {(() => {
+                          if (user.role == ADMIN) {
+                              return <Button color="primary" onClick={allUsersAction}>All users</Button>;
+                          }
+                      })()}
                     </ButtonGroup>
                     </div> ;
             }
@@ -63,16 +70,10 @@ const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddN
             }
           })()}
 
-
-
-
-
-
       </Navbar>
 
   );
 }
-
 
 const mapStateToProps = (state) => ({
   page: state.pageReducer.page,
@@ -86,7 +87,8 @@ const mapDispatchToProps = (dispatch) => ({
   loginSuccessAction: (data) => dispatch(loginSuccessAction(data)),
   loginAction: () => dispatch(loginAction()),
   ownProfileAction: () => dispatch(ownProfileAction()),
-  userAddNewItemAction: () => dispatch(userAddNewItemAction())
+  userAddNewItemAction: () => dispatch(userAddNewItemAction()),
+  allUsersAction: () => dispatch(allUsersAction())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
