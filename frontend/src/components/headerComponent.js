@@ -16,11 +16,12 @@ import {
   mainAction,
   loggedOutAction,
   loginSuccessAction,
-  loginAction
+  loginAction,
+  ownProfileAction
 } from '../actions/actions.js';
 
 
-const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction,user}) => {
+const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction,user,ownProfileAction}) => {
   
   const [isOpen, setIsOpen] = useState(false);
 
@@ -41,7 +42,7 @@ const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction,user})
             return <div>
                     <ButtonGroup className="mr-2">
                     <Button size="lg">Kaupat</Button>
-                    <Button size="lg">Profiili</Button>
+                    <Button size="lg" onClick={ownProfileAction}>Profiili</Button>
                     <Button size="lg">Jotain</Button>
                     </ButtonGroup>
                     </div> ;
@@ -56,7 +57,7 @@ const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction,user})
               return <Button color="primary" onClick={loginAction}>Kirjaudu sisään</Button>;
            
             }else{
-              return (<div>Hei {user.user.name}    
+              return (<div>Welcome {user.user.name}    
               <Button color="primary" onClick={loggedOutAction}>Kirjaudu ulos</Button></div>);
             }
           })()}
@@ -84,7 +85,8 @@ const mapDispatchToProps = (dispatch) => ({
   mainAction: () => dispatch(mainAction()),
   loggedOutAction: () => dispatch(loggedOutAction()),
   loginSuccessAction: (data) => dispatch(loginSuccessAction(data)),
-  loginAction: () => dispatch(loginAction())
+  loginAction: () => dispatch(loginAction()),
+  ownProfileAction: () => dispatch(ownProfileAction())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

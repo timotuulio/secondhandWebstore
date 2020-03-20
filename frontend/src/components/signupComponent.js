@@ -45,7 +45,6 @@ import { connect } from 'react-redux';
       body: body
   }).then(
       response => response.text() 
-      
   ).then(
       html => console.log(html)
   );  
@@ -80,10 +79,10 @@ const Signup = ({registerAction}) => {
         <Input type="password" name="password" id="password" placeholder="Salasana" />
       </FormGroup>
       <FormGroup>
-        <Input type="text" name="bank" id="bank" placeholder="Tilinumero" />
+        <Input type="text" name="bankAccount" id="bankAccount" placeholder="Tilinumero" />
       </FormGroup>
       <FormGroup>
-        <Input type="text" name="phone" id="phone" placeholder="Puhelinnumero" />
+        <Input type="text" name="phoneNumber" id="phoneNumber" placeholder="Puhelinnumero" />
       </FormGroup>
       <FormGroup>
         <Input type="text" name="address" id="address" placeholder="Osoite" />
