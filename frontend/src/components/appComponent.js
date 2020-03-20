@@ -7,6 +7,7 @@ import Test from './test.js'
 import Signup from './signupComponent.js';
 import Login from '../containers/loginContainer.js';
 import Profile from '../containers/profileContainer.js'
+import Sell from '../components/sellComponent.js';
 
 
 const App = ({page,mainAction,login}) =>{
@@ -39,11 +40,19 @@ const App = ({page,mainAction,login}) =>{
 
 
 
+    }else if(page=='USERADDNEWITEM' && login == 'LOGGEDIN') {
+
+        return(<div>
+                <Header />
+                <Sell />
+                <div>Addnew item here</div>
+            </div>);
+
+
     }else{
         return(
             <div>
                 <Header />
-                {/*<AllItems />*/}
                 <Test />
                 <AllUsers />
             </div>

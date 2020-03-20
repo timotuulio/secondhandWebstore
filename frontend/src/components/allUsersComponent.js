@@ -15,8 +15,8 @@ function setData(data){
 }
 
 function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
-  //const authKey = token
-  const authKey =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiNWU3MGVhOGU1M2VkN2YyMDc3YjljZDRlIiwiaWF0IjoxNTg0NDU4MzgyfQ.FCfdW5Piw2BuAGMmRDNB9QrBtcOStOwR_XxJQ5QCkPY"
+  const authKey = token
+  //const authKey =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiNWU3MGVhOGU1M2VkN2YyMDc3YjljZDRlIiwiaWF0IjoxNTg0NDU4MzgyfQ.FCfdW5Piw2BuAGMmRDNB9QrBtcOStOwR_XxJQ5QCkPY"
   var obj = {
     method: 'GET',
     headers: {
@@ -65,6 +65,7 @@ function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
   return usersToRender
 
   function pushToArray(usr) {
+    
     usersToRender.push(
       <div>
         <h3>{usr.name}</h3>
