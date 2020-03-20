@@ -65,10 +65,9 @@ module.exports = {
 
                 jwt.sign({name:user._id},secret,{algorithm:'HS256'},function(err, token){
 
-                   // dont send user id and password to client
+                   // dont send password to client
                    user = {...user._doc};
-                   delete user['password'];
-                   delete user['_id']; 
+                   delete user['password']; 
 
                    console.log(user)
 
@@ -119,7 +118,7 @@ module.exports = {
             password: hash,
             role: xssFilters.inHTMLData(userToBeAdded.role),
             email: xssFilters.inHTMLData(userToBeAdded.email),
-            bankAccout:xssFilters.inHTMLData(userToBeAdded.bank),
+            bankAccount:xssFilters.inHTMLData(userToBeAdded.bank),
             phoneNumber:xssFilters.inHTMLData(userToBeAdded.phone),
             address:xssFilters.inHTMLData(userToBeAdded.address)
           });
@@ -149,6 +148,8 @@ module.exports = {
 
     async updateUser(req,res){
 
+      if(authToken(req.headers.authorization)){
+
         //console.log(authenticate(req.headers.authorization))
 
         // Something is wrong with this thing. It cant find with findById >,<
@@ -158,14 +159,26 @@ module.exports = {
         var updatedUser = await User.findById(req.params.id).exec()
             .catch(function(error){return 'Error occured'});
 
-        updatedUser.name = userUpdateInfo.name;
-        updatedUser.role = userUpdateInfo.role;
-        updatedUser.password = userUpdateInfo.password;
+        for (const [key, value] of Object.entries(userUpdateInfo)) { 
+          updatedUser[key] = value;
+          console.log(key)
+        }
+        //updatedUser.name = userUpdateInfo.name;
+        //updatedUser.role = userUpdateInfo.role;
+        //updatedUser.password = userUpdateInfo.password;
 
         updatedUser.save();
 
         console.log(updatedUser);
         res.send(updatedUser);
+        
+
+        }else{
+            console.log("Authentication failed")
+            // Check format of this
+            res.send("Not authorized")
+        }
+
     },
 
     async deleteUser(req,res){

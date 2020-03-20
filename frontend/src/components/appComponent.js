@@ -6,6 +6,7 @@ import AllUsers from './allUsersComponent.js'
 import Test from './test.js'
 import Signup from './signupComponent.js';
 import Login from '../containers/loginContainer.js';
+import Profile from '../containers/profileContainer.js'
 
 
 const App = ({page,mainAction,login}) =>{
@@ -27,6 +28,17 @@ const App = ({page,mainAction,login}) =>{
                 <Signup />
             </div>
         );
+    }else if(page=='OWNPROFILE' && login == 'LOGGEDIN'){
+
+        return(
+            <div>
+                <Header />
+                <Profile />
+            </div>
+        );
+
+
+
     }else{
         return(
             <div>
