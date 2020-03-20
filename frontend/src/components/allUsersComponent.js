@@ -46,16 +46,21 @@ function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
   console.log(user);
   if (loadState=='LOADED') {
       var singleRoleArray = [];
-      console.log(user);
+      //console.log(user);
       singleRoleArray = user.filter(usr => usr.role == ADMIN);
-      usersToRender = singleRoleArray.map(usr => pushToArray);
-      console.log(usersToRender);
+      console.log(singleRoleArray);
+      usersToRender = singleRoleArray.map(usr => pushToArray(usr, usersToRender));
+      console.log("----------------------");
+
       singleRoleArray = user.filter(usr => usr.role == SHOPKEEPER);
-      usersToRender = singleRoleArray.map(usr => pushToArray);
-console.log(usersToRender);
+      console.log(singleRoleArray);
+      usersToRender = singleRoleArray.map(usr => pushToArray(usr, usersToRender));
+      console.log("----------------------");
+
       singleRoleArray = user.filter(usr => usr.role == USER);
-      usersToRender = singleRoleArray.map(usr => pushToArray);
-console.log(usersToRender);
+      console.log(singleRoleArray);
+      usersToRender = singleRoleArray.map(usr => pushToArray(usr, usersToRender));
+
   }
   else {
       usersToRender.push(
@@ -67,24 +72,27 @@ console.log(usersToRender);
 }
 
 function pushToArray(usr, usersToRender) {
-  return usersToRender.push(
-  <div>
-    <h3>{usr.name}</h3>
-    <p>Role: {usr.role}</p>
-    <p>Email: {usr.email}</p>
+  // console.log("-----------------------")
+  console.log(usr)
+  usersToRender.push(
+    <div>
+      <h3>{usr.name}</h3>
+      <p>Role: {usr.role}</p>
+      <p>Email: {usr.email}</p>
+        {(() => {
+          if (usr.address!='') {
+            return <p>Adress: {usr.address}</p>;
+          }
+        })()}
       {(() => {
-        if (usr.address!='') {
-          return <p>Adress: {usr.address}</p>;
+        if (usr.phoneNumber!='') {
+          return <p>Phone number: {usr.phoneNumber}</p>;
         }
       })()}
-    {(() => {
-      if (usr.phoneNumber!='') {
-        return <p>Phone number: {usr.phoneNumber}</p>;
-      }
-    })()}
-    <hr/>
-  </div>
+      <hr/>
+    </div>
   )
+  return usersToRender;
 }
 
 const mapStateToProps = (state) => ({
