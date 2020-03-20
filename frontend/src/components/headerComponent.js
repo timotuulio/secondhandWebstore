@@ -11,8 +11,6 @@ import {
 import { connect } from 'react-redux';
 
 import {
-  incrementAction,
-  decreaseAction,
   mainAction,
   loggedOutAction,
   loginSuccessAction,
@@ -65,7 +63,7 @@ const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddN
             }
           })()}
 
-      
+
 
 
 
@@ -75,19 +73,14 @@ const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddN
   );
 }
 
-//export default Header;
-
 
 const mapStateToProps = (state) => ({
-  value: state.addReducer.value,
   page: state.pageReducer.page,
   login: state.loginReducer.login,
   user: state.loginReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  incrementAction: () => dispatch(incrementAction()),
-  decreaseAction: () => dispatch(decreaseAction()),
   mainAction: () => dispatch(mainAction()),
   loggedOutAction: () => dispatch(loggedOutAction()),
   loginSuccessAction: (data) => dispatch(loginSuccessAction(data)),

@@ -24,7 +24,7 @@ import { connect } from 'react-redux';
   var phoneNumber = document.getElementById('phoneNumber').value;
   var address = document.getElementById('address').value;
   var bankAccount = document.getElementById('bankAccount').value;
-  
+
 
   var role;
 
@@ -126,7 +126,6 @@ const Signup = ({registerAction}) => {
 
 
 const mapStateToProps = (state) => ({
-  value: state.addReducer.value,
   page: state.pageReducer.page,
   login: state.loginReducer.login
 });

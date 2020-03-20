@@ -5,8 +5,6 @@ import store from '../store/store.js'
 import { Input, InputGroup, Card, CardHeader,CardBody,CardFooter, Button } from 'reactstrap';
 
 import {
-    incrementAction,
-    decreaseAction,
     mainAction,
     loginFailedAction,
     loginSuccessAction,
@@ -46,7 +44,6 @@ let submit = (e,data) => {
             // TODO: That's just funny so I'll leave it that way for now
             alert("EIPÄ OLLU")
             store.dispatch(loginFailedAction());
-            //store.dispatch(incrementAction);
         }else{
             store.dispatch(loginSuccessAction(JSON.parse(response)));
             // This will show the main page
