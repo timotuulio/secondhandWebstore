@@ -52,8 +52,8 @@ const App = ({page,mainAction,login}) =>{
         return(
             <div>
                 <Header />
-                {/*<AllItems />*/}
-                <AllUsers />
+                <AllItems />
+                {/*<AllUsers />*/}
             </div>
         );
     }

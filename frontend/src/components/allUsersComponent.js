@@ -45,6 +45,7 @@ function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
   ];*/
   var usersToRender = /*testUsers*/[];
 
+  // TODO: Add different pages for all the roles
   console.log(user);
   if (loadState=='LOADED') {
       var singleRoleArray = [];
