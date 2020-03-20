@@ -135,7 +135,11 @@ module.exports = {
             console.log("This is ID:" + newUser._id)
             // Create token and return it
             jwt.sign({name:newUser._id},secret,{algorithm:'HS256'},function(err, token){
-              res.json(token);
+              
+              user = {...newUser._doc};
+              delete user['password']; 
+              
+              res.json({token,user});
             });
           });
 

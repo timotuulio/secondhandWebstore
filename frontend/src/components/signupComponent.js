@@ -10,10 +10,10 @@ import {
 } from '../actions/actions.js';
 import { USER, SHOPKEEPER, ADMIN } from '../stateNames.js'
 import { connect } from 'react-redux';
-
+import store from '../store/store.js';
 
  // take over its submit event.
- let submit = (e,data) => {
+let submit = (e,data) => {
   e.preventDefault();
 
   // Extract data from the form
@@ -44,13 +44,12 @@ import { connect } from 'react-redux';
       method : "post",
       headers: {'Content-Type': 'application/json'},
       body: body
-  }).then(
-      response => response.text()
-
-  ).then(
-      html => console.log(html)
-  );
+  }).then(response => response.text()).then(html=> store.dispatch(loginSuccessAction(JSON.parse(html))),store.dispatch(mainAction()));
 }
+
+//store.dispatch(loginSuccessAction(JSON.parse(response))),store.dispatch(mainAction());
+
+
 
 
 const Signup = ({registerAction}) => {
@@ -110,7 +109,7 @@ const Signup = ({registerAction}) => {
       </FormGroup>
         </CardBody>
         <CardFooter>
-        <Button color="primary" size="lg" >Rekisteröidy</Button>
+        <Button color="primary" size="lg" onClick={submit}>Rekisteröidy</Button>
         </CardFooter>
       </Card>
     </Form>
