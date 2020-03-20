@@ -52,6 +52,7 @@ module.exports = {
                 
                 newItem.price = xssFilters.inHTMLData(itemToBeAdded.price);
                 newItem.title = xssFilters.inHTMLData(itemToBeAdded.title);
+                newItem.description = xssFilters.inHTMLData(itemToBeAdded.description);
                 newItem.ownerId = itemToBeAdded.ownerId;
         
                 newItem.save(function(err){
