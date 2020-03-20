@@ -21,9 +21,10 @@ import { connect } from 'react-redux';
   var name = document.getElementById('name').value;
   var email = document.getElementById('email').value;
   var pass = document.getElementById('password').value;
-  var phone = document.getElementById('phone').value;
+  var phoneNumber = document.getElementById('phoneNumber').value;
   var address = document.getElementById('address').value;
-  var bank = document.getElementById('bank').value;
+  var bankAccount = document.getElementById('bankAccount').value;
+  
 
   var role;
 
@@ -36,7 +37,7 @@ import { connect } from 'react-redux';
   }
 
   // Build body for the POST request
-  var body  = JSON.stringify({"name":name,"email":email,"password":pass,"phone":phone,"address":address,"role":role,"bank":bank});
+  var body  = JSON.stringify({"name":name,"email":email,"password":pass,"phoneNumber":phoneNumber,"address":address,"role":role,"bankAccount":bankAccount});
 
   // Use fetch to send the data
   const url = "http://localhost:3001/api/user";

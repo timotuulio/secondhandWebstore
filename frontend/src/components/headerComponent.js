@@ -17,20 +17,21 @@ import {
   loggedOutAction,
   loginSuccessAction,
   loginAction,
-  ownProfileAction
+  ownProfileAction,
+  userAddNewItemAction
 } from '../actions/actions.js';
 
 
-const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction,user,ownProfileAction}) => {
+const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction}) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
 
   return (
-    <div>
-      <Navbar color="light" light expand="md">
+
+      <Navbar sticky="top" style={{backgroundColor:'#2B3856'}}>
         <NavbarBrand href="/">Verkkokauppa</NavbarBrand>
-        <Collapse isOpen={isOpen} navbar>
+
           <Nav className="mr-auto" navbar>
           <ButtonToolbar aria-label="Toolbar with button groups">
 
@@ -41,15 +42,15 @@ const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction,user,o
             if (login=='LOGGEDIN') {
             return <div>
                     <ButtonGroup className="mr-2">
-                    <Button size="lg">Kaupat</Button>
-                    <Button size="lg" onClick={ownProfileAction}>Profiili</Button>
-                    <Button size="lg">Jotain</Button>
+                    <Button color="primary" onClick={mainAction}>Shop</Button>
+                    <Button color="primary" onClick={ownProfileAction}>Profile</Button>
+                    <Button color="primary" onClick={userAddNewItemAction}>Sell product</Button>
                     </ButtonGroup>
                     </div> ;
             }
             })()}
 
-    </ButtonToolbar>
+          </ButtonToolbar>
 
           </Nav>
           {(() => {
@@ -57,15 +58,20 @@ const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction,user,o
               return <Button color="primary" onClick={loginAction}>Kirjaudu sisään</Button>;
 
             }else{
-              return (<div>Welcome {user.user.name}
-              <Button color="primary" onClick={loggedOutAction}>Kirjaudu ulos</Button></div>);
+
+              //return(<div><Button>asdad</Button></div>);
+              return (<div style={{display: 'inline-block'}}><div style={{color: "white"}}>Welcome {user.user.name}</div><Button color="primary" onClick={loggedOutAction}>Log out</Button></div>);
+
             }
           })()}
 
-        </Collapse>
+      
+
+
+
 
       </Navbar>
-    </div>
+
   );
 }
 
@@ -86,7 +92,8 @@ const mapDispatchToProps = (dispatch) => ({
   loggedOutAction: () => dispatch(loggedOutAction()),
   loginSuccessAction: (data) => dispatch(loginSuccessAction(data)),
   loginAction: () => dispatch(loginAction()),
-  ownProfileAction: () => dispatch(ownProfileAction())
+  ownProfileAction: () => dispatch(ownProfileAction()),
+  userAddNewItemAction: () => dispatch(userAddNewItemAction())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
