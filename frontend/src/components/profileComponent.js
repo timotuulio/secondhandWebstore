@@ -20,6 +20,7 @@ import store from '../store/store.js';
     var body  = JSON.stringify({"name":name,"phoneNumber":phone,"address":address,"bankAccount":bank});
     console.log(store.getState())
     // Use fetch to send the data
+    // TODO: An if-system or something is needed so that when admin presses an user from all users -list he gets to the users profile and not to his own
     const url = "http://localhost:3001/api/user/"+store.getState().loginReducer.user._id;
     console.log(url);
     fetch(url, {
@@ -36,7 +37,7 @@ import store from '../store/store.js';
 
 const Profile = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,registerAction,user}) => {
 
-
+//TODO: The input fields should have a disabled value and a button that allows changing the values
     return (
         <div style={{
             display: "flex",
@@ -44,8 +45,8 @@ const Profile = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,re
             justifyContent: "center",
                 alignItems: "center"
             }}>
-        <Form onSubmit={submit}>
-          <h2 className="display-4">Edit profile</h2>
+        <Form onSubmit={submit} style={{width:"70%"}}>
+          <h2 className="display-4"  style={{textAlign:"center"}}>Edit profile</h2>
           <hr className="my-2" />
           <br/><br/>
           <Card className="text-center">
@@ -66,7 +67,7 @@ const Profile = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,re
             <FormGroup>Addresss:
               <Input type="text" name="address" id="address" placeholder="Address" defaultValue={user.address} />
             </FormGroup>
-    
+
             Password:
             <FormGroup>
               <Input type="password" name="password" id="password1" placeholder="Password" />

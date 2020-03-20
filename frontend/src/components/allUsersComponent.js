@@ -17,8 +17,8 @@ function setData(data){
 }
 
 function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
-  const authKey = token
-  //const authKey =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiNWU3MGVhOGU1M2VkN2YyMDc3YjljZDRlIiwiaWF0IjoxNTg0NDU4MzgyfQ.FCfdW5Piw2BuAGMmRDNB9QrBtcOStOwR_XxJQ5QCkPY"
+  //const authKey = token
+  const authKey =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiNWU3MGVhOGU1M2VkN2YyMDc3YjljZDRlIiwiaWF0IjoxNTg0NDU4MzgyfQ.FCfdW5Piw2BuAGMmRDNB9QrBtcOStOwR_XxJQ5QCkPY"
   var obj = {
     method: 'GET',
     headers: {
@@ -67,7 +67,7 @@ function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
   return usersToRender
 // TODO: Button is not yet connected to the users profile
   function pushToArray(usr) {
-    
+
     usersToRender.push(
       <div style={{
         display: "flex",
@@ -96,12 +96,17 @@ function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
                 return <CardText>Phonenumber: {usr.phoneNumber}</CardText>;
               }
             })()}
-            <Button>Got to profile</Button>
+            <Button onClick={goToProfile()}>Got to profile</Button>
           </CardBody>
         </Card>
       </div>
     )
   }
+}
+
+function goToProfile() {
+  console.log("This is useless")
+  //alert("Lol");
 }
 
 const mapStateToProps = (state) => ({
