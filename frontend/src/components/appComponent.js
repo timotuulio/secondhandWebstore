@@ -3,7 +3,6 @@ import Header from './headerComponent.js';
 //import Hdr from './containers/login.js';
 import AllItems from './allItemsComponent.js'
 import AllUsers from './allUsersComponent.js'
-import Test from './test.js'
 import Signup from './signupComponent.js';
 import Login from '../containers/loginContainer.js';
 import Profile from '../containers/profileContainer.js'
@@ -20,7 +19,7 @@ const App = ({page,mainAction,login}) =>{
                 <Login />
             </div>
         );
-    
+
     // This is for showing signup form
     }else if(page=='SIGNUP' && login !='LOGGEDIN'){
         return(
@@ -53,7 +52,7 @@ const App = ({page,mainAction,login}) =>{
         return(
             <div>
                 <Header />
-                <Test />
+                {/*<AllItems />*/}
                 <AllUsers />
             </div>
         );

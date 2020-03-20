@@ -12,7 +12,6 @@ import { USER, SHOPKEEPER, ADMIN } from '../stateNames.js'
 import { connect } from 'react-redux';
 
 
-
  // take over its submit event.
  let submit = (e,data) => {
   e.preventDefault();
@@ -24,7 +23,7 @@ import { connect } from 'react-redux';
   var phoneNumber = document.getElementById('phoneNumber').value;
   var address = document.getElementById('address').value;
   var bankAccount = document.getElementById('bankAccount').value;
-  
+
 
   var role;
 
@@ -52,8 +51,6 @@ import { connect } from 'react-redux';
       html => console.log(html)
   );
 }
-
-
 
 
 const Signup = ({registerAction}) => {
@@ -119,14 +116,11 @@ const Signup = ({registerAction}) => {
     </Form>
 
     </div>
-
   );
 }
 
 
-
 const mapStateToProps = (state) => ({
-  value: state.addReducer.value,
   page: state.pageReducer.page,
   login: state.loginReducer.login
 });

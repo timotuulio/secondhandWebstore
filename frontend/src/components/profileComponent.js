@@ -6,7 +6,7 @@ import store from '../store/store.js';
  // take over its submit event.
  let submit = (e) => {
     e.preventDefault();
-  
+
     // Extract data from the form
     var name = document.getElementById('name').value;
     //var email = document.getElementById('email').value;
@@ -14,8 +14,8 @@ import store from '../store/store.js';
     var phone = document.getElementById('phoneNumber').value;
     var address = document.getElementById('address').value;
     var bank = document.getElementById('bankAccount').value;
-    
-    
+
+
     // Build body for the POST request
     var body  = JSON.stringify({"name":name,"phoneNumber":phone,"address":address,"bankAccount":bank});
     console.log(store.getState())
@@ -27,14 +27,11 @@ import store from '../store/store.js';
         headers: {'Content-Type': 'application/json','Authorization': 'Bearer '+store.getState().loginReducer.token},
         body: body
     }).then(
-        response => response.text() 
+        response => response.text()
     ).then(
         html => console.log(html)
-    );  
+    );
   }
-  
-
-
 
 
 const Profile = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,registerAction,user}) => {
@@ -53,8 +50,8 @@ const Profile = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,re
           <br/><br/>
           <Card className="text-center">
             <CardHeader>
-            <h3 className="display-5">{user.email}</h3>     
-    
+            <h3 className="display-5">{user.email}</h3>
+
             </CardHeader>
               <CardBody>
               <FormGroup>Name:
@@ -68,8 +65,7 @@ const Profile = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,re
             </FormGroup>
             <FormGroup>Addresss:
               <Input type="text" name="address" id="address" placeholder="Address" defaultValue={user.address} />
-            </FormGroup>       
-    
+            </FormGroup>
     
             Password:
             <FormGroup>
@@ -78,17 +74,16 @@ const Profile = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,re
             <FormGroup>
               <Input type="password" name="password" id="password2" placeholder="Password" />
             </FormGroup>
-    
+
               </CardBody>
               <CardFooter>
               <Button color="primary" size="lg" >Save changes</Button>
-              </CardFooter>               
+              </CardFooter>
             </Card>
           </Form>
-      
+
           </div>
       );
-
 }
 
 

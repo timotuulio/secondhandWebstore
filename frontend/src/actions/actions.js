@@ -1,11 +1,8 @@
 // Actions for Redux part of the page
-import { INCREMENT, DECREASE, LOADING, LOADED } from "./actionTypes";
+import { LOADING, LOADED } from "./actionTypes";
 import { MAIN, ALLITEMS, SINGLEITEM, LOGIN, SIGNIN, OWNPROFILE, OWNSELLABLES, USERADDNEWITEM, ALLSELLABLES, SHOPKEEPERBUYITEM, ALLUSERS } from "./actionTypes";
 import { QUEST, USER, SHOPKEEPER, ADMIN } from "./actionTypes";
 import {LOGINFAILED,LOGGEDIN, LOGGEDOUT, SIGNUP,USERDATA} from "./actionTypes";
-
-export function incrementAction() {return {type: INCREMENT,};}
-export function decreaseAction() {return{type: DECREASE,};}
 
 export function mainAction() {return{type: MAIN,};}
 export function allItemsAction() {return{type: ALLITEMS,};}

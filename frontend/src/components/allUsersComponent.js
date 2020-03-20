@@ -6,6 +6,8 @@ import {
   mainAction,
   loadingAction
 } from '../actions/actions.js';
+import { Card, Button, CardHeader, CardFooter, CardBody,
+  CardTitle, CardText } from 'reactstrap';
 import { QUEST, USER, SHOPKEEPER, ADMIN } from '../stateNames.js'
 
 
@@ -23,6 +25,7 @@ function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
       'authorization': 'Bearer ' + authKey
     }
   }
+  // TODO: The loadingState needs to update when we start fetching something
   //loadingAction();
   fetch('http://localhost:3001/api/user', obj).then(res=>res.json()).then(data => setData(data)).then(loadedAction);
 
@@ -41,8 +44,7 @@ function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
     }
   ];*/
   var usersToRender = /*testUsers*/[];
-  //var users = testUsers;
-  //console.log(users);
+
   console.log(user);
   if (loadState=='LOADED') {
       var singleRoleArray = [];
@@ -63,25 +65,40 @@ function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
           </div>)
   }
   return usersToRender
-
+// TODO: Button is not yet connected to the users profile
   function pushToArray(usr) {
     
     usersToRender.push(
-      <div>
-        <h3>{usr.name}</h3>
-        <p>Role: {usr.role}</p>
-        <p>Email: {usr.email}</p>
-          {(() => {
-            if (usr.address!='') {
-              return <p>Adress: {usr.address}</p>;
-            }
-          })()}
-        {(() => {
-          if (usr.phoneNumber!='') {
-            return <p>Phone number: {usr.phoneNumber}</p>;
-          }
-        })()}
-        <hr/>
+      <div style={{
+        display: "flex",
+        margin: "15px",
+        justifyContent: "center",
+            alignItems: "center",
+        width:"100%"
+        }}>
+        <Card style={{
+          maxWidth:"500px",
+          minWidth:"30em",
+          marginBottom:"5px",
+          alignSelf:"center"
+        }}>
+          <CardHeader>{usr.name}</CardHeader>
+          <CardBody>
+            <CardText>Role: {usr.role}</CardText>
+            <CardText>{usr.email}</CardText>
+            {(() => {
+              if (usr.address!='' && usr.address!='undefined') {
+                return <CardText>Address: {usr.address}</CardText>;
+              }
+            })()}
+            {(() => {
+              if (usr.phoneNumber!='' && usr.phoneNumber!='undefined') {
+                return <CardText>Phonenumber: {usr.phoneNumber}</CardText>;
+              }
+            })()}
+            <Button>Got to profile</Button>
+          </CardBody>
+        </Card>
       </div>
     )
   }
