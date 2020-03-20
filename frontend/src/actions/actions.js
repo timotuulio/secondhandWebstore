@@ -2,7 +2,7 @@
 import { INCREMENT, DECREASE, LOADING, LOADED } from "./actionTypes";
 import { MAIN, ALLITEMS, SINGLEITEM, LOGIN, SIGNIN, OWNPROFILE, OWNSELLABLES, USERADDNEWITEM, ALLSELLABLES, SHOPKEEPERBUYITEM, ALLUSERS } from "./actionTypes";
 import { QUEST, USER, SHOPKEEPER, ADMIN } from "./actionTypes";
-import {LOGINFAILED,LOGGEDIN, LOGGEDOUT, SIGNUP} from "./actionTypes";
+import {LOGINFAILED,LOGGEDIN, LOGGEDOUT, SIGNUP,USERDATA} from "./actionTypes";
 
 export function incrementAction() {return {type: INCREMENT,};}
 export function decreaseAction() {return{type: DECREASE,};}
@@ -28,7 +28,9 @@ export function loadingAction() {return{type: LOADING};};
 export function loadedAction() {return{type: LOADED};};
 
 export function loginFailedAction() {return{type: LOGINFAILED};};
-export function loginSuccessAction() {return{type: LOGGEDIN};};
+export function loginSuccessAction(userData) {return{type: LOGGEDIN,data:userData};};
 export function loggedOutAction() {return{type: LOGGEDOUT};};
 
 export function registerAction() {return{type: SIGNUP};};
+
+export function userDataAction(ASD) {return{type:USERDATA,data:ASD};}

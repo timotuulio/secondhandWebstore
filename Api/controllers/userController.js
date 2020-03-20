@@ -60,9 +60,20 @@ module.exports = {
               // Here username and password matches so create and return a token to user which can be used to perform the operations
               if (result) {
                 console.log("ok")
-                var role = user.role;
+
+                  
+
                 jwt.sign({name:user._id},secret,{algorithm:'HS256'},function(err, token){
-                  res.json({token, role});
+
+                   // dont send user id and password to client
+                   user = {...user._doc};
+                   delete user['password'];
+                   delete user['_id']; 
+
+                   console.log(user)
+
+
+                  res.json({token, user});
                 });
                 
               } else {

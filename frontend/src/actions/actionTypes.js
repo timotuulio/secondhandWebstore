@@ -27,3 +27,5 @@ export const LOGGEDIN = 'LOGGEDIN';
 export const LOGGEDOUT = 'LOGGEDOUT';
 
 export const SIGNUP = 'SIGNUP';
+
+export const USERDATA = 'USERDATA';

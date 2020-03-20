@@ -50,7 +50,7 @@ let submit = (e,data) => {
             store.dispatch(loginFailedAction());
             //store.dispatch(incrementAction);
         }else{
-            store.dispatch(loginSuccessAction());
+            store.dispatch(loginSuccessAction(JSON.parse(response)));
             // This will show the main page
             store.dispatch(mainAction());
         }

@@ -20,7 +20,7 @@ import {
 } from '../actions/actions.js';
 
 
-const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction}) => {
+const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction,user}) => {
   
   const [isOpen, setIsOpen] = useState(false);
 
@@ -54,8 +54,10 @@ const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction}) => {
           {(() => {
             if (login!='LOGGEDIN') {
               return <Button color="primary" onClick={loginAction}>Kirjaudu sisään</Button>;
+           
             }else{
-              return <Button color="primary" onClick={loggedOutAction}>Kirjaudu ulos</Button>;
+              return (<div>Hei {user.user.name}    
+              <Button color="primary" onClick={loggedOutAction}>Kirjaudu ulos</Button></div>);
             }
           })()}
           
@@ -72,7 +74,8 @@ const Header =({page,login,loginAction,loggedOutAction,loginSuccessAction}) => {
 const mapStateToProps = (state) => ({
   value: state.addReducer.value,
   page: state.pageReducer.page,
-  login: state.loginReducer.login
+  login: state.loginReducer.login,
+  user: state.loginReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -80,7 +83,7 @@ const mapDispatchToProps = (dispatch) => ({
   decreaseAction: () => dispatch(decreaseAction()),
   mainAction: () => dispatch(mainAction()),
   loggedOutAction: () => dispatch(loggedOutAction()),
-  loginSuccessAction: () => dispatch(loginSuccessAction()),
+  loginSuccessAction: (data) => dispatch(loginSuccessAction(data)),
   loginAction: () => dispatch(loginAction())
 });
 
