@@ -16,9 +16,6 @@ const UserSchema = new mongoose.Schema({
   bankAccount: {
       type: String
   },
-  email: {
-      type: String
-  },
   phoneNumber: {
       type: String
   },
