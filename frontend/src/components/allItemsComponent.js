@@ -6,6 +6,8 @@ import {
   mainAction,
   loadingAction
 } from '../actions/actions.js';
+import { Card, Button, CardHeader, CardFooter, CardBody,
+  CardTitle, CardText } from 'reactstrap';
 
 
 var item;
@@ -38,11 +40,32 @@ function AllItems({loadState, loadedAction, loadingAction}) {
   if (loadState=='LOADED') {
 
       item.map(itm => itemsToRender.push(
-        <div>
-        <h3>{itm.title}</h3>
-        <div>{itm.price}€</div>
-        <hr/>
-      </div>
+
+        <div style={{
+          display: "flex",
+          margin: "15px",
+          justifyContent: "center",
+              alignItems: "center",
+          width:"100%"
+          }}>
+          <Card style={{
+            maxWidth:"500px",
+            minWidth:"30em",
+            marginBottom:"5px",
+            alignSelf:"center"
+          }}>
+            <CardHeader>{itm.title}</CardHeader>
+            <CardBody>
+              {(() => {
+                if (itm.description!='' && itm.description!='undefined') {
+                  return <CardText>{itm.description}</CardText>;
+                }
+              })()}
+              <CardText>Price: {itm.price}€</CardText>
+              <Button onClick={buyItem()}>Buy</Button>
+            </CardBody>
+          </Card>
+        </div>
       ))
 
   }
@@ -55,6 +78,9 @@ function AllItems({loadState, loadedAction, loadingAction}) {
   return itemsToRender
 }
 
+function buyItem() {
+  console.log("Now I'll buy The Item!")
+}
 
 const mapStateToProps = (state) => ({
     loadState: state.loadReducer.loadState
