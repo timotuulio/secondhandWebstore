@@ -55,6 +55,7 @@ module.exports = {
                 newItem.description = xssFilters.inHTMLData(itemToBeAdded.description);
                 newItem.ownerId = itemToBeAdded.ownerId;
                 newItem.created = xssFilters.inHTMLData(itemToBeAdded.created);
+                newItem.status = xssFilters.inHTMLData(itemToBeAdded.status);
 
                 // This was an attempt to add an image
                 //newItem.img.data = fs.readFileSync(itemToBeAdded.image);
@@ -174,9 +175,16 @@ module.exports = {
     // Fetches useritems
     async getOfferedItems(req,res){
 
-        var offeredItems = await Item.find({ ownerId: req.params.id }).exec()
+        var offeredItems = await Item.find({ ownerId: req.params.id, status:"offered"}).exec()
             .catch(function(error){return 'Error occured'});
        
         res.send(offeredItems);
+    },
+
+    async getOffers(req,res){
+        var offers = await Item.find({status:"offered"}).exec()
+            .catch(function(error){return 'Error occured'});
+       
+        res.send(offers);
     }
 }

@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
     user: state.loginReducer.user,
-    token: state.loginReducer.token
+    token: state.loginReducer.token,
+    page: state.pageReducer.page
   });
 
   const mapDispatchToProps = (dispatch) => ({

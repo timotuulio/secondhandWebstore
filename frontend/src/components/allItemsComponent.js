@@ -1,13 +1,12 @@
 import React from 'react';
-import useFetch from "use-http";
 import { connect } from 'react-redux';
 import {
   loadedAction,
   mainAction,
-  loadingAction
+  loadingAction,
+  editItemAction
 } from '../actions/actions.js';
-import { Card, Button, CardHeader, CardFooter, CardBody,
-  CardTitle, CardText } from 'reactstrap';
+import { Card, Button, CardHeader, CardFooter, CardBody, CardText } from 'reactstrap';
 
 
 var item;
@@ -15,7 +14,7 @@ function setData(data){
   item = data;
 }
 
-function AllItems({loadState, loadedAction, loadingAction,page,user,token}) {
+function AllItems({loadState, loadedAction, loadingAction,page,user,token,editItemAction}) {
 
 
 
@@ -28,18 +27,35 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token}) {
         'authorization': 'Bearer ' + token}}).then(res=>res.json()).then(data => loadingAction());
   }
 
+/*
+  function getUserName(ID){
+    var user =fetch('http://localhost:3001/api/user/'+ID,
+  {
+    method: 'get',
+    headers: {
+      'authorization': 'Bearer ' + token}}).then(res=>res.json()).then(data =>  data.name).then(result => result);
+    
+    return JSON.stringify(user);
+  }
 
+  
 
-
-
+  const getUserName = (ID) => fetch('http://localhost:3001/api/user/'+ID,
+  {
+    method: 'get',
+    headers: {
+      'authorization': 'Bearer ' + token}}).then(res=>res.json()).then(data => JSON.stringify(data));
+*/
 
   var currentPath;
   
 
-  if(page=='OWNSELLABLES'){
+  if(page==='OWNSELLABLES'){
     currentPath = "items/offered/"+user['_id'];
-  }else if(page=='MAIN'){
+  }else if(page==='MAIN'){
     currentPath = "item";
+  }else if(page === 'OFFERS'){
+    currentPath = "items/offers";
   }
 
 
@@ -63,11 +79,11 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token}) {
   const itemsToRender = /*testItems*/[];
   var items = testItems;
   console.log(items);
-  if (loadState=='LOADED') {
+  if (loadState==='LOADED') {
 
       item.map(itm => itemsToRender.push(
 
-        <div style={{
+        <div key={itm._id} style={{
           display: "flex",
           margin: "15px",
           justifyContent: "center",
@@ -79,28 +95,38 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token}) {
             minWidth:"30em",
             marginBottom:"5px",
             alignSelf:"center"
-          }}>
-            <CardHeader>{itm.title}</CardHeader>
+          }} >
+
+            {(() => {
+                if (page==='OWNSELLABLES') {
+                  return <CardHeader>{itm.title}</CardHeader>
+                }else{
+                  return <CardHeader>{itm.title}<Button color="primary" style={{float: 'right'}} onClick = {mainAction}>Seller</Button></CardHeader>
+
+                }
+              })()}
+
+
             
             <CardBody>
               {(() => {
-                if (itm.description!='' && itm.description!='undefined') {
+                if (itm.description!=='' && itm.description!=='undefined') {
                   return <CardText>{itm.description}</CardText>;
                 }
               })()}
               <CardText>Price: {itm.price}€</CardText>
               <CardText>Created: {itm.created}</CardText>
-            
-            
-
               
+
             </CardBody>
             <CardFooter>
             {(() => {
-                if (page=='OWNSELLABLES') {
-                  return <Button value={itm._id} onClick={deleteItem}>Remove</Button>
+                if (page==='OWNSELLABLES') {
+                  return <div><Button color="primary" value={itm._id} onClick={deleteItem}>Remove</Button>
+                  <Button color="primary" style={{float: 'right'}} onClick={() => editItemAction(itm)}>Edit</Button></div>
                 }else{
-                  return <Button value={itm._id} onClick={buyItem()}>Buy</Button>
+                  return <div><Button color="primary" value={itm._id} onClick={buyItem()}>Buy</Button>
+                  </div>
                 }
               })()}
 
@@ -114,15 +140,18 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token}) {
   }
   else {
     itemsToRender.push(
-      <div>
-        <p>Loading...</p>
+      <div key="none">
+        <div>Loading...</div>
       </div>)
   }
-  if (page=='OWNSELLABLES') {
+  if (page==='OWNSELLABLES') {
     return  (<div> <h2 className="display-4">Own sellables</h2>
     <hr className="my-2" /><div>{itemsToRender}</div></div>)
-  }else{
+  }else if(page==='MAIN'){
     return  (<div> <h2 className="display-4">Shop goods</h2>
+    <hr className="my-2" /><div>{itemsToRender}</div></div>)
+  }else{
+    return  (<div> <h2 className="display-4">Offers</h2>
     <hr className="my-2" /><div>{itemsToRender}</div></div>)
   }
   
@@ -145,6 +174,7 @@ const mapDispatchToProps = (dispatch) => ({
     mainAction: () => dispatch(mainAction()),
     loadedAction: () => dispatch(loadedAction()),
     loadingAction: () => dispatch(loadingAction()),
+    editItemAction: (data) => dispatch(editItemAction(data))
 });
 
 

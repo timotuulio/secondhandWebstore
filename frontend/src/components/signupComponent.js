@@ -37,7 +37,7 @@ let submit = (e,data) => {
   }).then(response => {
 
       // This is done in the case of successfull registration only
-      if(response.status == '200'){
+      if(response.status === '200'){
         response.text().then(html=> {
           loginSuccessAction(JSON.parse(html));
             mainAction();
@@ -45,14 +45,14 @@ let submit = (e,data) => {
 
       // Put here how unsuccessfull registration is handled
       // Reasons might be missing required value
-      }else if(response.status =='400'){
+      }else if(response.status ==='400'){
 
       
       // This will be the case of status 500 most of the time
       }else{
         response.text().then(res=> {
           
-          if(JSON.parse(res).code == '11000'){
+          if(JSON.parse(res).code === '11000'){
             console.log("duplicate email")
           }else{
             console.log("unknown error happened")
@@ -90,12 +90,12 @@ let submit = (e,data) => {
 
     function checkName(e){
         setName(e.target.value);
-        if(e.target.value.length == 0){
+        if(e.target.value.length === 0){
             setNameOk(false);
             btn.style.visibility = 'hidden';
         }else{
             setNameOk(true)
-            if(emailOK == true && passwordOK == true && radio==true){
+            if(emailOK === true && passwordOK === true && radio===true){
                 btn.style.visibility = 'visible';
             }
         }
@@ -115,7 +115,7 @@ let submit = (e,data) => {
         
         }else{
           setEmailOk(true)
-          if(nameOK == true && passwordOK == true && radio==true){
+          if(nameOK === true && passwordOK === true && radio===true){
               btn.style.visibility = 'visible';
           }
         }
@@ -128,7 +128,7 @@ let submit = (e,data) => {
         if(e.target.value.length > 7){
             setPasswordOk(true)
         
-            if(nameOK == true && emailOK == true && radio == true){
+            if(nameOK === true && emailOK === true && radio === true){
                 btn.style.visibility = 'visible';
             }
           
@@ -159,15 +159,15 @@ let submit = (e,data) => {
       <CardHeader></CardHeader>
         <CardBody>
         <FormGroup>
-        <Input type="text" name="name" id="name" placeholder="Name" valid={ nameOK === true } id="title" onChange={checkName} invalid={ nameOK === false }/>
+        <Input type="text" name="name" id="name" placeholder="Name" valid={ nameOK === true } onChange={checkName} invalid={ nameOK === false }/>
         <FormFeedback invalid>Name is required</FormFeedback>
       </FormGroup>
       <FormGroup>
-        <Input type="email" name="email" id="email" placeholder="Email" valid={ emailOK === true } id="title" onChange={checkEmail} invalid={ emailOK === false } />
+        <Input type="email" name="email" id="email" placeholder="Email" valid={ emailOK === true } onChange={checkEmail} invalid={ emailOK === false } />
         <FormFeedback invalid>Email is required</FormFeedback>
       </FormGroup>
       <FormGroup>
-        <Input type="password" name="password" id="password" placeholder="Password" valid={ passwordOK === true } id="title" onChange={checkPassword} invalid={ passwordOK === false } />
+        <Input type="password" name="password" id="password" placeholder="Password" valid={ passwordOK === true } onChange={checkPassword} invalid={ passwordOK === false } />
         <FormFeedback invalid>Password is required and needs to be at least 8 characters</FormFeedback>
       </FormGroup>
       <FormGroup>
@@ -199,7 +199,7 @@ let submit = (e,data) => {
             Admin
           </Label>
         </FormGroup>
-        <Input style={{visibility:"hidden"}} type="password"  invalid={radio==false} valid={radio==true}/>
+        <Input style={{visibility:"hidden"}} type="password"  invalid={radio===false} valid={radio===true}/>
         <FormFeedback invalid >Role must be selected</FormFeedback>
       </FormGroup>
         </CardBody>

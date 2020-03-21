@@ -1,17 +1,15 @@
 import React from 'react';
 import { FormText,Button, FormFeedback, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import store from '../store/store.js';
 
 
 
-const SellItem = ({user,token},props) => {
+const SellItem = ({user,token,page},props) => {
 
     console.log(user);
     console.log(token)
 
     const {
-        buttonLabel,
         className
       } = props;
     
@@ -19,7 +17,7 @@ const SellItem = ({user,token},props) => {
       const toggle = () => setModal(!modal);
     
       // take over its submit event.
-    let submit = (e) => {
+    let submitNew = (e) => {
     e.preventDefault();
   
     // Extract data from the form
@@ -31,7 +29,7 @@ const SellItem = ({user,token},props) => {
         
     var date = new Date();
     // Build body for the POST request
-    var body  = JSON.stringify({"title":title,"description":description,"price":price,"ownerId":user['_id'],"created":date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()});
+    var body  = JSON.stringify({"title":title,"description":description,"price":price,"ownerId":user['_id'],"created":date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),"status":"offered"});
     
 
     var formData = new FormData();
@@ -67,12 +65,12 @@ const SellItem = ({user,token},props) => {
 
     function checkTitle(e){
         setTitle(e.target.value);
-        if(e.target.value.length == 0){
+        if(e.target.value.length === 0){
             setTitleOk(false);
             btn.style.visibility = 'hidden';
         }else{
             setTitleOk(true)
-            if(descOK == true && priceOK == true){
+            if(descOK === true && priceOK === true){
                 btn.style.visibility = 'visible';
             }
         }
@@ -80,13 +78,13 @@ const SellItem = ({user,token},props) => {
 
     function checkDescription(e){
         setDescription(e.target.value);
-        if(e.target.value.length == 0){
+        if(e.target.value.length === 0){
             setDescOk(false)
             btn.style.visibility = 'hidden';
           
         }else{
             setDescOk(true)
-            if(descOK == true && priceOK == true){
+            if(descOK === true && priceOK === true){
                 btn.style.visibility = 'visible';
             }
         }  
@@ -94,10 +92,10 @@ const SellItem = ({user,token},props) => {
 
     function checkPrice(e){
         setPrice(e.target.value);
-        if(e.target.value.length != 0 && !isNaN(e.target.value)){
+        if(e.target.value.length !== 0 && !isNaN(e.target.value)){
             setPriceOk(true)
         
-            if(descOK == true && titleOK == true){
+            if(descOK === true && titleOK === true){
                 btn.style.visibility = 'visible';
             }
           
@@ -116,7 +114,17 @@ const SellItem = ({user,token},props) => {
             justifyContent: "center",
                 alignItems: "center"
             }}>
-        <Form onSubmit={submit}>
+               
+        <Form >
+        {(() => {
+              if(page === 'EDITITEM') {
+                return ( <div><h2 className="display-4">Edit offer</h2>
+                <hr className="my-2" /></div>)
+              }else{
+                return ( <div><h2 className="display-4">Make a new offer</h2>
+                <hr className="my-2" /></div>)
+              }
+            })()}
          <FormGroup>
             <Label for="title">Title</Label>
             <Input valid={ titleOK === true } id="title" onChange={checkTitle} invalid={ titleOK === false }/>
@@ -129,7 +137,7 @@ const SellItem = ({user,token},props) => {
           </FormGroup>
           <FormGroup>
             <Label for="description">Price</Label>
-            <Input id="price" onChange = {checkPrice} name="price" id="price" valid={ priceOK === true } invalid={ priceOK === false } />
+            <Input onChange = {checkPrice} name="price" id="price" valid={ priceOK === true } invalid={ priceOK === false } />
             <FormFeedback invalid>Give correct price</FormFeedback>
             </FormGroup>
             
@@ -144,7 +152,14 @@ const SellItem = ({user,token},props) => {
 
 
                 <div>
-                <Button style={{visibility:'hidden'}} onClick={toggle} id="confirm" block>Confirm</Button>
+                {(() => {
+                    if(page === 'EDITITEM') {
+                        return <Button style={{visibility:'hidden'}} onClick={toggle} id="confirm" block>Save changes</Button>
+                    }else{
+                        return <Button style={{visibility:'hidden'}} onClick={toggle} id="confirm" block>Confirm</Button>
+                    }
+                })()}
+              
               
                 <Modal isOpen={modal} toggle={toggle} className={className}>
                     <ModalHeader toggle={toggle}>Confirm sale</ModalHeader>
@@ -154,7 +169,14 @@ const SellItem = ({user,token},props) => {
                     <div>{price}</div>
                     </ModalBody>
                     <ModalFooter>
-                    <Button color="primary" onClick={submit}>Confirm</Button>{' '}
+                    {(() => {
+                    if(page === 'EDITITEM') {
+                        return (  <Button color="primary" onClick={submitNew}>Save changes</Button>)
+                    }else{
+                        return ( <Button color="primary" onClick={submitNew}>Confirm</Button>)
+                    }
+                    })()}
+                   
                     <Button color="secondary" onClick={toggle}>Cancel</Button>
                     </ModalFooter>
                 </Modal>

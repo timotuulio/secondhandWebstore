@@ -9,7 +9,8 @@ import {
     ownProfileAction,
     userAddNewItemAction,
     allUsersAction,
-    ownSellablesAction
+    ownSellablesAction,
+    offersAction
   } from '../actions/actions.js';
 
 
@@ -28,7 +29,8 @@ import {
     ownProfileAction: () => dispatch(ownProfileAction()),
     userAddNewItemAction: () => dispatch(userAddNewItemAction()),
     allUsersAction: () => dispatch(allUsersAction()),
-    ownSellablesAction: () => dispatch(ownSellablesAction())
+    ownSellablesAction: () => dispatch(ownSellablesAction()),
+    offersAction: () => dispatch(offersAction())
     
   });
   

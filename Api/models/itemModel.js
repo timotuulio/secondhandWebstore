@@ -28,6 +28,9 @@ const ItemSchema = new mongoose.Schema({
   },
   created: {
     type:String
+  },
+  status: {
+    type:String
   }
 });
 

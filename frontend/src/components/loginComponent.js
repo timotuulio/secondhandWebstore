@@ -8,8 +8,6 @@ import {
     mainAction,
     loginFailedAction,
     loginSuccessAction,
-    loggedOutAction,
-    registerAction
   } from '../actions/actions.js';
 
 
@@ -37,10 +35,10 @@ let submit = (e,data) => {
     XHR.addEventListener( "load", function(event) {
 
         var response = event.target.responseText;
-        console.log(response)
+        //console.log(response)
 
         // Tähän toiminta kun unauthorized
-        if(response == 'Unauthorized'){
+        if(response === 'Unauthorized'){
             // TODO: That's just funny so I'll leave it that way for now
             alert("EIPÄ OLLU")
             store.dispatch(loginFailedAction());
@@ -86,7 +84,7 @@ const Login = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,regi
 
                         <CardHeader>
                           {(() => {
-                              if (login=='LOGINFAILED') {
+                              if (login==='LOGINFAILED') {
                                   // The div
                                   return <div style={{
                                     backgroundColor: 'tomato',

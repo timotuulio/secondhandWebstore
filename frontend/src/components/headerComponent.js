@@ -1,17 +1,16 @@
 // React component for the header
 
-import React,{ useState } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-  ButtonToolbar,ButtonGroup,Button,Collapse,Navbar,NavbarBrand,Nav
+  ButtonToolbar,ButtonGroup,Button,Navbar,NavbarBrand,Nav
 } from 'reactstrap';
-import { ADMIN,USER } from '../stateNames'
-import { ownSellablesAction } from '../actions/actions';
+import { ADMIN,USER } from '../stateNames';
 
 
 
-const Header =({ownSellablesAction,login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction,allUsersAction}) => {
+
+const Header =({ownSellablesAction,login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction,allUsersAction,offersAction}) => {
 
 
   return (
@@ -26,19 +25,21 @@ const Header =({ownSellablesAction,login,loginAction,loggedOutAction,user,ownPro
           </ButtonGroup>
 
             {(() => {
-            if (login=='LOGGEDIN') {
+            if (login==='LOGGEDIN') {
             return <div>
                     <ButtonGroup className="mr-2">
                     <Button color="primary" onClick={mainAction}>Shop</Button>
                     <Button color="primary" onClick={ownProfileAction}>Profile</Button>
                     <Button color="primary" onClick={userAddNewItemAction}>Sell product</Button>
                       {(() => {
-                          if (user.role == ADMIN) {
+                          if (user.role === ADMIN) {
                               return <Button color="primary" onClick={allUsersAction}>All users</Button>;
-                          }else if(user.role == USER){
+                          }else if(user.role === USER){
                             return <div><Button color="primary" onClick={ownSellablesAction}>Active offers</Button>;
                               <Button color="primary" onClick={ownSellablesAction}>Sale history</Button>;</div>
                           
+                          }else{
+                            return <Button color="primary" onClick={offersAction}>Offers</Button>
                           }
                       })()}
                     </ButtonGroup>
@@ -50,7 +51,7 @@ const Header =({ownSellablesAction,login,loginAction,loggedOutAction,user,ownPro
 
           </Nav>
           {(() => {
-            if (login!='LOGGEDIN') {
+            if (login!=='LOGGEDIN') {
               return <Button color="primary" onClick={loginAction}>Kirjaudu sisään</Button>;
 
             }else{

@@ -26,3 +26,7 @@ export const LOGGEDOUT = 'LOGGEDOUT';
 export const SIGNUP = 'SIGNUP';
 
 export const USERDATA = 'USERDATA';
+
+export const ALLOFFERS = 'ALLOFFERS';
+
+export const EDITITEM = 'EDITITEM';

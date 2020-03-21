@@ -1,5 +1,5 @@
-import React, { useReducer } from 'react';
-import { Button, Form, FormGroup, Label, Input,Card, CardHeader,CardBody,CardFooter } from 'reactstrap';
+import React from 'react';
+import { Button, Form, FormGroup, Input,Card, CardHeader,CardBody,CardFooter } from 'reactstrap';
 
 import store from '../store/store.js';
 
