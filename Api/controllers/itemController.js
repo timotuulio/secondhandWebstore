@@ -54,6 +54,7 @@ module.exports = {
                 newItem.title = xssFilters.inHTMLData(itemToBeAdded.title);
                 newItem.description = xssFilters.inHTMLData(itemToBeAdded.description);
                 newItem.ownerId = itemToBeAdded.ownerId;
+                newItem.created = xssFilters.inHTMLData(itemToBeAdded.created);
 
                 // This was an attempt to add an image
                 //newItem.img.data = fs.readFileSync(itemToBeAdded.image);
@@ -61,7 +62,7 @@ module.exports = {
         
                 newItem.save(function(err){
                     if(err){
-                        return handleError(err);
+                        res.send(err)
                     }else{
                         console.log("Item "+newItem.title+" added.");
                         res.send({});

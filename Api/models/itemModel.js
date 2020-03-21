@@ -25,6 +25,9 @@ const ItemSchema = new mongoose.Schema({
   description: {
       type:String,
       required:true
+  },
+  created: {
+    type:String
   }
 });
 

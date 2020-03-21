@@ -81,6 +81,7 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token}) {
             alignSelf:"center"
           }}>
             <CardHeader>{itm.title}</CardHeader>
+            
             <CardBody>
               {(() => {
                 if (itm.description!='' && itm.description!='undefined') {
@@ -88,7 +89,14 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token}) {
                 }
               })()}
               <CardText>Price: {itm.price}€</CardText>
-              {(() => {
+              <CardText>Created: {itm.created}</CardText>
+            
+            
+
+              
+            </CardBody>
+            <CardFooter>
+            {(() => {
                 if (page=='OWNSELLABLES') {
                   return <Button value={itm._id} onClick={deleteItem}>Remove</Button>
                 }else{
@@ -96,8 +104,7 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token}) {
                 }
               })()}
 
-              
-            </CardBody>
+            </CardFooter>
           </Card>
         </div>
       ))

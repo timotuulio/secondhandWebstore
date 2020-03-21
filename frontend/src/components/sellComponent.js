@@ -28,9 +28,10 @@ const SellItem = ({user,token},props) => {
     var description = document.getElementById('description').value;
     var price = document.getElementById('price').value;
 
-  
+        
+    var date = new Date();
     // Build body for the POST request
-    var body  = JSON.stringify({"title":title,"description":description,"price":price,"ownerId":user['_id']});
+    var body  = JSON.stringify({"title":title,"description":description,"price":price,"ownerId":user['_id'],"created":date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()});
     
 
     var formData = new FormData();
