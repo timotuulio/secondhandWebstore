@@ -6,11 +6,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   ButtonToolbar,ButtonGroup,Button,Collapse,Navbar,NavbarBrand,Nav
 } from 'reactstrap';
-import { ADMIN } from '../stateNames'
+import { ADMIN,USER } from '../stateNames'
+import { ownSellablesAction } from '../actions/actions';
 
 
 
-const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction,allUsersAction}) => {
+const Header =({ownSellablesAction,login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction,allUsersAction}) => {
 
 
   return (
@@ -34,6 +35,10 @@ const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddN
                       {(() => {
                           if (user.role == ADMIN) {
                               return <Button color="primary" onClick={allUsersAction}>All users</Button>;
+                          }else if(user.role == USER){
+                            return <div><Button color="primary" onClick={ownSellablesAction}>Active offers</Button>;
+                              <Button color="primary" onClick={ownSellablesAction}>Sale history</Button>;</div>
+                          
                           }
                       })()}
                     </ButtonGroup>
@@ -51,7 +56,7 @@ const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddN
             }else{
 
               //return(<div><Button>asdad</Button></div>);
-              return (<div style={{display: 'inline-block'}}><div style={{color: "white"}}>Welcome {user.user.name}</div><Button color="primary" onClick={loggedOutAction}>Log out</Button></div>);
+              return (<div style={{display: 'inline-block'}}><div style={{color: "white"}}>Welcome {user.user.name}</div><Button color="primary" onClick={() => { loggedOutAction(); mainAction();}}>Log out</Button></div>);
 
             }
           })()}

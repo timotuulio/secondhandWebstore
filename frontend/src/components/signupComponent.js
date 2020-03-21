@@ -10,9 +10,6 @@ let submit = (e,data) => {
   e.preventDefault();
 
   // Extract data from the form
-  var name = document.getElementById('name').value;
-  var email = document.getElementById('email').value;
-  var pass = document.getElementById('password').value;
   var phoneNumber = document.getElementById('phoneNumber').value;
   var address = document.getElementById('address').value;
   var bankAccount = document.getElementById('bankAccount').value;
@@ -29,7 +26,7 @@ let submit = (e,data) => {
   }
 
   // Build body for the POST request
-  var body  = JSON.stringify({"name":name,"email":email,"password":pass,"phoneNumber":phoneNumber,"address":address,"role":role,"bankAccount":bankAccount});
+  var body  = JSON.stringify({"name":name,"email":email,"password":password,"phoneNumber":phoneNumber,"address":address,"role":role,"bankAccount":bankAccount});
 
   // Use fetch to send the data
   const url = "http://localhost:3001/api/user";

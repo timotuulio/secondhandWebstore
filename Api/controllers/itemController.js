@@ -168,5 +168,14 @@ module.exports = {
         var fetchedItems = await Item.find().exec()
             .catch(function(error){return 'Error occured'});
         res.send(fetchedItems);
+    },
+
+    // Fetches useritems
+    async getOfferedItems(req,res){
+
+        var offeredItems = await Item.find({ ownerId: req.params.id }).exec()
+            .catch(function(error){return 'Error occured'});
+       
+        res.send(offeredItems);
     }
 }

@@ -16,6 +16,7 @@ export function allSellablesAction() {return{type: ALLSELLABLES,};}
 export function shopkeeperBuyAction() {return{type: SHOPKEEPERBUYITEM,};}
 export function allUsersAction() {return{type: ALLUSERS,};}
 
+
 export function questAction() {return{type: QUEST,};}
 export function userAction() {return{type: USER,};}
 export function shopkeeperAction() {return{type: SHOPKEEPER,};}

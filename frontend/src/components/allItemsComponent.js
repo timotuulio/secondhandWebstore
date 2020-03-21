@@ -15,10 +15,36 @@ function setData(data){
   item = data;
 }
 
-function AllItems({loadState, loadedAction, loadingAction}) {
+function AllItems({loadState, loadedAction, loadingAction,page,user,token}) {
+
+
+
+  function deleteItem(e){
+    
+    fetch('http://localhost:3001/api/item/'+e.target.value,
+    {
+      method: 'delete',
+      headers: {
+        'authorization': 'Bearer ' + token}}).then(res=>res.json()).then(data => loadingAction());
+  }
+
+
+
+
+
+
+  var currentPath;
+  
+
+  if(page=='OWNSELLABLES'){
+    currentPath = "items/offered/"+user['_id'];
+  }else if(page=='MAIN'){
+    currentPath = "item";
+  }
+
 
   //loadingAction();
-  fetch('http://localhost:3001/api/item').then(res=>res.json()).then(data => setData(data)).then(loadedAction);
+  fetch('http://localhost:3001/api/'+currentPath).then(res=>res.json()).then(data => setData(data)).then(loadedAction);
 
   const testItems = [
     {
@@ -62,12 +88,22 @@ function AllItems({loadState, loadedAction, loadingAction}) {
                 }
               })()}
               <CardText>Price: {itm.price}€</CardText>
-              <Button onClick={buyItem()}>Buy</Button>
+              {(() => {
+                if (page=='OWNSELLABLES') {
+                  return <Button value={itm._id} onClick={deleteItem}>Remove</Button>
+                }else{
+                  return <Button value={itm._id} onClick={buyItem()}>Buy</Button>
+                }
+              })()}
+
+              
             </CardBody>
           </Card>
         </div>
       ))
 
+     
+              
   }
   else {
     itemsToRender.push(
@@ -75,7 +111,16 @@ function AllItems({loadState, loadedAction, loadingAction}) {
         <p>Loading...</p>
       </div>)
   }
-  return itemsToRender
+  if (page=='OWNSELLABLES') {
+    return  (<div> <h2 className="display-4">Own sellables</h2>
+    <hr className="my-2" /><div>{itemsToRender}</div></div>)
+  }else{
+    return  (<div> <h2 className="display-4">Shop goods</h2>
+    <hr className="my-2" /><div>{itemsToRender}</div></div>)
+  }
+  
+  
+ 
 }
 
 function buyItem() {
@@ -83,7 +128,10 @@ function buyItem() {
 }
 
 const mapStateToProps = (state) => ({
-    loadState: state.loadReducer.loadState
+    loadState: state.loadReducer.loadState,
+    user: state.loginReducer.user,
+    token: state.loginReducer.token,
+    page: state.pageReducer.page
   });
 
 const mapDispatchToProps = (dispatch) => ({

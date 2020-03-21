@@ -28,6 +28,8 @@ router.get('/item/:id', itemController.getSingleItem);
 router.put('/item/:id', itemController.updateItem);
 router.delete('/item/:id', itemController.deleteItem);
 
+router.get('/items/offered/:id',itemController.getOfferedItems);
+
 router.get('/itemsofusers', (req, res) => {res.send("GET: This is list of users with items");});
 router.post('/itemsofusers', (req, res) => {res.send("POST: This is list of users with items");});
 router.put('/itemsofusers', (req, res) => {res.send("PUT: This is list of users with items");});

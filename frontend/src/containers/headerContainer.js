@@ -8,7 +8,8 @@ import {
     loginAction,
     ownProfileAction,
     userAddNewItemAction,
-    allUsersAction
+    allUsersAction,
+    ownSellablesAction
   } from '../actions/actions.js';
 
 
@@ -26,7 +27,9 @@ import {
     loginAction: () => dispatch(loginAction()),
     ownProfileAction: () => dispatch(ownProfileAction()),
     userAddNewItemAction: () => dispatch(userAddNewItemAction()),
-    allUsersAction: () => dispatch(allUsersAction())
+    allUsersAction: () => dispatch(allUsersAction()),
+    ownSellablesAction: () => dispatch(ownSellablesAction())
+    
   });
   
   export default connect(mapStateToProps, mapDispatchToProps)(Header);
