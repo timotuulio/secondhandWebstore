@@ -1,16 +1,14 @@
 import React from 'react';
-import { Button, FormFeedback, Form, FormGroup, Label, Input } from 'reactstrap';
+import { FormText,Button, FormFeedback, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import store from '../store/store.js';
 
 
 
- 
- 
+const SellItem = ({user,token},props) => {
 
-const SellItem = (props,{login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction}) => {
-
-
+    console.log(user);
+    console.log(token)
 
     const {
         buttonLabel,
@@ -19,8 +17,9 @@ const SellItem = (props,{login,loginAction,loggedOutAction,user,ownProfileAction
     
       const [modal, setModal] = React.useState(false);
       const toggle = () => setModal(!modal);
-    // take over its submit event.
- let submit = (e) => {
+    
+      // take over its submit event.
+    let submit = (e) => {
     e.preventDefault();
   
     // Extract data from the form
@@ -28,17 +27,26 @@ const SellItem = (props,{login,loginAction,loggedOutAction,user,ownProfileAction
     var title= document.getElementById('title').value;
     var description = document.getElementById('description').value;
     var price = document.getElementById('price').value;
-  
 
   
     // Build body for the POST request
-    var body  = JSON.stringify({"title":title,"description":description,"price":price,"ownerId":store.getState().loginReducer.user['_id']});
+    var body  = JSON.stringify({"title":title,"description":description,"price":price,"ownerId":user['_id']});
+    
+
+    var formData = new FormData();
+    var image = document.getElementById('file').files[0];
+    console.log(image)
   
+    formData.append("body",body);
+    formData.append("image",image);
+
     // Use fetch to send the data
     const url = "http://localhost:3001/api/item";
     fetch(url, {
         method : "post",
-        headers: {'Content-Type': 'application/json','Authorization': 'Bearer '+store.getState().loginReducer.token},
+        headers: {'Content-type':'application/json','Authorization': 'Bearer '+token},
+        //headers: {'Authorization': 'Bearer '+store.getState().loginReducer.token},
+
         body: body
     }).then(response => response.text()).then(html=> toggle());
   }
@@ -123,6 +131,16 @@ const SellItem = (props,{login,loginAction,loggedOutAction,user,ownProfileAction
             <Input id="price" onChange = {checkPrice} name="price" id="price" valid={ priceOK === true } invalid={ priceOK === false } />
             <FormFeedback invalid>Give correct price</FormFeedback>
             </FormGroup>
+            
+            
+            <FormGroup>
+        <Label for="exampleFile">File</Label>
+        <Input type="file" name="file" id="file" />
+        <FormText color="muted">
+          
+        </FormText>
+        </FormGroup>
+
 
                 <div>
                 <Button style={{visibility:'hidden'}} onClick={toggle} id="confirm" block>Confirm</Button>
@@ -146,8 +164,6 @@ const SellItem = (props,{login,loginAction,loggedOutAction,user,ownProfileAction
         </div>
       );
 }
-
-//<Button color="danger" onClick={toggle}>{buttonLabel}</Button>
 
 
 export default SellItem;

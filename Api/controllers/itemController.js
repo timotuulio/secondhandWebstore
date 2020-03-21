@@ -3,7 +3,7 @@
 const Item = require('../models/itemModel');
 const xssFilters = require('xss-filters');
 const jwt = require('jsonwebtoken');
-
+const fs = require('fs');
 
 var secret = 'tosisecret';
 
@@ -54,13 +54,17 @@ module.exports = {
                 newItem.title = xssFilters.inHTMLData(itemToBeAdded.title);
                 newItem.description = xssFilters.inHTMLData(itemToBeAdded.description);
                 newItem.ownerId = itemToBeAdded.ownerId;
+
+                // This was an attempt to add an image
+                //newItem.img.data = fs.readFileSync(itemToBeAdded.image);
+                //newItem.img.contentType = 'image/png';
         
                 newItem.save(function(err){
                     if(err){
                         return handleError(err);
                     }else{
                         console.log("Item "+newItem.title+" added.");
-                        res.send(newItem);
+                        res.send({});
                     }
                 });
                 

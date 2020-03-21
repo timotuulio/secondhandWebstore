@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const ItemSchema = new mongoose.Schema({
   
-  ownerID: {
+  ownerId: {
     type: String,
-    //required: true
+    required: true
   },
   title:{
     type:String,
@@ -18,11 +18,13 @@ const ItemSchema = new mongoose.Schema({
     validate: Number.isInteger
   },
   
-  image: {
-      type:String
-  },
+  img: { 
+    data: Buffer, 
+    contentType: String },
+    
   description: {
-      type:String
+      type:String,
+      required:true
   }
 });
 

@@ -6,25 +6,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   ButtonToolbar,ButtonGroup,Button,Collapse,Navbar,NavbarBrand,Nav
 } from 'reactstrap';
-
-
-import { connect } from 'react-redux';
-
-import {
-  mainAction,
-  loggedOutAction,
-  loginSuccessAction,
-  loginAction,
-  ownProfileAction,
-  userAddNewItemAction,
-  allUsersAction
-} from '../actions/actions.js';
 import { ADMIN } from '../stateNames'
 
 
-const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction,allUsersAction}) => {
 
-  const [isOpen, setIsOpen] = useState(false);
+const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction,allUsersAction}) => {
 
 
   return (
@@ -75,20 +61,4 @@ const Header =({login,loginAction,loggedOutAction,user,ownProfileAction,userAddN
   );
 }
 
-const mapStateToProps = (state) => ({
-  page: state.pageReducer.page,
-  login: state.loginReducer.login,
-  user: state.loginReducer
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  mainAction: () => dispatch(mainAction()),
-  loggedOutAction: () => dispatch(loggedOutAction()),
-  loginSuccessAction: (data) => dispatch(loginSuccessAction(data)),
-  loginAction: () => dispatch(loginAction()),
-  ownProfileAction: () => dispatch(ownProfileAction()),
-  userAddNewItemAction: () => dispatch(userAddNewItemAction()),
-  allUsersAction: () => dispatch(allUsersAction())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

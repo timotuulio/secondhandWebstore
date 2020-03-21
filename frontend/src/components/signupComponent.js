@@ -1,18 +1,11 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input,Card, CardHeader,CardBody,CardFooter } from 'reactstrap';
-import {
-  mainAction,
-  loginSuccessAction,
-  loginFailedAction,
-  loggedOutAction,
-  registerAction
-
-} from '../actions/actions.js';
 import { USER, SHOPKEEPER, ADMIN } from '../stateNames.js'
-import { connect } from 'react-redux';
-import store from '../store/store.js';
 
- // take over its submit event.
+
+const Signup = ({mainAction,loginSuccessAction}) => {
+
+  // take over its submit event.
 let submit = (e,data) => {
   e.preventDefault();
 
@@ -44,15 +37,12 @@ let submit = (e,data) => {
       method : "post",
       headers: {'Content-Type': 'application/json'},
       body: body
-  }).then(response => response.text()).then(html=> store.dispatch(loginSuccessAction(JSON.parse(html))),store.dispatch(mainAction()));
+  }).then(response => response.text()).then(html=> loginSuccessAction(JSON.parse(html)),mainAction());
 }
 
-//store.dispatch(loginSuccessAction(JSON.parse(response))),store.dispatch(mainAction());
 
 
 
-
-const Signup = ({registerAction}) => {
   return (
     <div style={{
       display: "flex",
@@ -118,15 +108,4 @@ const Signup = ({registerAction}) => {
   );
 }
 
-
-const mapStateToProps = (state) => ({
-  page: state.pageReducer.page,
-  login: state.loginReducer.login
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  mainAction: () => dispatch(mainAction()),
-  registerAction: () => dispatch(registerAction())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default Signup;
