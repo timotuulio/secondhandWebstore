@@ -4,10 +4,13 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 
 
-const SellItem = ({user,token,page,item},props) => {
+const SellItem = ({user,token,page,item,offersAction,ownSellablesAction},props) => {
 
     // This produces null for the button reference??
     //var btn = document.getElementById('confirm');
+
+    
+
 
     const [title, setTitle] = React.useState(item ? item.title : "");
     const [description, setDescription] = React.useState(item ? item.description : "");
@@ -17,12 +20,15 @@ const SellItem = ({user,token,page,item},props) => {
     const [descOK, setDescOk] = React.useState(item ? true : false);
     const [priceOK, setPriceOk] = React.useState(item ? true : false);
 
+  
+
     const {
         className
       } = props;
 
       const [modal, setModal] = React.useState(false);
       const toggle = () => setModal(!modal);
+
 
       // take over its submit event.
     let submitNew = (e) => {
@@ -54,7 +60,8 @@ const SellItem = ({user,token,page,item},props) => {
         headers: {'Content-type':'application/json','Authorization': 'Bearer '+token},
 
         body: body
-    }).then(response => response.text()).then(html=> toggle());
+    }).then(response => response.text()).then(html=> combineActions(ownSellablesAction,toggle))
+
   }
 
 
@@ -71,11 +78,14 @@ const SellItem = ({user,token,page,item},props) => {
         headers: {'Content-type':'application/json','Authorization': 'Bearer '+token},
 
         body: body
-    }).then(response => response.text()).then(html=> toggle());
+    }).then(response => response.text()).then(html=> combineActions(ownSellablesAction,toggle))
   }
 
 
-
+  function combineActions(action1,action2){
+    action1();
+    action2();
+  }
 
 
 

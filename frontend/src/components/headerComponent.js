@@ -10,7 +10,7 @@ import { ADMIN,USER } from '../stateNames';
 
 
 
-const Header =({stockAction,ownSellablesAction,login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction,allUsersAction,offersAction}) => {
+const Header =({salesAction,stockAction,ownSellablesAction,login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction,allUsersAction,offersAction}) => {
 
 
   return (
@@ -36,7 +36,7 @@ const Header =({stockAction,ownSellablesAction,login,loginAction,loggedOutAction
                               return <Button color="primary" onClick={allUsersAction}>All users</Button>;
                           }else if(user.role === USER){
                             return <div><Button color="primary" onClick={ownSellablesAction}>Active offers</Button>;
-                              <Button color="primary" onClick={ownSellablesAction}>Sale history</Button>;</div>
+                              <Button color="primary" onClick={salesAction}>Sale history</Button>;</div>
                           
                           }else{
                             return <div><Button color="primary" onClick={offersAction}>Offers</Button>

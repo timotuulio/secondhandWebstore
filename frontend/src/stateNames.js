@@ -33,3 +33,4 @@ export const ALLOFFERS = 'OFFERS';
 export const EDITITEM = 'EDITITEM';
 
 export const STOCK = 'STOCK';
+export const USERSALES = 'USERSALES';

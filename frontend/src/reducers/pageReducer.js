@@ -1,4 +1,4 @@
-import {MAIN, ALLITEMS, SINGLEITEM, LOGIN, SIGNIN, OWNPROFILE, OWNSELLABLES, USERADDNEWITEM, ALLSELLABLES, SHOPKEEPERBUYITEM, ALLUSERS, SIGNUP,ALLOFFERS,EDITITEM,STOCK} from '../stateNames.js'
+import {MAIN, ALLITEMS, SINGLEITEM, LOGIN, SIGNIN, OWNPROFILE, OWNSELLABLES, USERADDNEWITEM, ALLSELLABLES, SHOPKEEPERBUYITEM, ALLUSERS, SIGNUP,ALLOFFERS,EDITITEM,STOCK, USERSALES} from '../stateNames.js'
 
 const initialState = {
   page: MAIN,
@@ -8,35 +8,37 @@ function pageReducer(state = initialState, action) {
   //TODO: Remove needless "...state" if possible
   switch(action.type) {
     case 'LOGIN':
-      return { ...state, page: LOGIN };
+      return {page: LOGIN };
     case 'MAIN':
-      return { ...state, page: MAIN };
+      return {page: MAIN };
     case 'ALLITEMS':
-      return { ...state, page: ALLITEMS };
+      return {page: ALLITEMS };
     case 'SINGLEITEM':
-      return { ...state, page: SINGLEITEM };
+      return {page: SINGLEITEM };
     case 'SIGNIN':
-      return { ...state, page: SIGNIN };
+      return {page: SIGNIN };
     case 'OWNPROFILE':
-      return { ...state, page: OWNPROFILE };
+      return {page: OWNPROFILE };
     case 'OWNSELLABLES':
-      return { ...state, page: OWNSELLABLES };
+      return {page: OWNSELLABLES };
     case 'USERADDNEWITEM':
-      return { ...state, page: USERADDNEWITEM };
+      return {page: USERADDNEWITEM };
     case 'ALLSELLABLES':
-      return { ...state, page: ALLSELLABLES };
+      return {page: ALLSELLABLES };
     case 'SHOPKEEPERBUYITEM':
-      return { ...state, page: SHOPKEEPERBUYITEM };
+      return {page: SHOPKEEPERBUYITEM };
     case 'ALLUSERS':
-      return { ...state, page: ALLUSERS };
+      return {page: ALLUSERS };
     case 'SIGNUP':
-      return {...state, page: SIGNUP };
+      return {page: SIGNUP };
     case 'ALLOFFERS':
-      return {...state, page: ALLOFFERS};
+      return {page: ALLOFFERS};
     case 'EDITITEM':
-      return {...state, page: EDITITEM, item:action.data};
+      return {page: EDITITEM, item:action.data};
     case 'STOCK':
-      return {...state, page: STOCK}
+      return {page: STOCK};
+    case 'USERSALES':
+      return {page: USERSALES}
     default:
       return state;
   }

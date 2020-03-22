@@ -11,7 +11,8 @@ import {
     allUsersAction,
     ownSellablesAction,
     offersAction,
-    stockAction
+    stockAction,
+    salesAction
   } from '../actions/actions.js';
 
 
@@ -32,7 +33,8 @@ import {
     allUsersAction: () => dispatch(allUsersAction()),
     ownSellablesAction: () => dispatch(ownSellablesAction()),
     offersAction: () => dispatch(offersAction()),
-    stockAction: () => dispatch(stockAction())
+    stockAction: () => dispatch(stockAction()),
+    salesAction: () => dispatch(salesAction())
     
   });
   
