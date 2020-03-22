@@ -11,6 +11,7 @@ export const ALLSELLABLES = 'ALLSELLABLES';
 // Show item to shopkeeper so that he can buy it
 export const SHOPKEEPERBUYITEM = 'SHOPKEEPERBUYITEM';
 export const ALLUSERS = 'ALLUSERS';
+export const ADDFORSALE = 'ADDFORSALE';
 
 // State names for users-authorization
 export const QUEST = 'Quest';
@@ -33,4 +34,7 @@ export const ALLOFFERS = 'OFFERS';
 export const EDITITEM = 'EDITITEM';
 
 export const STOCK = 'STOCK';
+<<<<<<< HEAD
 export const USERSALES = 'USERSALES';
+=======
+>>>>>>> 6aeda5386c3a8c1448975b354d0e825d648bc381

@@ -39,17 +39,6 @@ router.get('/receipt', receiptController.getReceipts);
 router.get('/receipt/:id',receiptController.getUserReceipts);
 router.post('/receipt', receiptController.createReceipt);
 
-router.get('/itemsofusers', (req, res) => {res.send("GET: This is list of users with items");});
-router.post('/itemsofusers', (req, res) => {res.send("POST: This is list of users with items");});
-router.put('/itemsofusers', (req, res) => {res.send("PUT: This is list of users with items");});
-router.delete('/itemsofusers', (req, res) => {res.send("DELETE: This is list of users with items");});
-
-router.get('/itemsofusers/:id', (req, res) =>  {res.send("GET: This is list of a certain users items");});
-router.post('/itemsofusers/:id', (req, res) =>  {res.send("POST: This is list of a certain users items");});
-router.put('/itemsofusers/:id', (req, res) =>  {res.send("PUT: This is list of a certain users items");});
-router.delete('/itemsofusers/:id', (req, res) =>  {res.send("DELETE: This is list of a certain users items");});
-
-
 router.get('/test', testItem);
 
 function testItem(req, res) {
