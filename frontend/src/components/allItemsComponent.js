@@ -27,6 +27,19 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
         'authorization': 'Bearer ' + token}}).then(res=>res.json()).then(data => loadingAction());
   }
 
+
+  function buyItem(e) {
+    //alert(e.target.value);
+    fetch('http://localhost:3001/api/buy/'+e.target.value,
+    {
+      method: 'post',
+      headers: {
+        'Content-type':'application/json','authorization': 'Bearer ' + token},
+      body: JSON.stringify({"itemID":e.target.value, "buyerID": user['_id'] ,"asdasd":"asdsad"})}
+      ).then(res=>res.json()).then(data => loadingAction());
+  }
+
+
 /*
   function getUserName(ID){
     var user =fetch('http://localhost:3001/api/user/'+ID,
@@ -56,29 +69,19 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
     currentPath = "item";
   }else if(page === 'OFFERS'){
     currentPath = "items/offers";
+  }else if(page ==='STOCK'){
+    currentPath = "items/stock";
+  }else{
+    currentPath = "ad"
   }
 
 
   //loadingAction();
   fetch('http://localhost:3001/api/'+currentPath).then(res=>res.json()).then(data => setData(data)).then(loadedAction);
 
-  const testItems = [
-    {
-        "_id": "5e6d1dd29339230cc6f8076c",
-        "price": 1,
-        "title": "A Blääg",
-        "__v": 0
-    },
-    {
-        "_id": "5e6d34d4f5b37b0ecc4821ac",
-        "price": 1290,
-        "title": "A secret JOeebix",
-        "__v": 0
-    }
-  ];
-  const itemsToRender = /*testItems*/[];
-  var items = testItems;
-  console.log(items);
+  
+  const itemsToRender =[];
+
   if (loadState==='LOADED') {
 
       item.map(itm => itemsToRender.push(
@@ -125,7 +128,7 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
                   return <div><Button color="primary" value={itm._id} onClick={deleteItem}>Remove</Button>
                   <Button color="primary" style={{float: 'right'}} onClick={() => editItemAction(itm)}>Edit</Button></div>
                 }else{
-                  return <div><Button color="primary" value={itm._id} onClick={buyItem()}>Buy</Button>
+                  return <div><Button color="primary" value={itm._id} onClick={buyItem}>Buy</Button>
                   </div>
                 }
               })()}
@@ -144,11 +147,19 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
         <div>Loading...</div>
       </div>)
   }
+
+
+    
+
+
   if (page==='OWNSELLABLES') {
-    return  (<div> <h2 className="display-4">Own sellables</h2>
-    <hr className="my-2" /><div>{itemsToRender}</div></div>)
+    return  (<div><div> <h2 className="display-4"  >Own sellables</h2>
+    <hr className="my-2" /></div><div>{itemsToRender}</div></div>)
   }else if(page==='MAIN'){
     return  (<div> <h2 className="display-4">Shop goods</h2>
+    <hr className="my-2" /><div>{itemsToRender}</div></div>)
+  }else if(page ==='STOCK'){
+    return  (<div> <h2 className="display-4">Stock</h2>
     <hr className="my-2" /><div>{itemsToRender}</div></div>)
   }else{
     return  (<div> <h2 className="display-4">Offers</h2>
@@ -159,9 +170,7 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
  
 }
 
-function buyItem() {
-  console.log("Now I'll buy The Item!")
-}
+
 
 const mapStateToProps = (state) => ({
     loadState: state.loadReducer.loadState,

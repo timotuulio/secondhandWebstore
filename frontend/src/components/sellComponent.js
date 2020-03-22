@@ -4,10 +4,18 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 
 
-const SellItem = ({user,token,page},props) => {
+const SellItem = ({user,token,page,item},props) => {
 
-    console.log(user);
-    console.log(token)
+    // This produces null for the button reference??
+    //var btn = document.getElementById('confirm');
+
+    const [title, setTitle] = React.useState(item ? item.title : "");
+    const [description, setDescription] = React.useState(item ? item.description : "");
+    const [price, setPrice] = React.useState(item ? item.price :0);
+    
+    const [titleOK, setTitleOk] = React.useState(item ? true : false);
+    const [descOK, setDescOk] = React.useState(item ? true : false);
+    const [priceOK, setPriceOk] = React.useState(item ? true : false);
 
     const {
         className
@@ -34,7 +42,7 @@ const SellItem = ({user,token,page},props) => {
 
     var formData = new FormData();
     var image = document.getElementById('file').files[0];
-    console.log(image)
+    //console.log(image)
   
     formData.append("body",body);
     formData.append("image",image);
@@ -44,7 +52,23 @@ const SellItem = ({user,token,page},props) => {
     fetch(url, {
         method : "post",
         headers: {'Content-type':'application/json','Authorization': 'Bearer '+token},
-        //headers: {'Authorization': 'Bearer '+store.getState().loginReducer.token},
+
+        body: body
+    }).then(response => response.text()).then(html=> toggle());
+  }
+
+
+  let submitChanges = (e) => {
+
+     // Build body for the put request
+        var body  = JSON.stringify({"title":title,"description":description,"price":price});
+    
+
+
+      const url = "http://localhost:3001/api/item/"+item._id;
+        fetch(url, {
+        method : "put",
+        headers: {'Content-type':'application/json','Authorization': 'Bearer '+token},
 
         body: body
     }).then(response => response.text()).then(html=> toggle());
@@ -53,25 +77,20 @@ const SellItem = ({user,token,page},props) => {
 
    
 
-    const [title, setTitle] = React.useState("");
-    const [description, setDescription] = React.useState("");
-    const [price, setPrice] = React.useState(0);
     
-    const [titleOK, setTitleOk] = React.useState(false);
-    const [descOK, setDescOk] = React.useState(false);
-    const [priceOK, setPriceOk] = React.useState(false);
 
-    var btn = document.getElementById('confirm');
+
+    
 
     function checkTitle(e){
         setTitle(e.target.value);
         if(e.target.value.length === 0){
             setTitleOk(false);
-            btn.style.visibility = 'hidden';
+            document.getElementById('confirm').style.visibility = 'hidden';
         }else{
             setTitleOk(true)
             if(descOK === true && priceOK === true){
-                btn.style.visibility = 'visible';
+                document.getElementById('confirm').style.visibility = 'visible';
             }
         }
     }
@@ -80,12 +99,12 @@ const SellItem = ({user,token,page},props) => {
         setDescription(e.target.value);
         if(e.target.value.length === 0){
             setDescOk(false)
-            btn.style.visibility = 'hidden';
+            document.getElementById('confirm').style.visibility = 'hidden';
           
         }else{
             setDescOk(true)
             if(descOK === true && priceOK === true){
-                btn.style.visibility = 'visible';
+                document.getElementById('confirm').style.visibility = 'visible';
             }
         }  
     }
@@ -96,12 +115,12 @@ const SellItem = ({user,token,page},props) => {
             setPriceOk(true)
         
             if(descOK === true && titleOK === true){
-                btn.style.visibility = 'visible';
+                document.getElementById('confirm').style.visibility = 'visible';
             }
           
         }else{
             setPriceOk(false);
-            btn.style.visibility = 'hidden';
+            document.getElementById('confirm').style.visibility = 'hidden';
         }       
     }
 
@@ -125,24 +144,55 @@ const SellItem = ({user,token,page},props) => {
                 <hr className="my-2" /></div>)
               }
             })()}
-         <FormGroup>
-            <Label for="title">Title</Label>
-            <Input valid={ titleOK === true } id="title" onChange={checkTitle} invalid={ titleOK === false }/>
-            <FormFeedback invalid>Please fill in the title</FormFeedback>
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleEmail">Description</Label>
-            <Input id="description" type="textarea" onChange = {checkDescription} valid={ descOK === true } invalid={ descOK === false }/>
-            <FormFeedback invalid>Please fill in the description</FormFeedback>
-          </FormGroup>
-          <FormGroup>
-            <Label for="description">Price</Label>
-            <Input onChange = {checkPrice} name="price" id="price" valid={ priceOK === true } invalid={ priceOK === false } />
-            <FormFeedback invalid>Give correct price</FormFeedback>
-            </FormGroup>
+
+
+            {(() => {
+              if(page === 'EDITITEM') {
+                return (<div>
+                    <FormGroup>
+                    <Label for="title">Title</Label>
+                    <Input valid={ titleOK === true } id="title" onChange={checkTitle} invalid={ titleOK === false} defaultValue={item.title}/>
+                    <FormFeedback invalid="true">Please fill in the title</FormFeedback>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="exampleEmail">Description</Label>
+                    <Input id="description" type="textarea" onChange = {checkDescription} valid={ descOK === true } invalid={ descOK === false } defaultValue={item.description}/>
+                    <FormFeedback invalid="true">Please fill in the description</FormFeedback>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="description">Price</Label>
+                    <Input onChange = {checkPrice} name="price" id="price" valid={ priceOK === true } invalid={ priceOK === false } defaultValue={item.price}/>
+                    <FormFeedback invalid="true">Give correct price</FormFeedback>
+                    </FormGroup>
+                    </div> 
+                )
+              }else{
+                return (<div>
+                    <FormGroup>
+                    <Label for="title">Title</Label>
+                    <Input valid={ titleOK === true } id="title" onChange={checkTitle} invalid={ titleOK === false }/>
+                    <FormFeedback invalid="true">Please fill in the title</FormFeedback>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="exampleEmail">Description</Label>
+                    <Input id="description" type="textarea" onChange = {checkDescription} valid={ descOK === true } invalid={ descOK === false }/>
+                    <FormFeedback invalid="true">Please fill in the description</FormFeedback>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="description">Price</Label>
+                    <Input onChange = {checkPrice} name="price" id="price" valid={ priceOK === true } invalid={ priceOK === false } />
+                    <FormFeedback invalid="true">Give correct price</FormFeedback>
+                    </FormGroup>
             
+                    </div> 
+                )
+              }
+            })()}
+
+
+         
             
-            <FormGroup>
+        <FormGroup>
         <Label for="exampleFile">File</Label>
         <Input type="file" name="file" id="file" />
         <FormText color="muted">
@@ -154,24 +204,30 @@ const SellItem = ({user,token,page},props) => {
                 <div>
                 {(() => {
                     if(page === 'EDITITEM') {
-                        return <Button style={{visibility:'hidden'}} onClick={toggle} id="confirm" block>Save changes</Button>
+                        return <Button color="primary" onClick={toggle} id="confirm" block>Save changes</Button>
                     }else{
-                        return <Button style={{visibility:'hidden'}} onClick={toggle} id="confirm" block>Confirm</Button>
+                        return <Button color="primary" style={{visibility:'hidden'}} onClick={toggle} id="confirm" block>Confirm</Button>
                     }
                 })()}
               
               
-                <Modal isOpen={modal} toggle={toggle} className={className}>
-                    <ModalHeader toggle={toggle}>Confirm sale</ModalHeader>
+                    <Modal isOpen={modal} toggle={toggle} className={className}>
+                    {(() => {
+                    if(page === 'EDITITEM') {
+                       return  <ModalHeader toggle={toggle}>Confirm changes</ModalHeader>
+                    }else{
+                        return  <ModalHeader toggle={toggle}>Confirm sale</ModalHeader>
+                    }
+                    })()}
                     <ModalBody>
-                    <div>{title}</div>
-                    <div>{description}</div>
-                    <div>{price}</div>
+                    <div>Title: {title}</div>
+                    <div>Description: {description}</div>
+                    <div>Price: {price} €</div>
                     </ModalBody>
                     <ModalFooter>
                     {(() => {
                     if(page === 'EDITITEM') {
-                        return (  <Button color="primary" onClick={submitNew}>Save changes</Button>)
+                        return (  <Button color="primary" onClick={submitChanges}>Save changes</Button>)
                     }else{
                         return ( <Button color="primary" onClick={submitNew}>Confirm</Button>)
                     }

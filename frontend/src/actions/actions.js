@@ -2,7 +2,7 @@
 import { LOADING, LOADED } from "./actionTypes";
 import { MAIN, ALLITEMS, SINGLEITEM, LOGIN, SIGNIN, OWNPROFILE, OWNSELLABLES, USERADDNEWITEM, ALLSELLABLES, SHOPKEEPERBUYITEM, ALLUSERS } from "./actionTypes";
 import { QUEST, USER, SHOPKEEPER, ADMIN } from "./actionTypes";
-import {LOGINFAILED,LOGGEDIN, LOGGEDOUT, SIGNUP,USERDATA,ALLOFFERS, EDITITEM} from "./actionTypes";
+import {LOGINFAILED,LOGGEDIN, LOGGEDOUT, SIGNUP,USERDATA,ALLOFFERS, EDITITEM, STOCK} from "./actionTypes";
 
 export function mainAction() {return{type: MAIN,};}
 export function allItemsAction() {return{type: ALLITEMS,};}
@@ -18,7 +18,7 @@ export function allUsersAction() {return{type: ALLUSERS,};}
 
 export function offersAction() {return{type: ALLOFFERS,};};
 export function editItemAction(item) {return{type: EDITITEM, data:item};};
-
+export function stockAction() {return{type: STOCK}}
 
 export function questAction() {return{type: QUEST,};}
 export function userAction() {return{type: USER,};}

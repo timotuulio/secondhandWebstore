@@ -10,7 +10,8 @@ import {
     userAddNewItemAction,
     allUsersAction,
     ownSellablesAction,
-    offersAction
+    offersAction,
+    stockAction
   } from '../actions/actions.js';
 
 
@@ -30,7 +31,8 @@ import {
     userAddNewItemAction: () => dispatch(userAddNewItemAction()),
     allUsersAction: () => dispatch(allUsersAction()),
     ownSellablesAction: () => dispatch(ownSellablesAction()),
-    offersAction: () => dispatch(offersAction())
+    offersAction: () => dispatch(offersAction()),
+    stockAction: () => dispatch(stockAction())
     
   });
   

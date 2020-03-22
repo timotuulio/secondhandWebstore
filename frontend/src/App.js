@@ -6,7 +6,7 @@ import store from './store/store.js';
 
 
     function Main(){
-      console.log(store.getState().pageReducer.page)
+   
       return(
           <Provider store={store}>
             <App />

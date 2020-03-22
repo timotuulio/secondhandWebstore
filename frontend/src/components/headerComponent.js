@@ -10,7 +10,7 @@ import { ADMIN,USER } from '../stateNames';
 
 
 
-const Header =({ownSellablesAction,login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction,allUsersAction,offersAction}) => {
+const Header =({stockAction,ownSellablesAction,login,loginAction,loggedOutAction,user,ownProfileAction,userAddNewItemAction,mainAction,allUsersAction,offersAction}) => {
 
 
   return (
@@ -39,7 +39,8 @@ const Header =({ownSellablesAction,login,loginAction,loggedOutAction,user,ownPro
                               <Button color="primary" onClick={ownSellablesAction}>Sale history</Button>;</div>
                           
                           }else{
-                            return <Button color="primary" onClick={offersAction}>Offers</Button>
+                            return <div><Button color="primary" onClick={offersAction}>Offers</Button>
+                            <Button color="primary" onClick={stockAction}>Stock</Button></div>
                           }
                       })()}
                     </ButtonGroup>

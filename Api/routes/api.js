@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const itemController = require('../controllers/itemController');
 const userController = require('../controllers/userController');
+const receiptController = require('../controllers/receiptController');
 const bodyParser = require('body-parser');
 
 //router.use(bodyParser.urlencoded({ extended: true }))
@@ -30,6 +31,13 @@ router.delete('/item/:id', itemController.deleteItem);
 
 router.get('/items/offered/:id',itemController.getOfferedItems);
 router.get('/items/offers', itemController.getOffers);
+router.post('/buy/:id', itemController.transaction);
+
+router.get('/items/stock', itemController.getStock);
+
+router.get('/receipt', receiptController.getReceipts);
+router.get('/receipt/:id',receiptController.getUserReceipts);
+router.get('/receipt', receiptController.createReceipt);
 
 router.get('/itemsofusers', (req, res) => {res.send("GET: This is list of users with items");});
 router.post('/itemsofusers', (req, res) => {res.send("POST: This is list of users with items");});

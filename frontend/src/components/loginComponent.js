@@ -43,9 +43,10 @@ let submit = (e,data) => {
             alert("EIPÄ OLLU")
             store.dispatch(loginFailedAction());
         }else{
+            store.dispatch(mainAction());
             store.dispatch(loginSuccessAction(JSON.parse(response)));
             // This will show the main page
-            store.dispatch(mainAction());
+            
         }
         // Set token and role to state
 

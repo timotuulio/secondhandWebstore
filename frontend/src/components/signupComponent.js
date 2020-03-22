@@ -35,12 +35,13 @@ let submit = (e,data) => {
       headers: {'Content-Type': 'application/json'},
       body: body
   }).then(response => {
-
+      console.log(response.status)
       // This is done in the case of successfull registration only
-      if(response.status === '200'){
+      if(response.status === 200){
         response.text().then(html=> {
+          mainAction();
           loginSuccessAction(JSON.parse(html));
-            mainAction();
+            
         });
 
       // Put here how unsuccessfull registration is handled
@@ -51,7 +52,7 @@ let submit = (e,data) => {
       // This will be the case of status 500 most of the time
       }else{
         response.text().then(res=> {
-          
+          console.log(res)
           if(JSON.parse(res).code === '11000'){
             console.log("duplicate email")
           }else{
@@ -160,15 +161,15 @@ let submit = (e,data) => {
         <CardBody>
         <FormGroup>
         <Input type="text" name="name" id="name" placeholder="Name" valid={ nameOK === true } onChange={checkName} invalid={ nameOK === false }/>
-        <FormFeedback invalid>Name is required</FormFeedback>
+        <FormFeedback invalid="true">Name is required</FormFeedback>
       </FormGroup>
       <FormGroup>
         <Input type="email" name="email" id="email" placeholder="Email" valid={ emailOK === true } onChange={checkEmail} invalid={ emailOK === false } />
-        <FormFeedback invalid>Email is required</FormFeedback>
+        <FormFeedback invalid="true">Email is required</FormFeedback>
       </FormGroup>
       <FormGroup>
         <Input type="password" name="password" id="password" placeholder="Password" valid={ passwordOK === true } onChange={checkPassword} invalid={ passwordOK === false } />
-        <FormFeedback invalid>Password is required and needs to be at least 8 characters</FormFeedback>
+        <FormFeedback invalid="true">Password is required and needs to be at least 8 characters</FormFeedback>
       </FormGroup>
       <FormGroup>
         <Input type="text" name="bankAccount" id="bankAccount" placeholder="Bank account" />
@@ -200,7 +201,7 @@ let submit = (e,data) => {
           </Label>
         </FormGroup>
         <Input style={{visibility:"hidden"}} type="password"  invalid={radio===false} valid={radio===true}/>
-        <FormFeedback invalid >Role must be selected</FormFeedback>
+        <FormFeedback invalid="true">Role must be selected</FormFeedback>
       </FormGroup>
         </CardBody>
         <CardFooter>
