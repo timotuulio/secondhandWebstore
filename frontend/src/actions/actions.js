@@ -1,6 +1,6 @@
 // Actions for Redux part of the page
 import { LOADING, LOADED } from "./actionTypes";
-import { MAIN, ALLITEMS, SINGLEITEM, LOGIN, SIGNIN, OWNPROFILE, OWNSELLABLES, USERADDNEWITEM, ALLSELLABLES, SHOPKEEPERBUYITEM, ALLUSERS } from "./actionTypes";
+import { MAIN, ALLITEMS, SINGLEITEM, LOGIN, SIGNIN, OWNPROFILE, OWNSELLABLES, USERADDNEWITEM, ALLSELLABLES, SHOPKEEPERBUYITEM, ALLUSERS, USERSALES } from "./actionTypes";
 import { QUEST, USER, SHOPKEEPER, ADMIN } from "./actionTypes";
 import {LOGINFAILED,LOGGEDIN, LOGGEDOUT, SIGNUP,USERDATA,ALLOFFERS, EDITITEM, STOCK, ADDFORSALE} from "./actionTypes";
 
@@ -16,6 +16,10 @@ export function allSellablesAction() {return{type: ALLSELLABLES,};}
 export function shopkeeperBuyAction() {return{type: SHOPKEEPERBUYITEM,};}
 export function allUsersAction() {return{type: ALLUSERS,};}
 export function addForSaleAction(item) {return{type: ADDFORSALE, data:item};}
+
+
+
+export function salesAction() {return{type: USERSALES,};}
 
 export function offersAction() {return{type: ALLOFFERS,};};
 export function editItemAction(item) {return{type: EDITITEM, data:item};};

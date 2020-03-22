@@ -38,7 +38,7 @@ router.get('/items/sales', itemController.getSales);
 
 router.get('/receipt', receiptController.getReceipts);
 router.get('/receipt/:id',receiptController.getUserReceipts);
-router.get('/receipt', receiptController.createReceipt);
+router.post('/receipt', receiptController.createReceipt);
 
 router.get('/test', testItem);
 

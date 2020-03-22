@@ -2,6 +2,7 @@
 import Sell from '../components/sellComponent.js';
 import { connect } from 'react-redux';
 
+import {ownSellablesAction} from '../actions/actions.js';
 
 const mapStateToProps = (state) => ({
     user: state.loginReducer.user,
@@ -11,6 +12,8 @@ const mapStateToProps = (state) => ({
   });
 
   const mapDispatchToProps = (dispatch) => ({
+   
+    ownSellablesAction: () => dispatch(ownSellablesAction())
   });
 
   export default connect(mapStateToProps, mapDispatchToProps)(Sell);
