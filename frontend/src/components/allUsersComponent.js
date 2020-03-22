@@ -25,8 +25,6 @@ function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
       'authorization': 'Bearer ' + authKey
     }
   }
-  // TODO: The loadingState needs to update when we start fetching something
-  //loadingAction();
   fetch('http://localhost:3001/api/user', obj).then(res=>res.json()).then(data => setData(data)).then(loadedAction);
 
   /*const testUsers = [
@@ -45,7 +43,6 @@ function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
   ];*/
   var usersToRender = /*testUsers*/[];
 
-  // TODO: Add different pages for all the roles
   console.log(user);
   if (loadState=='LOADED') {
       var singleRoleArray = [];
