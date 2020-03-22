@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormText,Button, FormFeedback, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
+import { SALE } from '../constants.js';
 
 
 const SellItem = ({user,token,page,item},props) => {
@@ -26,36 +26,36 @@ const SellItem = ({user,token,page,item},props) => {
 
       // take over its submit event.
     let submitNew = (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    // Extract data from the form
+        // Extract data from the form
 
-    var title= document.getElementById('title').value;
-    var description = document.getElementById('description').value;
-    var price = document.getElementById('price').value;
-
-
-    var date = new Date();
-    // Build body for the POST request
-    var body  = JSON.stringify({"title":title,"description":description,"price":price,"ownerId":user['_id'],"created":date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),"status":"offered"});
+        var title= document.getElementById('title').value;
+        var description = document.getElementById('description').value;
+        var price = document.getElementById('price').value;
 
 
-    var formData = new FormData();
-    var image = document.getElementById('file').files[0];
-    //console.log(image)
+        var date = new Date();
+        // Build body for the POST request
+        var body  = JSON.stringify({"title":title,"description":description,"price":price,"ownerId":user['_id'],"created":date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),"status":"offered"});
 
-    formData.append("body",body);
-    formData.append("image",image);
 
-    // Use fetch to send the data
-    const url = "http://localhost:3001/api/item";
-    fetch(url, {
-        method : "post",
-        headers: {'Content-type':'application/json','Authorization': 'Bearer '+token},
+        var formData = new FormData();
+        var image = document.getElementById('file').files[0];
+        //console.log(image)
 
-        body: body
-    }).then(response => response.text()).then(html=> toggle());
-  }
+        formData.append("body",body);
+        formData.append("image",image);
+
+        // Use fetch to send the data
+        const url = "http://localhost:3001/api/item";
+        fetch(url, {
+            method : "post",
+            headers: {'Content-type':'application/json','Authorization': 'Bearer '+token},
+
+            body: body
+        }).then(response => response.text()).then(html=> toggle());
+    }
 
 
   let submitChanges = (e) => {
@@ -66,15 +66,27 @@ const SellItem = ({user,token,page,item},props) => {
 
 
       const url = "http://localhost:3001/api/item/"+item._id;
-        fetch(url, {
+      fetch(url, {
         method : "put",
         headers: {'Content-type':'application/json','Authorization': 'Bearer '+token},
 
         body: body
-    }).then(response => response.text()).then(html=> toggle());
+      }).then(response => response.text()).then(html=> toggle());
   }
 
+  let addForSale = (e) => {
 
+      // Build body for the put request
+      var body  = JSON.stringify({"title":title,"description":description,"price":price,"status":SALE});
+
+      const url = "http://localhost:3001/api/item/"+item._id;
+      fetch(url, {
+        method : "put",
+        headers: {'Content-type':'application/json','Authorization': 'Bearer '+token},
+
+        body: body
+      }).then(response => response.text()).then(html=> toggle());
+  }
 
 
 
@@ -139,6 +151,9 @@ const SellItem = ({user,token,page,item},props) => {
               if(page === 'EDITITEM') {
                 return ( <div><h2 className="display-4">Edit offer</h2>
                 <hr className="my-2" /></div>)
+              }else if (page==='ADDFORSALE'){
+                return ( <div><h2 className="display-4">Add to sales</h2>
+                <hr className="my-2" /></div>)
               }else{
                 return ( <div><h2 className="display-4">Make a new offer</h2>
                 <hr className="my-2" /></div>)
@@ -147,7 +162,7 @@ const SellItem = ({user,token,page,item},props) => {
 
 
             {(() => {
-              if(page === 'EDITITEM') {
+              if(page === 'EDITITEM' || page === 'ADDFORSALE') {
                 return (<div>
                     <FormGroup>
                     <Label for="title">Title</Label>
@@ -228,6 +243,8 @@ const SellItem = ({user,token,page,item},props) => {
                     {(() => {
                     if(page === 'EDITITEM') {
                         return (  <Button color="primary" onClick={submitChanges}>Save changes</Button>)
+                    }else if (page === 'ADDFORSALE'){
+                        return ( <Button color="primary" onClick={addForSale}>Add to sales</Button>)
                     }else{
                         return ( <Button color="primary" onClick={submitNew}>Confirm</Button>)
                     }

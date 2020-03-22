@@ -4,22 +4,25 @@ import {
   loadedAction,
   mainAction,
   loadingAction,
-  editItemAction
+  editItemAction,
+  stockAction,
+  addForSaleAction
 } from '../actions/actions.js';
+import { SALE } from '../constants.js';
 import { Card, Button, CardHeader, CardFooter, CardBody, CardText } from 'reactstrap';
 
 
 var item;
 function setData(data){
-  item = data;
+    item = data;
 }
 
-function AllItems({loadState, loadedAction, loadingAction,page,user,token,editItemAction}) {
 
+function AllItems({loadState, loadedAction, loadingAction,page,user,token,editItemAction,addForSaleAction}) {
 
 
   function deleteItem(e){
-    
+
     fetch('http://localhost:3001/api/item/'+e.target.value,
     {
       method: 'delete',
@@ -47,11 +50,11 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
     method: 'get',
     headers: {
       'authorization': 'Bearer ' + token}}).then(res=>res.json()).then(data =>  data.name).then(result => result);
-    
+
     return JSON.stringify(user);
   }
 
-  
+
 
   const getUserName = (ID) => fetch('http://localhost:3001/api/user/'+ID,
   {
@@ -61,7 +64,7 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
 */
 
   var currentPath;
-  
+
 
   if(page==='OWNSELLABLES'){
     currentPath = "items/offered/"+user['_id'];
@@ -79,7 +82,7 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
   //loadingAction();
   fetch('http://localhost:3001/api/'+currentPath).then(res=>res.json()).then(data => setData(data)).then(loadedAction);
 
-  
+
   const itemsToRender =[];
 
   if (loadState==='LOADED') {
@@ -110,7 +113,7 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
               })()}
 
 
-            
+
             <CardBody>
               {(() => {
                 if (itm.description!=='' && itm.description!=='undefined') {
@@ -119,7 +122,7 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
               })()}
               <CardText>Price: {itm.price}€</CardText>
               <CardText>Created: {itm.created}</CardText>
-              
+
 
             </CardBody>
             <CardFooter>
@@ -127,7 +130,9 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
                 if (page==='OWNSELLABLES') {
                   return <div><Button color="primary" value={itm._id} onClick={deleteItem}>Remove</Button>
                   <Button color="primary" style={{float: 'right'}} onClick={() => editItemAction(itm)}>Edit</Button></div>
-                }else{
+                }else if (page === 'STOCK'){
+                  return <div><Button color="primary" onClick={() => addForSaleAction(itm)}>Add to sales</Button></div>
+                } else {
                   return <div><Button color="primary" value={itm._id} onClick={buyItem}>Buy</Button>
                   </div>
                 }
@@ -138,8 +143,8 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
         </div>
       ))
 
-     
-              
+
+
   }
   else {
     itemsToRender.push(
@@ -149,7 +154,7 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
   }
 
 
-    
+
 
 
   if (page==='OWNSELLABLES') {
@@ -165,9 +170,9 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
     return  (<div> <h2 className="display-4">Offers</h2>
     <hr className="my-2" /><div>{itemsToRender}</div></div>)
   }
-  
-  
- 
+
+
+
 }
 
 
@@ -181,6 +186,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     mainAction: () => dispatch(mainAction()),
+    addForSaleAction: (data) => dispatch(addForSaleAction(data)),
+    stockAction: () => dispatch(stockAction()),
     loadedAction: () => dispatch(loadedAction()),
     loadingAction: () => dispatch(loadingAction()),
     editItemAction: (data) => dispatch(editItemAction(data))

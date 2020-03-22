@@ -9,6 +9,8 @@ export const USERADDNEWITEM = 'USERADDNEWITEM';
 export const ALLSELLABLES = 'ALLSELLABLES';
 export const SHOPKEEPERBUYITEM = 'SHOPKEEPERBUYITEM';
 export const ALLUSERS = 'ALLUSERS';
+export const ADDFORSALE = 'ADDFORSALE';
+
 
 // User authorization action types
 export const QUEST = 'QUEST';

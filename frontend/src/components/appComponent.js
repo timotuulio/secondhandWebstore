@@ -40,7 +40,7 @@ const App = ({page,mainAction,login}) =>{
 
 
 
-    }else if((page==='USERADDNEWITEM' || page==='EDITITEM') && login === 'LOGGEDIN') {
+    }else if((page==='USERADDNEWITEM' || page==='EDITITEM' ||page==='ADDFORSALE') && login === 'LOGGEDIN') {
 
         return(<div>
                 <Header />

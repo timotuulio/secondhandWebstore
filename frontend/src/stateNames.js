@@ -11,6 +11,7 @@ export const ALLSELLABLES = 'ALLSELLABLES';
 // Show item to shopkeeper so that he can buy it
 export const SHOPKEEPERBUYITEM = 'SHOPKEEPERBUYITEM';
 export const ALLUSERS = 'ALLUSERS';
+export const ADDFORSALE = 'ADDFORSALE';
 
 // State names for users-authorization
 export const QUEST = 'Quest';
