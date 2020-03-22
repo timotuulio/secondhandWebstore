@@ -29,3 +29,7 @@ export const LOGGEDOUT = 'LOGGEDOUT';
 
 
 export const SIGNUP = 'SIGNUP';
+export const ALLOFFERS = 'OFFERS';
+export const EDITITEM = 'EDITITEM';
+
+export const STOCK = 'STOCK';

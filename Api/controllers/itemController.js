@@ -1,9 +1,12 @@
 // Controller for items for when api calls are used for items
 
 const Item = require('../models/itemModel');
+const User = require('../models/userModel');
+const Receipt = require('../models/receiptModel');
 const xssFilters = require('xss-filters');
 const jwt = require('jsonwebtoken');
-
+const fs = require('fs');
+const mongoose = require('mongoose');
 
 var secret = 'tosisecret';
 
@@ -44,7 +47,7 @@ module.exports = {
         if(authToken(req.headers.authorization)){
             const itemToBeAdded = req.body;
 
-            newItem = new Item();
+            var newItem = new Item();
 
             // Check that the added data has required properties
             if('title' in itemToBeAdded && 'price' in itemToBeAdded && 'ownerId' in itemToBeAdded){
@@ -54,13 +57,19 @@ module.exports = {
                 newItem.title = xssFilters.inHTMLData(itemToBeAdded.title);
                 newItem.description = xssFilters.inHTMLData(itemToBeAdded.description);
                 newItem.ownerId = itemToBeAdded.ownerId;
+                newItem.created = xssFilters.inHTMLData(itemToBeAdded.created);
+                newItem.status = xssFilters.inHTMLData(itemToBeAdded.status);
+
+                // This was an attempt to add an image
+                //newItem.img.data = fs.readFileSync(itemToBeAdded.image);
+                //newItem.img.contentType = 'image/png';
         
                 newItem.save(function(err){
                     if(err){
-                        return handleError(err);
+                        res.send(err)
                     }else{
                         console.log("Item "+newItem.title+" added.");
-                        res.send(newItem);
+                        res.send({});
                     }
                 });
                 
@@ -88,12 +97,16 @@ module.exports = {
         if(authToken(req.headers.authorization)){
             const itemUpdateInfo = req.body;
             console.log(itemUpdateInfo);
-            // Check that player exists, that is to be modified
+           
+
             var updatedItem = await Item.findById(req.params.id).exec()
                 .catch(function(error){return 'Error occured'});
-
-            updatedItem.price = itemUpdateInfo.price;
-            updatedItem.description = itemUpdateInfo.description;
+            
+            for (const [key, value] of Object.entries(itemUpdateInfo)) { 
+                updatedItem[key] = value;
+            }
+            //updatedItem.price = itemUpdateInfo.price;
+            //updatedItem.description = itemUpdateInfo.description;
 
             updatedItem.save();
             
@@ -164,5 +177,86 @@ module.exports = {
         var fetchedItems = await Item.find().exec()
             .catch(function(error){return 'Error occured'});
         res.send(fetchedItems);
+    },
+
+    // Fetches useritems
+    async getOfferedItems(req,res){
+
+        var offeredItems = await Item.find({ ownerId: req.params.id, status:"offered"}).exec()
+            .catch(function(error){return 'Error occured'});
+       
+        res.send(offeredItems);
+    },
+
+    async getOffers(req,res){
+        var offers = await Item.find({status:"offered"}).exec()
+            .catch(function(error){return 'Error occured'});
+       
+        res.send(offers);
+    },
+
+
+    async transaction(req,res){
+        console.log("enter transcation!")
+
+        var itemID = req.body.itemID;
+        var buyerID = req.body.buyerID;
+
+        
+
+        var item = await Item.findById(itemID).exec().catch(function(error){return 'Error occured'});
+        var buyer = await User.findById(buyerID).exec().catch(function(error){return 'Error occured'});
+
+        var owner = await User.findById(item.ownerId).exec().catch(function(error){return 'Error occured'});
+
+
+        var date = new Date();
+
+        var receipt = new Receipt();
+        receipt.title = item.title;
+        receipt.buyer = buyerID;
+        receipt.seller = item.ownerId;
+        receipt.amount = item.price;
+        receipt.date = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
+
+        await receipt.save();
+
+        item.ownerId = 'SHOP';
+        item.status = 'SHOP_BOUGHT';
+        await item.save();
+
+        /*
+        
+
+  
+      
+       
+*/
+        
+        // vähennä rahat ostajalta, lisää rahat myyjälle
+        // Muuta myydyn tavaran tila
+        // muuta myydyn tavaran omistaja
+        /*
+        if(buyer.role === 'Shopkeeper'){
+
+        }else{
+
+        }
+*/
+
+        res.send(item)
+
+    },
+
+    async getStock(req,res){
+        console.log("getting shop stock")
+
+        var stock = await Item.find({status:"SHOP_BOUGHT"}).exec()
+            .catch(function(error){return 'Error occured'});
+       
+        res.send(stock);
+
     }
+
+   
 }

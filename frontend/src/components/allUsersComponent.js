@@ -1,14 +1,12 @@
 import React from 'react';
-import useFetch from "use-http";
 import { connect } from 'react-redux';
 import {
   loadedAction,
   mainAction,
   loadingAction
 } from '../actions/actions.js';
-import { Card, Button, CardHeader, CardFooter, CardBody,
-  CardTitle, CardText } from 'reactstrap';
-import { QUEST, USER, SHOPKEEPER, ADMIN } from '../stateNames.js'
+import { Card, Button, CardHeader, CardBody, CardText } from 'reactstrap';
+import { USER, SHOPKEEPER, ADMIN } from '../stateNames.js'
 
 
 var user;
@@ -16,7 +14,7 @@ function setData(data){
   user = data;
 }
 
-function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
+function AllUsers({loadState, loadedAction}) {
   //const authKey = token
   const authKey =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiNWU3MGVhOGU1M2VkN2YyMDc3YjljZDRlIiwiaWF0IjoxNTg0NDU4MzgyfQ.FCfdW5Piw2BuAGMmRDNB9QrBtcOStOwR_XxJQ5QCkPY"
   var obj = {
@@ -44,15 +42,15 @@ function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
   var usersToRender = /*testUsers*/[];
 
   console.log(user);
-  if (loadState=='LOADED') {
+  if (loadState==='LOADED') {
       var singleRoleArray = [];
-      singleRoleArray = user.filter(usr => usr.role == ADMIN);
+      singleRoleArray = user.filter(usr => usr.role === ADMIN);
       singleRoleArray.map(usr => pushToArray(usr));
 
-      singleRoleArray = user.filter(usr => usr.role == SHOPKEEPER);
+      singleRoleArray = user.filter(usr => usr.role === SHOPKEEPER);
       singleRoleArray.map(usr => pushToArray(usr));
 
-      singleRoleArray = user.filter(usr => usr.role == USER);
+      singleRoleArray = user.filter(usr => usr.role === USER);
       singleRoleArray.map(usr => pushToArray(usr));
 
   }
@@ -85,12 +83,12 @@ function AllUsers({loadState, loadedAction, loadingAction, role, token}) {
             <CardText>Role: {usr.role}</CardText>
             <CardText>{usr.email}</CardText>
             {(() => {
-              if (usr.address!='' && usr.address!='undefined') {
+              if (usr.address!=='' && usr.address!=='undefined') {
                 return <CardText>Address: {usr.address}</CardText>;
               }
             })()}
             {(() => {
-              if (usr.phoneNumber!='' && usr.phoneNumber!='undefined') {
+              if (usr.phoneNumber!=='' && usr.phoneNumber!=='undefined') {
                 return <CardText>Phonenumber: {usr.phoneNumber}</CardText>;
               }
             })()}

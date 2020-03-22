@@ -108,27 +108,36 @@ module.exports = {
       const userToBeAdded = req.body;
       console.log("adduser");
       console.log(userToBeAdded);
-      if (req.body && req.body.name && req.body.password, req.body.email, req.body.role) {
+      if (req.body && req.body.name && req.body.password && req.body.email &&req.body.role) {
         console.log('adding user');
 
         bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
 
+          // First set required fields
           var newUser = new User({
             name: xssFilters.inHTMLData(userToBeAdded.name),
             password: hash,
             role: xssFilters.inHTMLData(userToBeAdded.role),
-            email: xssFilters.inHTMLData(userToBeAdded.email),
-            bankAccount:xssFilters.inHTMLData(userToBeAdded.bank),
-            phoneNumber:xssFilters.inHTMLData(userToBeAdded.phone),
-            address:xssFilters.inHTMLData(userToBeAdded.address)
+            email: xssFilters.inHTMLData(userToBeAdded.email)
           });
 
-          console.log(newUser)
+          // If additional fields are provided, set them
+          if(req.body.bankAccount){
+            newUser.bankAccount = xssFilters.inHTMLData(userToBeAdded.bank);
+          }
+          if(req.body.phoneNumber){
+            newUser.phoneNumber = xssFilters.inHTMLData(userToBeAdded.phone);
+          }
+          if(req.body.address){
+            newUser.address = xssFilters.inHTMLData(userToBeAdded.address);
+          }
+          
+          
+          //console.log(newUser)
 
           newUser.save(function(err) {
             if (err) {
-              res.sendStatus(500);
-              return console.error(err);
+              res.status(500).send(err); 
             };
 
             console.log("Inserted new user");
@@ -145,8 +154,8 @@ module.exports = {
 
         });
       } else {
-        console.log("not enough data")
-        res.sendStatus(400);
+        console.log("not enough data");
+        res.status(400).send("Data missing");
       }
     },
 
