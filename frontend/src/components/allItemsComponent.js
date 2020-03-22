@@ -69,7 +69,7 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
   if(page==='OWNSELLABLES'){
     currentPath = "items/offered/"+user['_id'];
   }else if(page==='MAIN'){
-    currentPath = "item";
+    currentPath = "items/sales";
   }else if(page === 'OFFERS'){
     currentPath = "items/offers";
   }else if(page ==='STOCK'){

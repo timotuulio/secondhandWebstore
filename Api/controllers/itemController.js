@@ -18,13 +18,13 @@ function authToken(tokenAuth){
 
     if(!tokenAuth){
 
-        // No header 
-    
+        // No header
+
     }else if(tokenAuth.startsWith('Bearer' )){
 
         var token = tokenAuth.slice(7,tokenAuth.length);
         console.log(token)
-    
+
         jwt.verify(token,secret, function(err,decoded){
             if(err){
                 console.log("invalid token");
@@ -36,7 +36,7 @@ function authToken(tokenAuth){
     }
     return authed;
   }
-  
+
 
 
 module.exports = {
@@ -52,7 +52,7 @@ module.exports = {
             // Check that the added data has required properties
             if('title' in itemToBeAdded && 'price' in itemToBeAdded && 'ownerId' in itemToBeAdded){
 
-                
+
                 newItem.price = xssFilters.inHTMLData(itemToBeAdded.price);
                 newItem.title = xssFilters.inHTMLData(itemToBeAdded.title);
                 newItem.description = xssFilters.inHTMLData(itemToBeAdded.description);
@@ -63,7 +63,7 @@ module.exports = {
                 // This was an attempt to add an image
                 //newItem.img.data = fs.readFileSync(itemToBeAdded.image);
                 //newItem.img.contentType = 'image/png';
-        
+
                 newItem.save(function(err){
                     if(err){
                         res.send(err)
@@ -72,8 +72,8 @@ module.exports = {
                         res.send({});
                     }
                 });
-                
-            
+
+
             // In case there are no required fields, give bad request
             }else{
                 res.statusCode = 400;
@@ -88,8 +88,8 @@ module.exports = {
             res.send("Not authorized")
         }
 
-        
-       
+
+
     },
 
     async updateItem(req,res){
@@ -97,19 +97,19 @@ module.exports = {
         if(authToken(req.headers.authorization)){
             const itemUpdateInfo = req.body;
             console.log(itemUpdateInfo);
-           
+
 
             var updatedItem = await Item.findById(req.params.id).exec()
                 .catch(function(error){return 'Error occured'});
-            
-            for (const [key, value] of Object.entries(itemUpdateInfo)) { 
+
+            for (const [key, value] of Object.entries(itemUpdateInfo)) {
                 updatedItem[key] = value;
             }
             //updatedItem.price = itemUpdateInfo.price;
             //updatedItem.description = itemUpdateInfo.description;
 
             updatedItem.save();
-            
+
             console.log(updatedItem);
             res.send(updatedItem);
 
@@ -121,7 +121,7 @@ module.exports = {
 
 
 
-        
+
     },
 
     async deleteItem(req,res){
@@ -141,7 +141,7 @@ module.exports = {
         }
 
 
-       
+
     },
 
     deleteAllItems(req,res){
@@ -161,14 +161,14 @@ module.exports = {
             // Check format of this
             res.send("Not authorized")
         }
-        
+
     },
 
     async getSingleItem(req,res){
 
         var fetchedItem = await Item.findById(req.params.id).exec()
             .catch(function(error){return 'Error occured'});
-        
+
         res.send(fetchedItem);
     },
 
@@ -184,14 +184,14 @@ module.exports = {
 
         var offeredItems = await Item.find({ ownerId: req.params.id, status:"offered"}).exec()
             .catch(function(error){return 'Error occured'});
-       
+
         res.send(offeredItems);
     },
 
     async getOffers(req,res){
         var offers = await Item.find({status:"offered"}).exec()
             .catch(function(error){return 'Error occured'});
-       
+
         res.send(offers);
     },
 
@@ -202,7 +202,7 @@ module.exports = {
         var itemID = req.body.itemID;
         var buyerID = req.body.buyerID;
 
-        
+
 
         var item = await Item.findById(itemID).exec().catch(function(error){return 'Error occured'});
         var buyer = await User.findById(buyerID).exec().catch(function(error){return 'Error occured'});
@@ -226,13 +226,13 @@ module.exports = {
         await item.save();
 
         /*
-        
 
-  
-      
-       
+
+
+
+
 */
-        
+
         // vähennä rahat ostajalta, lisää rahat myyjälle
         // Muuta myydyn tavaran tila
         // muuta myydyn tavaran omistaja
@@ -253,10 +253,19 @@ module.exports = {
 
         var stock = await Item.find({status:"SHOP_BOUGHT"}).exec()
             .catch(function(error){return 'Error occured'});
-       
+
+        res.send(stock);
+
+    },
+
+    async getSales(req,res){
+        console.log("getting shop stock")
+
+        var stock = await Item.find({status:"sale"}).exec()
+            .catch(function(error){return 'Error occuredddd'});
+
         res.send(stock);
 
     }
 
-   
 }

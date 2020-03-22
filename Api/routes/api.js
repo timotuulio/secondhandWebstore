@@ -34,6 +34,7 @@ router.get('/items/offers', itemController.getOffers);
 router.post('/buy/:id', itemController.transaction);
 
 router.get('/items/stock', itemController.getStock);
+router.get('/items/sales', itemController.getSales);
 
 router.get('/receipt', receiptController.getReceipts);
 router.get('/receipt/:id',receiptController.getUserReceipts);
