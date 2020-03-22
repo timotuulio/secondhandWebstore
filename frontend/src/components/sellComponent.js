@@ -4,7 +4,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { SALE } from '../constants.js';
 
 
-const SellItem = ({user,token,page,item,offersAction,ownSellablesAction},props) => {
+const SellItem = ({user,token,page,item,mainAction,ownSellablesAction},props) => {
 
     // This produces null for the button reference??
     //var btn = document.getElementById('confirm');
@@ -97,7 +97,7 @@ function combineActions(action1,action2){
         headers: {'Content-type':'application/json','Authorization': 'Bearer '+token},
 
         body: body
-      }).then(response => response.text()).then(html=> toggle());
+      }).then(response => response.text()).then(html=> combineActions(mainAction,toggle));
   }
 
 

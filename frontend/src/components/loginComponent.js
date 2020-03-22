@@ -2,7 +2,7 @@
 import React from 'react';
 
 import store from '../store/store.js'
-import { Input, InputGroup, Card, CardHeader,CardBody,CardFooter, Button } from 'reactstrap';
+import {Alert,Input, InputGroup, Card, CardHeader,CardBody,CardFooter, Button } from 'reactstrap';
 
 import {
     mainAction,
@@ -40,7 +40,7 @@ let submit = (e,data) => {
         // Tähän toiminta kun unauthorized
         if(response === 'Unauthorized'){
             // TODO: That's just funny so I'll leave it that way for now
-            alert("EIPÄ OLLU")
+            //alert("EIPÄ OLLU")
             store.dispatch(loginFailedAction());
         }else{
             store.dispatch(mainAction());
@@ -69,8 +69,16 @@ let submit = (e,data) => {
 
 
 
-const Login = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,registerAction}) => (
-    <div style={{
+
+const Login = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,registerAction}) => {
+  
+
+   
+
+    
+ 
+
+    return(<div style={{
         position: 'absolute', left: '50%', top: '50%',
         transform: 'translate(-50%, -50%)',
     }}>
@@ -81,23 +89,12 @@ const Login = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,regi
 
             <form id="login" onSubmit={submit}>
                 <div style={{width:"100%"}}>
+                <Alert isOpen={login==='LOGINFAILED'} color="danger">
+                                    Wrong email and/or password!
+                                </Alert>
+                    
                     <Card className="text-center">
 
-                        <CardHeader>
-                          {(() => {
-                              if (login==='LOGINFAILED') {
-                                  // The div
-                                  return <div style={{
-                                    backgroundColor: 'tomato',
-                                    width: '100%',
-                                    textAlign: 'center',
-                                    fontWeight: 'bold',
-                                    borderRadius: '5px'
-                                  }}
-                                  >Wrong email and/or password</div> ;
-                              }
-                          })()}
-                        </CardHeader>
                         <CardBody>
                             <InputGroup>
                                 <Input type="text" id="email" placeholder="Email" />
@@ -107,13 +104,13 @@ const Login = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,regi
                                 <Input type="password" id="password" placeholder="Password" />
                             </InputGroup>
                             <br></br>
-
+                            
+                             <Button block color="primary" size="lg" >Log in</Button>
                         </CardBody>
-                        <CardFooter>
-                        <Button color="primary" size="lg" >Log in</Button>
-                        </CardFooter>
-
+                        
+                      
                     </Card>
+                   
                 </div>
             </form>
             <br/><br/>
@@ -122,6 +119,7 @@ const Login = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,regi
             <div>Not signed in yet? Create a new user <Button onClick={registerAction}>Here</Button></div>
     </div>
   )
+}
 
 
 export default Login;

@@ -29,6 +29,9 @@ const UserSchema = new mongoose.Schema({
   selfLink: {
       type: String,
       //required: true
+  },
+  balance:{
+      type: Number
   }
 });
 

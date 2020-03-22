@@ -52,7 +52,15 @@ function authToken(tokenAuth){
         var fetchedReceipts = await Receipt.find({seller:req.params.id}).exec()
             .catch(function(error){return 'Error occured'});
         res.send(fetchedReceipts);
+    },
+
+    async deleteReceipts(req,res){
+        console.log("deleting receipts");
+        Receipt.deleteMany({});
+        res.send({});
     }
+
+
 
 
 

@@ -34,8 +34,5 @@ export const ALLOFFERS = 'ALLOFFERS';
 export const EDITITEM = 'EDITITEM';
 
 export const STOCK = 'STOCK';
-<<<<<<< HEAD
 
 export const USERSALES = 'USERSALES';
-=======
->>>>>>> 6aeda5386c3a8c1448975b354d0e825d648bc381

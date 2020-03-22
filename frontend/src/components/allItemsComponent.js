@@ -9,7 +9,7 @@ import {
   addForSaleAction
 } from '../actions/actions.js';
 import { SALE } from '../constants.js';
-import { Card, Button, CardHeader, CardFooter, CardBody, CardText } from 'reactstrap';
+import { Alert,Card, Button, CardHeader, CardFooter, CardBody, CardText } from 'reactstrap';
 
 
 var item;
@@ -19,6 +19,16 @@ function setData(data){
 
 
 function AllItems({loadState, loadedAction, loadingAction,page,user,token,editItemAction,addForSaleAction}) {
+
+  const [visible, setVisible] = React.useState(false)
+  function alert2(){
+      setVisible(true);
+      window.setTimeout(()=>{
+          setVisible(false)
+        },3000)
+     
+  }
+
 
 
   function deleteItem(e){
@@ -32,6 +42,7 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
 
 
   function buyItem(e) {
+    alert2();
     //alert(e.target.value);
     fetch('http://localhost:3001/api/buy/'+e.target.value,
     {
@@ -83,7 +94,15 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
   fetch('http://localhost:3001/api/'+currentPath).then(res=>res.json()).then(data => setData(data)).then(loadedAction);
 
 
-  const itemsToRender =[];
+  const itemsToRender =[<div key={33} style={{
+    display: "flex",
+    margin: "15px",
+    justifyContent: "center",
+        alignItems: "center",
+    width:"100%"
+    }}><Alert isOpen={visible} color="success">
+  <h5 className="alert-heading">Item bought successfully!</h5>
+</Alert></div>];
 
   if (loadState==='LOADED') {
 
@@ -167,12 +186,9 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
     return  (<div> <h2 className="display-4">Stock</h2>
     <hr className="my-2" /><div>{itemsToRender}</div></div>)
   }else{
-    return  (<div> <h2 className="display-4">Offers</h2>
+    return  (<div><h2 className="display-4">Offers</h2>
     <hr className="my-2" /><div>{itemsToRender}</div></div>)
   }
-
-
-
 }
 
 
