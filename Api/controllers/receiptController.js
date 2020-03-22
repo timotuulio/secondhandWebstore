@@ -4,6 +4,7 @@ const xssFilters = require('xss-filters');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const mongoose = require('mongoose');
+const Receipt = require('../models/receiptModel');
 
 var secret = 'tosisecret';
 
@@ -47,7 +48,10 @@ function authToken(tokenAuth){
     },
 
     async getUserReceipts(req,res){
-        console.log("getting user receipts")
+        console.log("getting user receipts");
+        var fetchedReceipts = await Receipt.find({seller:req.params.id}).exec()
+            .catch(function(error){return 'Error occured'});
+        res.send(fetchedReceipts);
     }
 
 
