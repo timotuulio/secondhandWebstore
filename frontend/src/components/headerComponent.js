@@ -16,7 +16,7 @@ const Header =({stockAction,ownSellablesAction,login,loginAction,loggedOutAction
   return (
 
       <Navbar sticky="top" style={{backgroundColor:'#2B3856'}}>
-        <NavbarBrand style={{color:"#007bff"}}>Paavon Putiikki</NavbarBrand>
+        <NavbarBrand style={{color:"#007bff"}}>Paavos Boutique</NavbarBrand>
 
           <Nav className="mr-auto" navbar>
           <ButtonToolbar aria-label="Toolbar with button groups">
@@ -37,7 +37,7 @@ const Header =({stockAction,ownSellablesAction,login,loginAction,loggedOutAction
                           }else if(user.role === USER){
                             return <div><Button color="primary" onClick={ownSellablesAction}>Active offers</Button>;
                               <Button color="primary" onClick={ownSellablesAction}>Sale history</Button>;</div>
-                          
+
                           }else{
                             return <div><Button color="primary" onClick={offersAction}>Offers</Button>
                             <Button color="primary" onClick={stockAction}>Stock</Button></div>
