@@ -57,7 +57,6 @@ Our planned working directory is as follows:
 <pre><code>
 Directory
 - Api
-- frontend
 --- controllers
 ----- itemController
 ----- receiptController
@@ -71,25 +70,31 @@ Directory
 ----- api.js
 --- app
 --- package
-- Public
-  - index.html
-- src
-  - Actions
-    - actions.js
-  - Reducers
-    - rootReducer.js
-    - reducer1.js
-    - reducer2.js
-
-  - Components
-    - header.js
-    - item.js
-    - user.js
-    - allItems.js
-    - allUsers.js
-  - app.js
-  - api.js
-- readme.md
+- frontend
+- - Public
+- - - index.html
+- - src
+- - - Actions
+- - - - actions.js
+- - - Components
+- - - - header.js
+- - - - item.js
+- - - - user.js
+- - - - allItems.js
+- - - - allUsers.js
+    - Containers
+      -
+    - Reducers
+      - rootReducer.js
+      - reducer1.js
+      - reducer2.js
+    - store
+      - store
+    - App
+    - constants
+    - index
+    - stateNames
+  - package
 </code></pre>
 ---
 ## Mongo database and Mongoose schemas    
