@@ -231,18 +231,6 @@ module.exports = {
             });
 
             // User is buying
-<<<<<<< HEAD
-            if (item.ownerId === 'SHOP') {
-                item.owner = buyerID;
-                item.status = 'SOLD';
-
-                // user is selling
-            } else {
-                var owner = await User.findById(item.ownerId).exec().catch(function(error) {
-                    return 'Error occured'
-                });
-
-=======
             if(item.ownerId === 'SHOP'){
                 item.ownerId = buyerID;
                 item.status = 'SOLD';
@@ -253,7 +241,6 @@ module.exports = {
             }else{
                 var owner = await User.findById(item.ownerId).exec().catch(function(error){return 'Error occured'});
                 
->>>>>>> 208341b3418253407090dbd271776aebfe0e8d1f
                 item.ownerId = 'SHOP';
                 item.status = 'SHOP_BOUGHT';
                 item.ownerId = 'SHOP';

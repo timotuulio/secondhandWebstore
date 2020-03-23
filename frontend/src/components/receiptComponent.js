@@ -36,7 +36,7 @@ function Receipts({
     const toggle = tab => {
         if (activeTab !== tab)
             setActiveTab(tab);
-        
+    }
         var path;
 
         if (user['role'] === 'Shopkeeper') {
@@ -164,5 +164,5 @@ function Receipts({
         </div>);
 
     }
-
+  
     export default Receipts;
