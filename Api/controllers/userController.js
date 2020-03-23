@@ -16,13 +16,13 @@ function authToken(tokenAuth){
 
     if(!tokenAuth){
 
-        // No header 
-    
+        // No header
+
     }else if(tokenAuth.startsWith('Bearer' )){
 
         var token = tokenAuth.slice(7,tokenAuth.length);
         console.log(token)
-    
+
         jwt.verify(token,secret, function(err,decoded){
             if(err){
                 console.log("invalid token");
@@ -47,7 +47,7 @@ module.exports = {
         var decodedHeader = new Buffer(encodedHeader, 'base64').toString();
         var email = decodedHeader.split(':')[0];
         var password = decodedHeader.split(':')[1];
-        
+
         console.log(email)
 
         User.findOne({
@@ -56,25 +56,25 @@ module.exports = {
           if (err) return console.error(err);
           if (user) {
             bcrypt.compare(password, user.password, function(err, result) {
-              
+
               // Here username and password matches so create and return a token to user which can be used to perform the operations
               if (result) {
                 console.log("ok")
 
-                  
+
 
                 jwt.sign({name:user._id},secret,{algorithm:'HS256'},function(err, token){
 
                    // dont send password to client
                    user = {...user._doc};
-                   delete user['password']; 
+                   delete user['password'];
 
                    console.log(user)
 
 
                   res.json({token, user});
                 });
-                
+
               } else {
                 // password didnt match
                 console.log("password did not match")
@@ -91,13 +91,13 @@ module.exports = {
         console.log("loginuser");
         console.log(req.headers.authorization)
 
-      
+
       }else{
         console.log("no authorization header")
         res.sendStatus(401);
       // No authorization header
     }
-    
+
   },
 
 
@@ -132,23 +132,23 @@ module.exports = {
           if(req.body.address){
             newUser.address = xssFilters.inHTMLData(userToBeAdded.address);
           }
-          
-          
+
+
           //console.log(newUser)
 
           newUser.save(function(err) {
             if (err) {
-              res.status(500).send(err); 
+              res.status(500).send(err);
             };
 
             console.log("Inserted new user");
             console.log("This is ID:" + newUser._id)
             // Create token and return it
             jwt.sign({name:newUser._id},secret,{algorithm:'HS256'},function(err, token){
-              
+
               user = {...newUser._doc};
-              delete user['password']; 
-              
+              delete user['password'];
+
               res.json({token,user});
             });
           });
@@ -164,8 +164,6 @@ module.exports = {
 
       if(authToken(req.headers.authorization)){
 
-       
-
         // Something is wrong with this thing. It cant find with findById >,<
         const userUpdateInfo = req.body;
         console.log(userUpdateInfo);
@@ -175,22 +173,18 @@ module.exports = {
 
         var funds = updatedUser.balance;
 
-        for (const [key, value] of Object.entries(userUpdateInfo)) { 
+        for (const [key, value] of Object.entries(userUpdateInfo)) {
           if(key==='balance'){
             updatedUser[key] = parseInt(value)+funds;
           }else{
-            updatedUser[key] = value;
-          }
-          
-         
+            updatedUser[key] = xssFilters.inHTMLData(value);
+          }         
         }
-        
 
         await updatedUser.save();
 
         console.log(updatedUser);
         res.send(updatedUser);
-        
 
         }else{
             console.log("Authentication failed")
@@ -217,7 +211,7 @@ module.exports = {
             res.send("Not authorized")
         }
 
-       
+
     },
 
     deleteAllUsers(req,res){
@@ -251,7 +245,7 @@ module.exports = {
         // Check format of this
         res.send("Not authorized")
       }
-    
+
     },
 
     async getAllUsers(req,res){
@@ -266,7 +260,7 @@ module.exports = {
         // Check format of this
         res.send("Not authorized")
       }
-       
+
     }
 
 }

@@ -73,7 +73,6 @@ module.exports = {
                     }
                 });
 
-
             // In case there are no required fields, give bad request
             }else{
                 res.statusCode = 400;
@@ -87,9 +86,6 @@ module.exports = {
             // Check format of this
             res.send("Not authorized")
         }
-
-
-
     },
 
     async updateItem(req,res){
@@ -98,15 +94,12 @@ module.exports = {
             const itemUpdateInfo = req.body;
             console.log(itemUpdateInfo);
 
-
             var updatedItem = await Item.findById(req.params.id).exec()
                 .catch(function(error){return 'Error occured'});
 
             for (const [key, value] of Object.entries(itemUpdateInfo)) {
-                updatedItem[key] = value;
+                updatedItem[key] = xssFilters.inHTMLData(value);
             }
-            //updatedItem.price = itemUpdateInfo.price;
-            //updatedItem.description = itemUpdateInfo.description;
 
             updatedItem.save();
 
@@ -118,10 +111,6 @@ module.exports = {
             // Check format of this
             res.send("Not authorized")
         }
-
-
-
-
     },
 
     async deleteItem(req,res){
@@ -222,8 +211,6 @@ module.exports = {
 
         }
 
-       
-
         var date = new Date();
 
         var receipt = new Receipt();
@@ -235,30 +222,10 @@ module.exports = {
 
         await receipt.save();
 
-        
+
         await item.save();
 
-        /*
-
-
-
-
-
-*/
-
-        // vähennä rahat ostajalta, lisää rahat myyjälle
-        // Muuta myydyn tavaran tila
-        // muuta myydyn tavaran omistaja
-        /*
-        if(buyer.role === 'Shopkeeper'){
-
-        }else{
-
-        }
-*/
-
         res.send(item)
-
     },
 
     async getStock(req,res){
