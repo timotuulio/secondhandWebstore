@@ -1,13 +1,13 @@
 import React from 'react';
-import { Alert,Button, Form, FormGroup, Input,Card, CardHeader,CardBody,CardFooter } from 'reactstrap';
+import { Alert,Button, Input} from 'reactstrap';
 import { ownProfileAction } from '../actions/actions';
 
 
 
 
-function Balance({user,token,updateProfileAction,ownProfileAction}){
+function Balance({user,token,updateProfileAction}){
 
-    
+
 
     function addFunds(){
         var funds = document.getElementById('funds').value;
@@ -20,12 +20,6 @@ function Balance({user,token,updateProfileAction,ownProfileAction}){
         }).then(
             response => response.text()).then(res => updateProfileAction(JSON.parse(res))).then(ownProfileAction)
     }
-   //updateProfileAction(JSON.parse(res),ownProfileAction()
-    function tst(f1,f2){
-        f1();
-        f2();
-    }
-
 
     if(user.bankAccount){
         return <div style={{
@@ -36,7 +30,7 @@ function Balance({user,token,updateProfileAction,ownProfileAction}){
             }}><div><h2 className="display-4"  style={{textAlign:"center"}}>Add balance</h2>
             <hr className="my-2" />Account: {user.bankAccount}<Input id="funds" type ="number" placeholder="Amount in euros"></Input><Button onClick={addFunds} color="primary">Transfer funds</Button></div>
            </div>
-              
+
 
 
     }else{
@@ -50,7 +44,7 @@ function Balance({user,token,updateProfileAction,ownProfileAction}){
            </div>
     }
 
-    
+
 }
 
 

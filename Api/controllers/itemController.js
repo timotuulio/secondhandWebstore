@@ -128,9 +128,6 @@ module.exports = {
             // Check format of this
             res.send("Not authorized")
         }
-
-
-
     },
 
     deleteAllItems(req,res){
@@ -181,9 +178,6 @@ module.exports = {
             // Check format of this
             res.send("Not authorized")
         }
-
-
-        
     },
 
     async getOffers(req,res){
@@ -193,17 +187,13 @@ module.exports = {
             .catch(function(error){return 'Error occured'});
 
             res.send(offers);
-            
+
         }else{
             console.log("Authentication failed")
             // Check format of this
             res.send("Not authorized")
         }
-
-
-        
     },
-
 
     async transaction(req,res){
         if(authToken(req.headers.authorization)){
@@ -216,9 +206,9 @@ module.exports = {
             var receipt = new Receipt();
 
             var item = await Item.findById(itemID).exec().catch(function(error){return 'Error occured'});
-    
+
             var buyer = await User.findById(buyerID).exec().catch(function(error){return 'Error occured'});
-    
+
             // User is buying
             if(item.ownerId === 'SHOP'){
                 item.ownerId = buyerID;
@@ -237,26 +227,22 @@ module.exports = {
                 receipt.seller = owner['_id']
     
             }
-    
-           
-    
+
             var date = new Date();
             receipt.title = item.title;
             receipt.amount = item.price;
             receipt.date = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
-    
+
             await receipt.save();
-    
-            
+
             await item.save();
-    
+
             res.send(item)
         }else{
             console.log("Authentication failed")
             // Check format of this
             res.send("Not authorized")
-        }    
-
+        }
     },
 
     async getStock(req,res){
@@ -271,9 +257,6 @@ module.exports = {
             res.send("Not authorized")
         }
         console.log("getting shop stock")
-
-        
-
     },
 
     async getSales(req,res){
@@ -281,8 +264,5 @@ module.exports = {
         .catch(function(error){return 'Error occuredddd'});
 
         res.send(stock);
-        
-
     }
-
 }
