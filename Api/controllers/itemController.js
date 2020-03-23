@@ -218,6 +218,9 @@ module.exports = {
 
             var itemID = req.body.itemID;
             var buyerID = req.body.buyerID;
+    
+    
+            var receipt = new Receipt();
 
             var item = await Item.findById(itemID).exec().catch(function(error) {
                 return 'Error occured'
@@ -228,6 +231,7 @@ module.exports = {
             });
 
             // User is buying
+<<<<<<< HEAD
             if (item.ownerId === 'SHOP') {
                 item.owner = buyerID;
                 item.status = 'SOLD';
@@ -238,16 +242,28 @@ module.exports = {
                     return 'Error occured'
                 });
 
+=======
+            if(item.ownerId === 'SHOP'){
+                item.ownerId = buyerID;
+                item.status = 'SOLD';
+                receipt.buyer = buyerID;
+                receipt.seller = 'SHOP';
+    
+            // user is selling
+            }else{
+                var owner = await User.findById(item.ownerId).exec().catch(function(error){return 'Error occured'});
+                
+>>>>>>> 208341b3418253407090dbd271776aebfe0e8d1f
                 item.ownerId = 'SHOP';
                 item.status = 'SHOP_BOUGHT';
+                item.ownerId = 'SHOP';
+                receipt.buyer = 'SHOP';
+                receipt.seller = owner['_id']
+    
             }
 
             var date = new Date();
-
-            var receipt = new Receipt();
             receipt.title = item.title;
-            receipt.buyer = buyerID;
-            receipt.seller = item.ownerId;
             receipt.amount = item.price;
             receipt.date = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
 

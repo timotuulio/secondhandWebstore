@@ -64,6 +64,7 @@ const Header = ({
                                                 return <div>
                                                     <Button color="primary" onClick={offersAction}>Offers</Button>
                                                     <Button color="primary" onClick={stockAction}>Stock</Button>
+                                                    <Button color="primary" onClick={salesAction}>Sale history</Button>
                                                 </div>
                                             }
                                         })()
@@ -86,7 +87,7 @@ const Header = ({
         {
             (() => {
                 if (login !== 'LOGGEDIN') {
-                    return <Button color="primary" onClick={loginAction}>Kirjaudu sisään</Button>;
+                    return <Button color="primary" onClick={loginAction}>Log in</Button>;
 
                 } else {
 
