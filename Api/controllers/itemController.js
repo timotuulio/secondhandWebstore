@@ -73,7 +73,6 @@ module.exports = {
                     }
                 });
 
-
             // In case there are no required fields, give bad request
             }else{
                 res.statusCode = 400;
@@ -87,9 +86,6 @@ module.exports = {
             // Check format of this
             res.send("Not authorized")
         }
-
-
-
     },
 
     async updateItem(req,res){
@@ -98,15 +94,12 @@ module.exports = {
             const itemUpdateInfo = req.body;
             console.log(itemUpdateInfo);
 
-
             var updatedItem = await Item.findById(req.params.id).exec()
                 .catch(function(error){return 'Error occured'});
 
             for (const [key, value] of Object.entries(itemUpdateInfo)) {
-                updatedItem[key] = value;
+                updatedItem[key] = xssFilters.inHTMLData(value);
             }
-            //updatedItem.price = itemUpdateInfo.price;
-            //updatedItem.description = itemUpdateInfo.description;
 
             updatedItem.save();
 
@@ -118,10 +111,6 @@ module.exports = {
             // Check format of this
             res.send("Not authorized")
         }
-
-
-
-
     },
 
     async deleteItem(req,res){
@@ -211,6 +200,23 @@ module.exports = {
             res.send("Not authorized")
         }
 
+<<<<<<< HEAD
+        var date = new Date();
+
+        var receipt = new Receipt();
+        receipt.title = item.title;
+        receipt.buyer = buyerID;
+        receipt.seller = item.ownerId;
+        receipt.amount = item.price;
+        receipt.date = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
+
+        await receipt.save();
+
+
+        await item.save();
+
+        res.send(item)
+=======
 
         
     },
@@ -266,6 +272,7 @@ module.exports = {
             res.send("Not authorized")
         }    
 
+>>>>>>> cde85845f0235f07e89f864e65f4f59885ac8822
     },
 
     async getStock(req,res){

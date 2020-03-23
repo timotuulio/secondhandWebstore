@@ -1,5 +1,3 @@
-
-## TODO: Headers buttons have different margins or something
 ## TODO: How stock and users and all that zhass works
 
 # WWW Programming Part 2 Coursework Project plan
@@ -34,10 +32,18 @@ This is a project for secondhand webstore. It includes signing in with different
 ## Functionality
 
 <div style="text-align: justify">
-The project includes an api and the frontend for a second hand webstore. In the webstore users can sell their own items which the shop can then buy and sell back to the users. The backend includes mongoose and mongoDB and frontend that is implemented with React, along with the Redux state design. User authentication is done with JSON webtoken.
+The project includes an api and the frontend for a second hand webstore. In the webstore users can sell their own items which the shop can then buy and sell back to the users. The backend includes mongoose and mongoDB and frontend that is implemented with React, along with the Redux state design. User authentication is done with JSON webtoken. Below is more detailed explanation on what each type of user can do.
+
+Without having signed up:
+Users can see all the items, log in and sign up.
 
 Users:
-Users 
+Users can buy items, add new items and offer them to the shop, edit and remove items they already have offered (but which have not yet been bought), edit and remove their own profile, add money to their balance and see items they have sold and bought from the store.
+
+Shopkeepers:
+Shopkeepers can
+
+
 // We will start by designing the database and Mongoose schemas that can be done without worrying about the frontend. After this API can be designed and implemented. Next, basic frontend is implemented with React, along with the Redux state design. Authentication is designed at this point; we are planning to use JSON webtoken authentication. Frontend is finalized and all the parts are tied together. Finally, some tests are implemented. See project timetable in the end of this file.
 
 </div>
@@ -47,27 +53,25 @@ Users
 The site includes a static navigation bar that has links to main page (The "shop" -button) and most other pages. Depending on the users authentication only some navigation links are shown. On the graph this is marked with letters. U for user, S for shopkeeper and A for admin. Note that shopkeepers authetication includes the users authentication.
 ``` mermaid
 graph TD
-  Log(Login) --> |not<br/> Registered?| Reg
-  Reg(Register)
-  MP{{Mainpage that includes <br/>all vendible items}}
-  MP --> |log in| Log
-  MP --> |USA:Profile| Prof
-  MP --> |U: Sales history| Hist
-  MP --> |A:check users| LU
-  MP --> |S:Stock|OwnSells
-  MP --> |U:Active<br/> offers|OwnOff
-  MP --> |USA:<br/>Buy item| Item
-  MP --> |USA:Sell product| NewItem
-  MP --> |SA:Offers|Offers
-  Hist(Sales history)
-  NewItem(Add new <br/>sales item)
-  LU(List of users) --> |A:Check profile<br/>of a single user| Prof
-  Prof(Users own profile)
-  OwnOff(Own offerings <br/>that haven't<br/> been sold yet) --> |Edit|Edit
-  Edit(Edit existing item)
-  OwnSells(Shops items <br/>that are not <br/>yet for sale) --> |S:Add to <br/>sales|Edit
-  Item(Modal window <br/>to buy item)
-  Offers(Offers that <br/>users have<br/> given)
+Log(Login) --> |not<br/> Registered?| Reg
+Reg(Register)
+MP{{Mainpage that includes <br/>all vendible items}}
+MP --> |log in| Log
+MP --> |USA:Profile| Prof
+MP --> |U: Sales history| Hist
+MP --> |A:check users| LU
+MP --> |S:Stock|OwnSells
+MP --> |U:Active<br/> offers|OwnOff
+MP --> |USA:Sell product| NewItem
+MP --> |SA:Offers|Offers
+Hist(Sales history)
+NewItem(Add new <br/>sales item)
+LU(List of users) --> |A:Check profile<br/>of a single user| Prof
+Prof(Users own profile) --> |USA: Add balance| Balance
+OwnOff(Own offerings <br/>that haven't<br/> been sold yet) --> |Edit|Edit
+Edit(Edit existing item)
+OwnSells(Shops items <br/>that are not <br/>yet for sale) --> |S:Add to <br/>sales|Edit
+Offers(Offers that <br/>users have<br/> given)
 
 ```
 
@@ -132,12 +136,13 @@ Directory
 ---
 ## Mongo database and Mongoose schemas    
 <div style="text-align: justify">
-Configurations for the database are made in db.js -file which is used from app.js -file. There are three mongoose models to use.  
+Configurations for the database are made in db.js -file which is used from app.js -file. There are three mongoose models to use. They all have IDs that mongoDB automatically adds to them. Therefore the ID is not mentioned in models.
 UserModel is for all users in the webshop. It has a role for admins, shopkeepers and users. The email needs to be unique for every user.
 </div>
 
 <pre><code>
 USER
+- id: STRING
 - name: STRING
 - role: STRING
 - bankAccount: STRING
@@ -145,12 +150,13 @@ USER
 - phoneNumber: STRING
 - address: STRING
 - password: STRING
-- selfLink: STRING
+- balance: NUMBER
 </code></pre>
 
 Item model models individual item that is sold in the shop. OwnerID links every item to individual user. When the shop is the owner, OwnerID reads "SHOP" otherwise it is the users ID. There is an option to add image of the item although there is no functionality made for it in the store. The status is either "offered", "stock", "sales" or "sold". Offered when the shop hasn't yet bought it, stock when shop has bought it but not yet added it to the shop, sales when it is in sales and sold when a user has bought it.
 <pre><code>
 ITEM
+- ID: STRING
 - ownerID: STRING
 - title: STRING
 - price: NUMBER
@@ -160,9 +166,10 @@ ITEM
 - status: STRING
 </code></pre>
 
-ReceiptModel holds receipts of sold items. It includes IDs of both buyer, sales date and some iteminfo
+ReceiptModel holds receipts of sold items. It includes the ID of the customer and shops "ID" is marked as "SHOP".
 <pre><code>
 RECEIPT
+- ID: STRING
 - title: STRING
 - seller: STRING
 - buyer: STRING
@@ -219,24 +226,32 @@ Redux was used for handling the state of the app.
 ## Testing and bugs
 
 No automatic testing is implemented. All the code is tested manually.
+
 Bugs in the project:
-- When a user buys an item from the itemlist, the item stays for a few seconds in the list before getting removed from it. Or sometimes the window freezes so that it becomes unscrollable until the whole page is reloaded. This has something to do with modal windows.
+- When a user buys an item from an itemlist, the item stays for a few seconds in the list before getting removed from it. And sometimes the window freezes so that it becomes unscrollable until the whole page is reloaded. This has something to do with modal windows and was removed after removing the modal windows.
+- If a user edits a product he had previously offered, and then directly changes page to making a new offer (sell product -button), the text-fields are completed with the item that was edited previously.
 
 
 ---
 ## Future improvements and missing functionality
 Here are pointed out some functionality that is still missing from the project.
-- Giving admin the possibility to change users info and role. Now there is a "Go to profile" button in the list of all users but it does nothing pressed.
+- Giving admin the possibility to change users info and role. Now there is a "Go to profile" button in the list of all users but it does nothing when pressed.
 - Giving admin the possibility to see all the receipts.
-- Handling of the money is done from bank account and in an unrefined way.
+- Handling of the money is not done. The user can add his balance but that's all :D
+- There is no confirmation of buying items. We had a modal window solution for that but it had problems as mentioned above in "bugs".
 
 Here are explained some improvements that were considered to be added to the project but which we didn't have time.
+- LoginComponent uses XHR to fetch data from api. This could be improved to use normal fetch instead like elsewhere in code.
+- Editing user profile the text-fields aren't validated in any way.
+- "Remove account" -button should have confirmation.
 - Uploading images to items.
 - UI elements could be improved in many parts of the project.
 - Better use of constants-file. Right now it isn't referred often and there are lots of string-values that could come straight from constants-file instead of being handwritten every time.
 - For localization purposes all text could come imported from a file. This way different languages could be easily implemented by just doing new files for different languages.
 - Search functionality for items, users and receipts. Also tags could be added to the items so that it could be possible to search for example furniture.
-- Security measures could be added. TODO
+- Security measures could be added.
+- Automatic testing.
+- If some list is empty there should be a message that there is nothing in the list instead of showing nothing (for example the main page is empty if there are no items in sale).
 ---
 ## Project timetable and division of work    
 
