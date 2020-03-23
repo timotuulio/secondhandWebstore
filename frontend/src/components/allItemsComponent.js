@@ -20,6 +20,7 @@ function setData(data){
 
 function AllItems({login, loadState, loadedAction, loadingAction,page,user,token,editItemAction,addForSaleAction}) {
 
+  const [visible2, setVisible2] = React.useState(false)
   const [visible, setVisible] = React.useState(false)
   function alert2(){
       setVisible(true);
@@ -28,6 +29,14 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
         },3000)
      
   }
+  function alert3(){
+    setVisible2(true);
+    window.setTimeout(()=>{
+        setVisible2(false)
+      },3000)
+   
+}
+  
 
 
 
@@ -37,7 +46,7 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
     {
       method: 'delete',
       headers: {
-        'authorization': 'Bearer ' + token}}).then(res=>res.json()).then(data => loadingAction());
+        'authorization': 'Bearer ' + token}}).then(res=>res.json()).then(data => loadingAction(),alert3());
   }
 
 
@@ -102,6 +111,8 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
     width:"100%"
     }}><Alert isOpen={visible} color="success">
   <h5 className="alert-heading">Item bought successfully!</h5>
+</Alert><Alert isOpen={visible2} color="success">
+  <h5 className="alert-heading">Offer removed successfully!</h5>
 </Alert></div>];
 
   if (loadState==='LOADED') {

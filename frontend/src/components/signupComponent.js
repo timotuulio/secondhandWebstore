@@ -1,9 +1,19 @@
 import React from 'react';
-import { Button, Form, FormGroup, FormFeedback, Label, Input,Card, CardHeader,CardBody,CardFooter } from 'reactstrap';
+import { Button, Form, FormGroup, FormFeedback, Label, Input,Card,CardBody } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { USER, SHOPKEEPER, ADMIN } from '../stateNames.js'
 
 
-const Signup = ({mainAction,loginSuccessAction}) => {
+const Signup = ({mainAction,loginSuccessAction},props) => {
+
+  const {
+    buttonLabel,
+    className
+  } = props;
+
+  const [modal, setModal] = React.useState(false);
+
+  const toggle = () => setModal(!modal);
 
   // take over its submit event.
 let submit = (e,data) => {
@@ -40,7 +50,7 @@ let submit = (e,data) => {
       if(response.status === 200){
         response.text().then(html=> {
           mainAction();
-          loginSuccessAction(JSON.parse(html));
+          loginSuccessAction(JSON.parse(html),toggle);
             
         });
 
@@ -74,18 +84,20 @@ let submit = (e,data) => {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [radio, setRadio] = React.useState(false);
+    const [bank, setBank] = React.useState("");
+    const [phone, setPhone] = React.useState("");
+    const [address, setAddress] = React.useState("");
     
     const [nameOK, setNameOk] = React.useState(false);
     const [emailOK, setEmailOk] = React.useState(false);
     const [passwordOK, setPasswordOk] = React.useState(false);
 
 
-    var btn = document.getElementById('register');
 
     function checkRadio(e){
       setRadio(true);
       if(nameOK && emailOK && passwordOK){
-        btn.style.visibility = 'visible';
+        document.getElementById('register').style.visibility = 'visible';
       }
     }
 
@@ -93,11 +105,11 @@ let submit = (e,data) => {
         setName(e.target.value);
         if(e.target.value.length === 0){
             setNameOk(false);
-            btn.style.visibility = 'hidden';
+            document.getElementById('register').style.visibility = 'hidden';
         }else{
             setNameOk(true)
             if(emailOK === true && passwordOK === true && radio===true){
-                btn.style.visibility = 'visible';
+              document.getElementById('register').style.visibility = 'visible';
             }
         }
     }
@@ -109,15 +121,15 @@ let submit = (e,data) => {
         
        
 
-        if((re.test(e.target.value))){
+        if(!(re.test(e.target.value))){
             setEmailOk(false)
-            btn.style.visibility = 'hidden';
+            document.getElementById('register').style.visibility = 'hidden';
           
         
         }else{
           setEmailOk(true)
           if(nameOK === true && passwordOK === true && radio===true){
-              btn.style.visibility = 'visible';
+            document.getElementById('register').style.visibility = 'visible';
           }
         }
            
@@ -130,15 +142,26 @@ let submit = (e,data) => {
             setPasswordOk(true)
         
             if(nameOK === true && emailOK === true && radio === true){
-                btn.style.visibility = 'visible';
+              document.getElementById('register').style.visibility = 'visible';
             }
           
         }else{
             setPasswordOk(false);
-            btn.style.visibility = 'hidden';
+            document.getElementById('register').style.visibility = 'hidden';
         }       
     }
 
+
+    function checkBank(e){
+      setBank(e.target.value);
+    }
+
+    function checkPhone(e){
+      setPhone(e.target.value);
+    }
+    function checkAddress(e){
+      setAddress(e.target.value);
+    }
     
 
 
@@ -151,34 +174,32 @@ let submit = (e,data) => {
       justifyContent: "center",
           alignItems: "center"
       }}>
-  <Form onSubmit={submit}>
+  <Form id = "signup">
     <h2 className="display-4">Registration</h2>
     <hr className="my-2" />
     <br/><br/>
     <Card className="text-center">
-
-      <CardHeader></CardHeader>
         <CardBody>
         <FormGroup>
-        <Input type="text" name="name" id="name" placeholder="Name" valid={ nameOK === true } onChange={checkName} invalid={ nameOK === false }/>
+        <Input autoComplete="new-password" type="text" name="name" id="name" placeholder="Name" valid={ nameOK === true } onChange={checkName} invalid={ nameOK === false }/>
         <FormFeedback invalid="true">Name is required</FormFeedback>
       </FormGroup>
       <FormGroup>
-        <Input type="email" name="email" id="email" placeholder="Email" valid={ emailOK === true } onChange={checkEmail} invalid={ emailOK === false } />
+        <Input autoComplete="new-password" type="email" name="email" id="email" placeholder="Email" valid={ emailOK === true } onChange={checkEmail} invalid={ emailOK === false } />
         <FormFeedback invalid="true">Email is required</FormFeedback>
       </FormGroup>
       <FormGroup>
-        <Input type="password" name="password" id="password" placeholder="Password" valid={ passwordOK === true } onChange={checkPassword} invalid={ passwordOK === false } />
+        <Input autoComplete="new-password" type="password" name="password" id="password" placeholder="Password" valid={ passwordOK === true } onChange={checkPassword} invalid={ passwordOK === false } />
         <FormFeedback invalid="true">Password is required and needs to be at least 8 characters</FormFeedback>
       </FormGroup>
       <FormGroup>
-        <Input type="text" name="bankAccount" id="bankAccount" placeholder="Bank account" />
+        <Input type="text" name="bankAccount" onChange={checkBank} id="bankAccount" placeholder="Bank account" />
       </FormGroup>
       <FormGroup>
-        <Input type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone number" />
+        <Input type="text" name="phoneNumber" onChange={checkPhone} id="phoneNumber" placeholder="Phone number" />
       </FormGroup>
       <FormGroup>
-        <Input type="text" name="address" id="address" placeholder="Address" />
+        <Input type="text" name="address" onChange={checkAddress} id="address" placeholder="Address" />
       </FormGroup>
       <FormGroup tag="fieldset">
         <legend>Role</legend>
@@ -203,10 +224,27 @@ let submit = (e,data) => {
         <Input style={{visibility:"hidden"}} type="password"  invalid={radio===false} valid={radio===true}/>
         <FormFeedback invalid="true">Role must be selected</FormFeedback>
       </FormGroup>
+      <Button block style={{visibility:"hidden"}} id="register" color="primary" size="lg" onClick={toggle}>Register</Button>
+      
+          <Modal isOpen={modal} toggle={toggle} className={className}>
+            <ModalHeader toggle={toggle}>Cofirm registration</ModalHeader>
+            <ModalBody>
+              <div>Name: {name}</div>
+              <div>Email: {email}</div>
+              <div>Bank account: {bank}</div>
+              <div>Phone number: {phone}</div>
+              <div>Address: {address}</div>
+
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={submit}>Confirm registration</Button>{' '}
+              <Button color="secondary" onClick={toggle}>Cancel</Button>
+            </ModalFooter>
+          </Modal>
+
         </CardBody>
-        <CardFooter>
-        <Button id="register" color="primary" size="lg" onClick={submit}>Register</Button>
-        </CardFooter>
+
+  
       </Card>
     </Form>
 

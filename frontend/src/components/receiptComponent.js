@@ -127,7 +127,7 @@ return(
   <TabPane tabId="1">
     <Row>
       <Col sm="12">
-        <div>{receiptsToRender}</div>
+        <div><div>dsfsdfds</div></div>
       </Col>
     </Row>
   </TabPane>
