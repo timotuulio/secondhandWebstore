@@ -8,7 +8,7 @@ import Login from '../containers/loginContainer.js';
 import Profile from '../containers/profileContainer.js'
 import Sell from '../containers/sellContainer.js';
 import store from '../store/store.js';
-import Receipts from '../components/receiptComponent';
+import Receipts from '../containers/receiptContainer';
 import { loadingAction } from '../actions/actions.js';
 
 const App = ({page,mainAction,login}) =>{

@@ -18,7 +18,7 @@ function setData(data){
 }
 
 
-function AllItems({loadState, loadedAction, loadingAction,page,user,token,editItemAction,addForSaleAction}) {
+function AllItems({login, loadState, loadedAction, loadingAction,page,user,token,editItemAction,addForSaleAction}) {
 
   const [visible, setVisible] = React.useState(false)
   function alert2(){
@@ -123,7 +123,7 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
           }} >
 
             {(() => {
-                if (page==='OWNSELLABLES') {
+                if (page==='OWNSELLABLES' || page ==='MAIN') {
                   return <CardHeader>{itm.title}</CardHeader>
                 }else{
                   return <CardHeader>{itm.title}<Button color="primary" style={{float: 'right'}} onClick = {mainAction}>Seller</Button></CardHeader>
@@ -151,7 +151,7 @@ function AllItems({loadState, loadedAction, loadingAction,page,user,token,editIt
                   <Button color="primary" style={{float: 'right'}} onClick={() => editItemAction(itm)}>Edit</Button></div>
                 }else if (page === 'STOCK'){
                   return <div><Button color="primary" onClick={() => addForSaleAction(itm)}>Add to sales</Button></div>
-                } else {
+                }else if(login==='LOGGEDIN'){
                   return <div><Button color="primary" value={itm._id} onClick={buyItem}>Buy</Button>
                   </div>
                 }
@@ -197,7 +197,8 @@ const mapStateToProps = (state) => ({
     loadState: state.loadReducer.loadState,
     user: state.loginReducer.user,
     token: state.loginReducer.token,
-    page: state.pageReducer.page
+    page: state.pageReducer.page,
+    login: state.loginReducer.login
   });
 
 const mapDispatchToProps = (dispatch) => ({

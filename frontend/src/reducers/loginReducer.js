@@ -1,4 +1,4 @@
-import {LOGGEDIN,LOGINFAILED,LOGGEDOUT,QUEST} from '../stateNames.js'
+import {LOGGEDIN,LOGINFAILED,LOGGEDOUT,QUEST,UPDATEDATA} from '../stateNames.js'
 
 const initialState = {
   login: LOGGEDOUT,
@@ -10,6 +10,8 @@ const initialState = {
 function loginReducer(state = initialState, action) {
   
   switch(action.type) {
+    
+   
     case LOGGEDIN:
 
       return { ...state, login: LOGGEDIN,user:action.data.user, token: action.data.token, role: action.data.user.role};
@@ -19,7 +21,12 @@ function loginReducer(state = initialState, action) {
     case LOGGEDOUT:
         return { ...state, login: LOGGEDOUT,user:null,token:null,role:QUEST};
     
+        case UPDATEDATA:
+          console.log("updating data");
+          return {...state, user:action.data};
     default:
+      console.log(action.data)
+      console.log(action.type)
       return state;
   }
 }

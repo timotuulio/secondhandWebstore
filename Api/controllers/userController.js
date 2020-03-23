@@ -118,7 +118,8 @@ module.exports = {
             name: xssFilters.inHTMLData(userToBeAdded.name),
             password: hash,
             role: xssFilters.inHTMLData(userToBeAdded.role),
-            email: xssFilters.inHTMLData(userToBeAdded.email)
+            email: xssFilters.inHTMLData(userToBeAdded.email),
+            balance: 0
           });
 
           // If additional fields are provided, set them
@@ -180,7 +181,7 @@ module.exports = {
         //updatedUser.role = userUpdateInfo.role;
         //updatedUser.password = userUpdateInfo.password;
 
-        updatedUser.save();
+        await updatedUser.save();
 
         console.log(updatedUser);
         res.send(updatedUser);

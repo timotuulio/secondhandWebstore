@@ -1,41 +1,45 @@
 import React from 'react';
 import { Button, Form, FormGroup, Input,Card, CardHeader,CardBody,CardFooter } from 'reactstrap';
 
-import store from '../store/store.js';
+
+
+const Profile = ({token,user, updateProfileAction}) => {
+
 
  // take over its submit event.
  let submit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // Extract data from the form
-    var name = document.getElementById('name').value;
-    //var email = document.getElementById('email').value;
-    //var pass = document.getElementById('password').value;
-    var phone = document.getElementById('phoneNumber').value;
-    var address = document.getElementById('address').value;
-    var bank = document.getElementById('bankAccount').value;
-
-
-    // Build body for the POST request
-    var body  = JSON.stringify({"name":name,"phoneNumber":phone,"address":address,"bankAccount":bank});
-    console.log(store.getState())
-    // Use fetch to send the data
-    // TODO: An if-system or something is needed so that when admin presses an user from all users -list he gets to the users profile and not to his own
-    const url = "http://localhost:3001/api/user/"+store.getState().loginReducer.user._id;
-    console.log(url);
-    fetch(url, {
-        method : "put",
-        headers: {'Content-Type': 'application/json','Authorization': 'Bearer '+store.getState().loginReducer.token},
-        body: body
-    }).then(
-        response => response.text()
-    ).then(
-        html => console.log(html)
-    );
-  }
+  // Extract data from the form
+  var name = document.getElementById('name').value;
+  //var email = document.getElementById('email').value;
+  //var pass = document.getElementById('password').value;
+  var phone = document.getElementById('phoneNumber').value;
+  var address = document.getElementById('address').value;
+  var bank = document.getElementById('bankAccount').value;
 
 
-const Profile = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,registerAction,user}) => {
+  // Build body for the POST request
+  var body  = JSON.stringify({"name":name,"phoneNumber":phone,"address":address,"bankAccount":bank});
+  
+  // Use fetch to send the data
+  // TODO: An if-system or something is needed so that when admin presses an user from all users -list he gets to the users profile and not to his own
+  const url = "http://localhost:3001/api/user/"+user['_id'];
+  console.log(url);
+  fetch(url, {
+      method : "put",
+      headers: {'Content-Type': 'application/json','Authorization': 'Bearer '+token},
+      body: body
+  }).then(
+      response => response.text()).then(res => updateProfileAction(JSON.parse(res)))
+  
+}
+
+
+
+
+
+
 
 //TODO: The input fields should have a disabled value and a button that allows changing the values
     return (

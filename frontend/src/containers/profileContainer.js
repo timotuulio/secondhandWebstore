@@ -6,10 +6,8 @@ import { connect } from 'react-redux';
 
 import {
   mainAction,
-  loginSuccessAction,
-  loginFailedAction,
-  loggedOutAction,
-  registerAction
+  registerAction,
+  updateProfileAction
 
 } from '../actions/actions.js';
 
@@ -18,15 +16,14 @@ import {
 const mapStateToProps = (state) => ({
     page: state.pageReducer.page,
     login: state.loginReducer.login,
-    user: state.loginReducer.user
+    user: state.loginReducer.user,
+    token: state.loginReducer.token
   });
 
   const mapDispatchToProps = (dispatch) => ({
     mainAction: () => dispatch(mainAction()),
-    loginSuccessAction: () => dispatch(loginSuccessAction()),
-    loginFailedAction: ()  => dispatch(loginFailedAction()),
-    loggedOutAction: () => dispatch(loggedOutAction()),
-    registerAction: () => dispatch(registerAction())
+    registerAction: () => dispatch(registerAction()),
+    updateProfileAction: (data) => dispatch(updateProfileAction(data))
   });
 
   export default connect(mapStateToProps, mapDispatchToProps)(Profile);

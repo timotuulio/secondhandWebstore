@@ -36,3 +36,5 @@ export const EDITITEM = 'EDITITEM';
 export const STOCK = 'STOCK';
 
 export const USERSALES = 'USERSALES';
+
+export const UPDATEDATA = 'UPDATEDATA';
