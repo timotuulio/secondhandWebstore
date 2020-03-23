@@ -29,22 +29,24 @@ The site includes a static navigation bar that has links to main page (The "shop
 graph TD
   Log(Login) --> |not<br/> Registered?| Reg
   Reg(Register)
-	MP{{Mainpage that includes <br/>all vendible items}} --> |log in| Log
-  MP --> |register| Reg
-  MP --> |USA:Check <br/>own profile| Prof
+  MP{{Mainpage that includes <br/>all vendible items}}
+  MP --> |log in| Log
+  MP --> |USA:Profile| Prof
+  MP --> |U: Sales history| Hist
   MP --> |A:check users| LU
-  MP --> |S:Own sellings|OwnSells
-  MP --> |U:Own offers|OwnOff
-  MP --> |SA:CheckOffers|Offers
-  MP --> |click item| Item
+  MP --> |S:Stock|OwnSells
+  MP --> |U:Active<br/> offers|OwnOff
+  MP --> |USA:<br/>Buy item| Item
+  MP --> |USA:Sell product| NewItem
+  MP --> |SA:Offers|Offers
+  Hist(Sales history)
+  NewItem(Add new <br/>sales item)
   LU(List of users) --> |A:Check profile<br/>of a single user| Prof
-  Prof(Users profile) --> |A:Check what <br/>shopkeeper sells|OwnSells
-  Prof --> |A: Chek users offerings|OwnOff
-  Prof --> |USA: Edit info| Edit(Edit profile)
-  OwnOff(Own offerings <br/>that haven't<br/> been sold yet)
-  OwnSells(Items that the <br/>shopkeeper sells) --> |S:click item|Item
-  Item(Info about<br/>single item) --> |U:buy|Buy
-  Buy(Payment page)
+  Prof(Users own profile)
+  OwnOff(Own offerings <br/>that haven't<br/> been sold yet) --> |Edit|Edit
+  Edit(Edit existing item)
+  OwnSells(Shops items <br/>that are not <br/>yet for sale) --> |S:Add to <br/>sales|Edit
+  Item(Modal window <br/>to buy item)
   Offers(Offers that <br/>users have<br/> given)
 
 ```
