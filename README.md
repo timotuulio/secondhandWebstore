@@ -16,16 +16,17 @@ Tapio Nevalainen | Timo Tuulio
 
 ---
 
-## Planned functionality
+## Functionality
 
 <div style="text-align: justify">
-We will start by designing the database and Mongoose schemas that can be done without worrying about the frontend. After this API can be designed and implemented. Next, basic frontend is implemented with React, along with the Redux state design. Authentication is designed at this point; we are planning to use JSON webtoken authentication. Frontend is finalized and all the parts are tied together. Finally, some tests are implemented. See project timetable in the end of this file.
+The project includes an api and the frontend for a second hand webstore. In the webstore users can sell their own items which the shop can then buy and sell back to the users. The backend includes mongoose and mongoDB and basic frontend is implemented with React, along with the Redux state design.User authentication is done with JSON webtoken.
+// We will start by designing the database and Mongoose schemas that can be done without worrying about the frontend. After this API can be designed and implemented. Next, basic frontend is implemented with React, along with the Redux state design. Authentication is designed at this point; we are planning to use JSON webtoken authentication. Frontend is finalized and all the parts are tied together. Finally, some tests are implemented. See project timetable in the end of this file.
 
 </div>
 
 ---
 ## Pages and navigation
-The site includes a static navigation bar that has links to main page and most other pages. Depending on the users authentication only some navigation links are shown. On the graph this is marked with letters. U for user, S for shopkeeper and A for admin. Note that shopkeepers authetication includes the users authentication.
+The site includes a static navigation bar that has links to main page (The "shop" -button) and most other pages. Depending on the users authentication only some navigation links are shown. On the graph this is marked with letters. U for user, S for shopkeeper and A for admin. Note that shopkeepers authetication includes the users authentication.
 ``` mermaid
 graph TD
   Log(Login) --> |not<br/> Registered?| Reg
@@ -55,7 +56,21 @@ graph TD
 Our planned working directory is as follows:
 <pre><code>
 Directory
-- package
+- Api
+- frontend
+--- controllers
+----- itemController
+----- receiptController
+----- userController
+--- Models
+----- db
+----- itemModel
+----- receiptModel
+----- userModel
+--- Routes
+----- api.js
+--- app
+--- package
 - Public
   - index.html
 - src
@@ -65,14 +80,7 @@ Directory
     - rootReducer.js
     - reducer1.js
     - reducer2.js
-  - Routes
-    - api.js
-    - user.js
-    - shop.js
-  - Models
-    - item
-    - itemList
-    - user
+
   - Components
     - header.js
     - item.js
