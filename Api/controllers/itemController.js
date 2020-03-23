@@ -128,9 +128,6 @@ module.exports = {
             // Check format of this
             res.send("Not authorized")
         }
-
-
-
     },
 
     deleteAllItems(req,res){
@@ -181,9 +178,6 @@ module.exports = {
             // Check format of this
             res.send("Not authorized")
         }
-
-
-
     },
 
     async getOffers(req,res){
@@ -199,11 +193,7 @@ module.exports = {
             // Check format of this
             res.send("Not authorized")
         }
-
-
-
     },
-
 
     async transaction(req,res){
         if(authToken(req.headers.authorization)){
@@ -211,8 +201,6 @@ module.exports = {
 
             var itemID = req.body.itemID;
             var buyerID = req.body.buyerID;
-
-
 
             var item = await Item.findById(itemID).exec().catch(function(error){return 'Error occured'});
 
@@ -229,10 +217,7 @@ module.exports = {
 
                 item.ownerId = 'SHOP';
                 item.status = 'SHOP_BOUGHT';
-
             }
-
-
 
             var date = new Date();
 
@@ -245,7 +230,6 @@ module.exports = {
 
             await receipt.save();
 
-
             await item.save();
 
             res.send(item)
@@ -254,7 +238,6 @@ module.exports = {
             // Check format of this
             res.send("Not authorized")
         }
-
     },
 
     async getStock(req,res){
@@ -269,9 +252,6 @@ module.exports = {
             res.send("Not authorized")
         }
         console.log("getting shop stock")
-
-
-
     },
 
     async getSales(req,res){
@@ -279,8 +259,5 @@ module.exports = {
         .catch(function(error){return 'Error occuredddd'});
 
         res.send(stock);
-
-
     }
-
 }
