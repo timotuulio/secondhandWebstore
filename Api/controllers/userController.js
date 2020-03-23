@@ -124,10 +124,10 @@ module.exports = {
 
           // If additional fields are provided, set them
           if(req.body.bankAccount){
-            newUser.bankAccount = xssFilters.inHTMLData(userToBeAdded.bank);
+            newUser.bankAccount = xssFilters.inHTMLData(userToBeAdded.bankAccount);
           }
           if(req.body.phoneNumber){
-            newUser.phoneNumber = xssFilters.inHTMLData(userToBeAdded.phone);
+            newUser.phoneNumber = xssFilters.inHTMLData(userToBeAdded.phoneNumber);
           }
           if(req.body.address){
             newUser.address = xssFilters.inHTMLData(userToBeAdded.address);

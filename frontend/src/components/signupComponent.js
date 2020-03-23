@@ -36,7 +36,7 @@ let submit = (e,data) => {
   }
 
   // Build body for the POST request
-  var body  = JSON.stringify({"name":name,"email":email,"password":password,"phoneNumber":phoneNumber,"address":address,"role":role,"bankAccount":bankAccount});
+  var body  = JSON.stringify({"name":name,"email":email,"password":password,"phoneNumber":phoneNumber,"address":address,"role":role,"bankAccount":bank});
 
   // Use fetch to send the data
   const url = "http://localhost:3001/api/user";

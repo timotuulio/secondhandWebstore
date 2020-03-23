@@ -49,10 +49,13 @@ function authToken(tokenAuth){
 
     async getUserReceipts(req,res){
         console.log("getting user receipts");
-        var fetchedReceipts = await Receipt.find({seller:req.params.id}).exec()
+        //{ $or:[ {seller:req.params.id}, {buyer:req.params.id} ]}
+        var fetchedReceipts = await Receipt.find({ $or:[ {seller:req.params.id}, {buyer:req.params.id} ]}).exec()
             .catch(function(error){return 'Error occured'});
         res.send(fetchedReceipts);
     },
+
+
 
     async deleteReceipts(req,res){
         console.log("deleting receipts");

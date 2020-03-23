@@ -94,33 +94,8 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
      
   }
 
-  
-  function combineActions(){
-    buyItem(itemID)
 
 
-    //loadingAction()
-  }
-
-/*
-  function getUserName(ID){
-    var user =fetch('http://localhost:3001/api/user/'+ID,
-  {
-    method: 'get',
-    headers: {
-      'authorization': 'Bearer ' + token}}).then(res=>res.json()).then(data =>  data.name).then(result => result);
-
-    return JSON.stringify(user);
-  }
-
-
-
-  const getUserName = (ID) => fetch('http://localhost:3001/api/user/'+ID,
-  {
-    method: 'get',
-    headers: {
-      'authorization': 'Bearer ' + token}}).then(res=>res.json()).then(data => JSON.stringify(data));
-*/
 
   var currentPath;
 
@@ -231,7 +206,7 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
     </ModalBody>
     <ModalFooter>
    
-      <Button color="primary" onClick={combineActions}>Confirm</Button>{' '}
+      <Button color="primary" onClick={() => buyItem(itemID)}>Confirm</Button>{' '}
       <Button color="secondary" onClick={toggle}>Cancel</Button>
     </ModalFooter>
   </Modal>);
