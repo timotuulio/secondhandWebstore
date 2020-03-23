@@ -36,7 +36,7 @@ function AllUsers({loadState, loadedAction, token, loadingAction}) {
         }
     }
 
-}
+
 fetch('http://localhost:3001/api/user', obj).then(res => res.json()).then(data => setData(data)).then(loadedAction);
 
 function deleteUser(e) {
