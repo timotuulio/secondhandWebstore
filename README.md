@@ -241,6 +241,7 @@ Here are pointed out some functionality that is still missing from the project.
 - There is no confirmation of buying items. We had a modal window solution for that but it had problems as mentioned above in "bugs".
 
 Here are explained some improvements that were considered to be added to the project but which we didn't have time.
+- There are still quite a few warnings running around when you run the program. Nothing major, but warnings all the same.
 - LoginComponent uses XHR to fetch data from api. This could be improved to use normal fetch instead like elsewhere in code.
 - Editing user profile the text-fields aren't validated in any way.
 - "Remove account" -button should have confirmation.
