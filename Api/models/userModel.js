@@ -11,7 +11,8 @@ const UserSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   bankAccount: {
       type: String
@@ -25,10 +26,6 @@ const UserSchema = new mongoose.Schema({
   password: {
       type: String,
       required: true
-  },
-  selfLink: {
-      type: String,
-      //required: true
   },
   balance:{
       type: Number
