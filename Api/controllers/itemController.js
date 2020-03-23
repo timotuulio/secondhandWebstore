@@ -200,23 +200,6 @@ module.exports = {
             res.send("Not authorized")
         }
 
-<<<<<<< HEAD
-        var date = new Date();
-
-        var receipt = new Receipt();
-        receipt.title = item.title;
-        receipt.buyer = buyerID;
-        receipt.seller = item.ownerId;
-        receipt.amount = item.price;
-        receipt.date = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
-
-        await receipt.save();
-
-
-        await item.save();
-
-        res.send(item)
-=======
 
         
     },
@@ -272,7 +255,6 @@ module.exports = {
             res.send("Not authorized")
         }    
 
->>>>>>> cde85845f0235f07e89f864e65f4f59885ac8822
     },
 
     async getStock(req,res){
