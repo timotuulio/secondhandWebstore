@@ -57,57 +57,57 @@ Our planned working directory is as follows:
 <pre><code>
 Directory
 - Api
- |- controllers
- | |- itemController.js
- | |- receiptController.js
- | |- userController.js
- |- Models
- |  |- db.js
- |  |- itemModel.js
- |  |- receiptModel.js
- |  |- userModel.js
- |- Routes
- |  |- api.js
- |- app.js
- |- package.json
+ | controllers
+ | | itemController.js
+ | | receiptController.js
+ | | userController.js
+ | Models
+ |  | db.js
+ |  | itemModel.js
+ |  | receiptModel.js
+ |  | userModel.js
+ | Routes
+ |  | api.js
+ | app.js
+ | package.json
 - frontend
---- Public
------ index.html
---- src
------ Actions
-------- actions.js
-------- actionTypes.js
------ Components
---------- allItemsComponent.js
---------- allUsersComponent.js
---------- appComponent.js
---------- headerComponent.js
---------- itemComponent.js
---------- loginComponent.js
---------- profileComponent.js
---------- receiptComponent.js
---------- sellComponent.js
---------- signupComponent.js
------ Containers
-------- appContainer.js
-------- headerContainer.js
-------- loginContainer.js
-------- profileContainer.js
-------- receiptContainer.js
-------- sellContainer.js
-------- signupContainer.js
------ Reducers
-------- loadReducer.js
-------- loginReducer.js
-------- pageReducer.js
-------- rootReducer.js
------ store
-------- store.js
------ App.js
------ constants.js
------ index.js
------ stateNames.js
---- package.json
+ | Public
+ | | index.html
+ | src
+ | | Actions
+ | | | actions.js
+ | | | actionTypes.js
+ | | Components
+ | | | allItemsComponent.js
+ | | | allUsersComponent.js
+ | | | appComponent.js
+ | | | headerComponent.js
+ | | | itemComponent.js
+ | | | loginComponent.js
+ | | | profileComponent.js
+ | | | receiptComponent.js
+ | | | sellComponent.js
+ | | | signupComponent.js
+ | | Containers
+ | | | appContainer.js
+ | | | headerContainer.js
+ | | | loginContainer.js
+ | | | profileContainer.js
+ | | | receiptContainer.js
+ | | | sellContainer.js
+ | | | signupContainer.js
+ | | Reducers
+ | | | loadReducer.js
+ | | | loginReducer.js
+ | | | pageReducer.js
+ | | | rootReducer.js
+ | | store
+ | | | store.js
+ | | App.js
+ | | constants.js
+ | | index.js
+ | | stateNames.js
+ | package.json
 </code></pre>
 ---
 ## Mongo database and Mongoose schemas    
