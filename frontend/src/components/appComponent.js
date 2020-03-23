@@ -9,6 +9,7 @@ import Profile from '../containers/profileContainer.js'
 import Sell from '../containers/sellContainer.js';
 import store from '../store/store.js';
 import Receipts from '../containers/receiptContainer';
+import Balance from '../containers/addBalanceContainer.js'
 import { loadingAction } from '../actions/actions.js';
 
 const App = ({page,mainAction,login}) =>{
@@ -60,6 +61,14 @@ const App = ({page,mainAction,login}) =>{
             <div>
                 <Header />
                 <Receipts/>
+                {/*<AllUsers />*/}
+            </div>
+        );
+    }else if(page ==='ADDBALANCE'){
+        return(
+            <div>
+                <Header />
+                <Balance />
                 {/*<AllUsers />*/}
             </div>
         );

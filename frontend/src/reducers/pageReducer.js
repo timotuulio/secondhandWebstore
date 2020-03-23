@@ -1,4 +1,4 @@
-import {MAIN, ALLITEMS, SINGLEITEM, LOGIN, SIGNIN, OWNPROFILE, OWNSELLABLES, USERADDNEWITEM, ALLSELLABLES, SHOPKEEPERBUYITEM, ALLUSERS, SIGNUP,ALLOFFERS,EDITITEM,STOCK,ADDFORSALE,USERSALES} from '../stateNames.js'
+import {MAIN, ALLITEMS, SINGLEITEM, LOGIN, SIGNIN, OWNPROFILE, OWNSELLABLES, USERADDNEWITEM, ALLSELLABLES, SHOPKEEPERBUYITEM, ALLUSERS, SIGNUP,ALLOFFERS,EDITITEM,STOCK,ADDFORSALE,USERSALES,ADDBALANCE} from '../stateNames.js'
 
 const initialState = {
   page: MAIN,
@@ -41,6 +41,8 @@ function pageReducer(state = initialState, action) {
       return {page: USERSALES}
     case 'ADDFORSALE':
       return {...state, page: ADDFORSALE, item:action.data};
+    case 'ADDBALANCE':
+      return {page: ADDBALANCE};
     default:
       return state;
   }

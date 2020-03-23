@@ -38,3 +38,5 @@ export const STOCK = 'STOCK';
 export const USERSALES = 'USERSALES';
 
 export const UPDATEDATA = 'UPDATEDATA';
+
+export const ADDBALANCE = 'ADDBALANCE';

@@ -164,7 +164,7 @@ module.exports = {
 
       if(authToken(req.headers.authorization)){
 
-        //console.log(authenticate(req.headers.authorization))
+       
 
         // Something is wrong with this thing. It cant find with findById >,<
         const userUpdateInfo = req.body;
@@ -173,13 +173,18 @@ module.exports = {
         var updatedUser = await User.findById(req.params.id).exec()
             .catch(function(error){return 'Error occured'});
 
+        var funds = updatedUser.balance;
+
         for (const [key, value] of Object.entries(userUpdateInfo)) { 
-          updatedUser[key] = value;
-          console.log(key)
+          if(key==='balance'){
+            updatedUser[key] = parseInt(value)+funds;
+          }else{
+            updatedUser[key] = value;
+          }
+          
+         
         }
-        //updatedUser.name = userUpdateInfo.name;
-        //updatedUser.role = userUpdateInfo.role;
-        //updatedUser.password = userUpdateInfo.password;
+        
 
         await updatedUser.save();
 

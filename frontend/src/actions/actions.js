@@ -2,7 +2,7 @@
 import { LOADING, LOADED } from "./actionTypes";
 import { MAIN, ALLITEMS, SINGLEITEM, LOGIN, SIGNIN, OWNPROFILE, OWNSELLABLES, USERADDNEWITEM, ALLSELLABLES, SHOPKEEPERBUYITEM, ALLUSERS, USERSALES } from "./actionTypes";
 import { QUEST, USER, SHOPKEEPER, ADMIN } from "./actionTypes";
-import {LOGINFAILED,LOGGEDIN, LOGGEDOUT, SIGNUP,ALLOFFERS, EDITITEM, STOCK, ADDFORSALE,UPDATEDATA} from "./actionTypes";
+import {LOGINFAILED,LOGGEDIN, LOGGEDOUT, SIGNUP,ALLOFFERS, EDITITEM, STOCK, ADDFORSALE,UPDATEDATA,ADDBALANCE} from "./actionTypes";
 
 export function mainAction() {return{type: MAIN,};}
 export function allItemsAction() {return{type: ALLITEMS,};}
@@ -39,6 +39,7 @@ export function loggedOutAction() {return{type: LOGGEDOUT};};
 
 export function registerAction() {return{type: SIGNUP};};
 
+export function addBalanceAction() {return{type:ADDBALANCE}};
 
 
 export function updateProfileAction(user) {console.log("updateprofile");console.log(user);return {type:UPDATEDATA, data:user}}

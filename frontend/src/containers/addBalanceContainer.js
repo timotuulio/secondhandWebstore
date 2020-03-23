@@ -1,6 +1,6 @@
 
 
-import Profile from '../components/profileComponent.js';
+import Balance from '../components/addBalanceComponent.js';
 
 import { connect } from 'react-redux';
 
@@ -9,7 +9,8 @@ import {
   registerAction,
   updateProfileAction,
   loggedOutAction,
-  addBalanceAction
+  addBalanceAction,
+  ownProfileAction
 
 } from '../actions/actions.js';
 
@@ -27,7 +28,8 @@ const mapStateToProps = (state) => ({
     registerAction: () => dispatch(registerAction()),
     updateProfileAction: (data) => dispatch(updateProfileAction(data)),
     loggedOutAction: () => dispatch(loggedOutAction()),
-    addBalanceAction: () => dispatch(addBalanceAction())
+    addBalanceAction: () => dispatch(addBalanceAction()),
+    ownProfileAction: () => dispatch(ownProfileAction())
   });
 
-  export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+  export default connect(mapStateToProps, mapDispatchToProps)(Balance);

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Alert,Button, Form, FormGroup, Input,Card, CardHeader,CardBody,CardFooter } from 'reactstrap';
-import { loggedOutAction } from '../actions/actions';
+import { loggedOutAction, addBalanceAction } from '../actions/actions';
 
 
 
-const Profile = ({mainAction,token,user, updateProfileAction,loggedOutAction}) => {
+const Profile = ({mainAction,token,user, updateProfileAction,loggedOutAction,addBalanceAction}) => {
 
 
   const [name, setName] = React.useState("");
@@ -89,7 +89,7 @@ function removeAccount(){
           <br/><br/>
           <Card className="text-center">
             <CardHeader>
-            <h3 className="display-5">{user.email}</h3>
+          <h3 className="display-5">{user.email} / Balance: {user.balance} €</h3><Button onClick={addBalanceAction} color="primary">Add balance</Button>
             
             </CardHeader>
               <CardBody>
