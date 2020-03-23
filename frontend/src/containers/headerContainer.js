@@ -1,5 +1,6 @@
-
-import { connect } from 'react-redux';
+import {
+    connect
+} from 'react-redux';
 import Header from '../components/headerComponent.js';
 import {
     mainAction,
@@ -13,17 +14,17 @@ import {
     offersAction,
     stockAction,
     salesAction
-  } from '../actions/actions.js';
+} from '../actions/actions.js';
 
 
 
-  const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({
     page: state.pageReducer.page,
     login: state.loginReducer.login,
     user: state.loginReducer
-  });
-  
-  const mapDispatchToProps = (dispatch) => ({
+});
+
+const mapDispatchToProps = (dispatch) => ({
     mainAction: () => dispatch(mainAction()),
     loggedOutAction: () => dispatch(loggedOutAction()),
     loginSuccessAction: (data) => dispatch(loginSuccessAction(data)),
@@ -35,8 +36,7 @@ import {
     offersAction: () => dispatch(offersAction()),
     stockAction: () => dispatch(stockAction()),
     salesAction: () => dispatch(salesAction())
-    
-  });
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(Header);
-  
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

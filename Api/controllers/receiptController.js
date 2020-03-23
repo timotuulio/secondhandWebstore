@@ -10,71 +10,67 @@ var secret = 'tosisecret';
 
 
 // This will authenticate token
-function authToken(tokenAuth){
+function authToken(tokenAuth) {
 
     var authed = false;
 
-    if(!tokenAuth){
+    if (!tokenAuth) {
 
-        // No header 
-    
-    }else if(tokenAuth.startsWith('Bearer' )){
+        // No header
 
-        var token = tokenAuth.slice(7,tokenAuth.length);
+    } else if (tokenAuth.startsWith('Bearer')) {
+
+        var token = tokenAuth.slice(7, tokenAuth.length);
         console.log(token)
-    
-        jwt.verify(token,secret, function(err,decoded){
-            if(err){
+
+        jwt.verify(token, secret, function(err, decoded) {
+            if (err) {
                 console.log("invalid token");
-            }else{
+            } else {
                 authed = true;
                 console.log('authenticated');
             }
         });
     }
     return authed;
-  }
-  
+}
 
-  module.exports = {
 
-   
+module.exports = {
 
-    async getReceipts(req,res){
-        if(authToken(req.headers.authorization)){
+
+
+    async getReceipts(req, res) {
+        if (authToken(req.headers.authorization)) {
             console.log("getting all receipts");
-        }else{
+        } else {
             console.log("Authentication failed")
             // Check format of this
             res.send("Not authorized")
-        }   
+        }
     },
 
-    async getUserReceipts(req,res){
+    async getUserReceipts(req, res) {
         console.log("getting user receipts");
-        var fetchedReceipts = await Receipt.find({ $or:[ {seller:req.params.id}, {buyer:req.params.id} ]}).exec()
-            .catch(function(error){return 'Error occured'});
+        var fetchedReceipts = await Receipt.find({
+                $or: [{
+                    seller: req.params.id
+                }, {
+                    buyer: req.params.id
+                }]
+            }).exec()
+            .catch(function(error) {
+                return 'Error occured'
+            });
         res.send(fetchedReceipts);
     },
 
 
 
-    async deleteReceipts(req,res){
+    async deleteReceipts(req, res) {
         console.log("deleting receipts");
         Receipt.deleteMany({});
         res.send({});
     }
 
-  }
-
-
-
-
-
-
-
-
-
-
-
- 
+}

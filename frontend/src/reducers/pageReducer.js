@@ -1,11 +1,29 @@
-import {MAIN, ALLITEMS, SINGLEITEM, LOGIN, SIGNIN, OWNPROFILE, OWNSELLABLES, USERADDNEWITEM, ALLSELLABLES, SHOPKEEPERBUYITEM, ALLUSERS, SIGNUP,ALLOFFERS,EDITITEM,STOCK,ADDFORSALE,USERSALES,ADDBALANCE} from '../stateNames.js'
+import {
+    MAIN,
+    ALLITEMS,
+    SINGLEITEM,
+    LOGIN,
+    SIGNIN,
+    OWNPROFILE,
+    OWNSELLABLES,
+    USERADDNEWITEM,
+    ALLSELLABLES,
+    SHOPKEEPERBUYITEM,
+    ALLUSERS,
+    SIGNUP,
+    ALLOFFERS,
+    EDITITEM,
+    STOCK,
+    ADDFORSALE,
+    USERSALES,
+    ADDBALANCE
+} from '../stateNames.js'
 
 const initialState = {
   page: MAIN,
 };
 
 function pageReducer(state = initialState, action) {
-  //TODO: Remove needless "...state" if possible
   switch(action.type) {
     case 'LOGIN':
       return {page: LOGIN };

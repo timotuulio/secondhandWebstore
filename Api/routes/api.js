@@ -6,10 +6,11 @@ const receiptController = require('../controllers/receiptController');
 const bodyParser = require('body-parser');
 
 //router.use(bodyParser.urlencoded({ extended: true }))
-router.use(express.urlencoded({ extended: true }));
+router.use(express.urlencoded({
+    extended: true
+}));
 router.use(bodyParser.json());
 
-router.get('/api', (req, res) => {res.send("This is api");});
 
 router.get('/user', userController.getAllUsers);
 router.post('/user', userController.addUser);
@@ -29,7 +30,7 @@ router.get('/item/:id', itemController.getSingleItem);
 router.put('/item/:id', itemController.updateItem);
 router.delete('/item/:id', itemController.deleteItem);
 
-router.get('/items/offered/:id',itemController.getOfferedItems);
+router.get('/items/offered/:id', itemController.getOfferedItems);
 router.get('/items/offers', itemController.getOffers);
 router.post('/buy/:id', itemController.transaction);
 
@@ -37,8 +38,8 @@ router.get('/items/stock', itemController.getStock);
 router.get('/items/sales', itemController.getSales);
 
 router.get('/receipt', receiptController.getReceipts);
-router.get('/receipt/:id',receiptController.getUserReceipts);
-router.delete('/receipt',receiptController.deleteReceipts);
+router.get('/receipt/:id', receiptController.getUserReceipts);
+router.delete('/receipt', receiptController.deleteReceipts);
 
 
 
