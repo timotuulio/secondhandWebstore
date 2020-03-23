@@ -1,9 +1,31 @@
 import React from 'react';
-import { Button, Form, FormGroup, Input,Card, CardHeader,CardBody,CardFooter } from 'reactstrap';
+import { Alert,Button, Form, FormGroup, Input,Card, CardHeader,CardBody,CardFooter } from 'reactstrap';
 
 
 
 const Profile = ({token,user, updateProfileAction}) => {
+
+
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [radio, setRadio] = React.useState(false);
+  
+  const [nameOK, setNameOk] = React.useState(false);
+  const [emailOK, setEmailOk] = React.useState(false);
+  const [passwordOK, setPasswordOk] = React.useState(false);
+
+
+
+
+  const [visible, setVisible] = React.useState(false)
+  function alert2(){
+      setVisible(true);
+      window.setTimeout(()=>{
+          setVisible(false)
+        },3000)
+     
+  }
 
 
  // take over its submit event.
@@ -31,7 +53,7 @@ const Profile = ({token,user, updateProfileAction}) => {
       headers: {'Content-Type': 'application/json','Authorization': 'Bearer '+token},
       body: body
   }).then(
-      response => response.text()).then(res => updateProfileAction(JSON.parse(res)))
+      response => response.text()).then(res => updateProfileAction(JSON.parse(res),alert2()))
   
 }
 
@@ -49,9 +71,11 @@ const Profile = ({token,user, updateProfileAction}) => {
             justifyContent: "center",
                 alignItems: "center"
             }}>
+              
         <Form onSubmit={submit} style={{width:"70%"}}>
           <h2 className="display-4"  style={{textAlign:"center"}}>Edit profile</h2>
           <hr className="my-2" />
+         
           <br/><br/>
           <Card className="text-center">
             <CardHeader>
@@ -85,8 +109,11 @@ const Profile = ({token,user, updateProfileAction}) => {
               <Button color="primary" size="lg" >Save changes</Button>
               </CardFooter>
             </Card>
+            <Alert isOpen={visible} color="success">
+  <h5 className="alert-heading">Data saved successfully!</h5>
+</Alert>
           </Form>
-
+          
           </div>
       );
 }
