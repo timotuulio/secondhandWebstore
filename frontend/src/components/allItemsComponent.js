@@ -107,10 +107,15 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
     currentPath = "items/sales";
   }
 
+    if(page === 'OWNSELLABLES' || page ==='OFFERS' || page==='STOCK'){
+      fetch('http://localhost:3001/api/'+currentPath,{headers: {'Content-type':'application/json','Authorization': 'Bearer '+token}}).then(res=>res.json()).then(data => setData(data)).then(loadedAction);
 
-  //loadingAction();
-  fetch('http://localhost:3001/api/'+currentPath).then(res=>res.json()).then(data => setData(data)).then(loadedAction);
+    }else{
+      fetch('http://localhost:3001/api/'+currentPath).then(res=>res.json()).then(data => setData(data)).then(loadedAction);
 
+    }
+
+  
 
   const itemsToRender =[<div key={33} style={{
     display: "flex",

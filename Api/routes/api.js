@@ -38,14 +38,8 @@ router.get('/items/sales', itemController.getSales);
 
 router.get('/receipt', receiptController.getReceipts);
 router.get('/receipt/:id',receiptController.getUserReceipts);
-router.post('/receipt', receiptController.createReceipt);
 router.delete('/receipt',receiptController.deleteReceipts);
 
 
-router.get('/test', testItem);
-
-function testItem(req, res) {
-  res.send("Api.js testItem funktiossa ollaan");
-}
 
 module.exports = router;

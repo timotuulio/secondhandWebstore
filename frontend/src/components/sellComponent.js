@@ -9,8 +9,6 @@ const SellItem = ({user,token,page,item,mainAction,ownSellablesAction},props) =>
     // This produces null for the button reference??
     //var btn = document.getElementById('confirm');
 
-    
-
 
     const [title, setTitle] = React.useState(item ? item.title : "");
     const [description, setDescription] = React.useState(item ? item.description : "");
@@ -28,8 +26,7 @@ const SellItem = ({user,token,page,item,mainAction,ownSellablesAction},props) =>
 
       const [modal, setModal] = React.useState(false);
       const toggle = () => setModal(!modal);
-
-
+      
       // take over its submit event.
     let submitNew = (e) => {
         e.preventDefault();

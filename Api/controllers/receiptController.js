@@ -38,18 +38,20 @@ function authToken(tokenAuth){
 
   module.exports = {
 
-    async createReceipt(req,res){
-        console.log("creating receipt");
-    },
-
+   
 
     async getReceipts(req,res){
-        console.log("getting all receipts");
+        if(authToken(req.headers.authorization)){
+            console.log("getting all receipts");
+        }else{
+            console.log("Authentication failed")
+            // Check format of this
+            res.send("Not authorized")
+        }   
     },
 
     async getUserReceipts(req,res){
         console.log("getting user receipts");
-        //{ $or:[ {seller:req.params.id}, {buyer:req.params.id} ]}
         var fetchedReceipts = await Receipt.find({ $or:[ {seller:req.params.id}, {buyer:req.params.id} ]}).exec()
             .catch(function(error){return 'Error occured'});
         res.send(fetchedReceipts);
@@ -63,12 +65,10 @@ function authToken(tokenAuth){
         res.send({});
     }
 
-
-
-
-
-
   }
+
+
+
 
 
 
