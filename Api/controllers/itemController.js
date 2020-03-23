@@ -171,46 +171,36 @@ module.exports = {
     // Fetches useritems
     async getOfferedItems(req,res){
 
-        var offeredItems = await Item.find({ ownerId: req.params.id, status:"offered"}).exec()
+        if(authToken(req.headers.authorization)){
+            var offeredItems = await Item.find({ ownerId: req.params.id, status:"offered"}).exec()
             .catch(function(error){return 'Error occured'});
 
         res.send(offeredItems);
+        }else{
+            console.log("Authentication failed")
+            // Check format of this
+            res.send("Not authorized")
+        }
+
+
+        
     },
 
     async getOffers(req,res){
-        var offers = await Item.find({status:"offered"}).exec()
+
+        if(authToken(req.headers.authorization)){
+            var offers = await Item.find({status:"offered"}).exec()
             .catch(function(error){return 'Error occured'});
 
-        res.send(offers);
-    },
-
-
-    async transaction(req,res){
-        console.log("enter transcation!")
-
-        var itemID = req.body.itemID;
-        var buyerID = req.body.buyerID;
-
-
-
-        var item = await Item.findById(itemID).exec().catch(function(error){return 'Error occured'});
-
-        var buyer = await User.findById(buyerID).exec().catch(function(error){return 'Error occured'});
-
-        // User is buying
-        if(item.ownerId === 'SHOP'){
-            item.owner = buyerID;
-            item.status = 'SOLD';
-
-        // user is selling
+            res.send(offers);
+            
         }else{
-            var owner = await User.findById(item.ownerId).exec().catch(function(error){return 'Error occured'});
-
-            item.ownerId = 'SHOP';
-            item.status = 'SHOP_BOUGHT';
-
+            console.log("Authentication failed")
+            // Check format of this
+            res.send("Not authorized")
         }
 
+<<<<<<< HEAD
         var date = new Date();
 
         var receipt = new Receipt();
@@ -226,25 +216,88 @@ module.exports = {
         await item.save();
 
         res.send(item)
+=======
+
+        
+    },
+
+
+    async transaction(req,res){
+        if(authToken(req.headers.authorization)){
+            console.log("enter transcation!")
+
+            var itemID = req.body.itemID;
+            var buyerID = req.body.buyerID;
+    
+    
+    
+            var item = await Item.findById(itemID).exec().catch(function(error){return 'Error occured'});
+    
+            var buyer = await User.findById(buyerID).exec().catch(function(error){return 'Error occured'});
+    
+            // User is buying
+            if(item.ownerId === 'SHOP'){
+                item.owner = buyerID;
+                item.status = 'SOLD';
+    
+            // user is selling
+            }else{
+                var owner = await User.findById(item.ownerId).exec().catch(function(error){return 'Error occured'});
+    
+                item.ownerId = 'SHOP';
+                item.status = 'SHOP_BOUGHT';
+    
+            }
+    
+           
+    
+            var date = new Date();
+    
+            var receipt = new Receipt();
+            receipt.title = item.title;
+            receipt.buyer = buyerID;
+            receipt.seller = item.ownerId;
+            receipt.amount = item.price;
+            receipt.date = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
+    
+            await receipt.save();
+    
+            
+            await item.save();
+    
+            res.send(item)
+        }else{
+            console.log("Authentication failed")
+            // Check format of this
+            res.send("Not authorized")
+        }    
+
+>>>>>>> cde85845f0235f07e89f864e65f4f59885ac8822
     },
 
     async getStock(req,res){
-        console.log("getting shop stock")
-
-        var stock = await Item.find({status:"SHOP_BOUGHT"}).exec()
+        if(authToken(req.headers.authorization)){
+            var stock = await Item.find({status:"SHOP_BOUGHT"}).exec()
             .catch(function(error){return 'Error occured'});
 
-        res.send(stock);
+            res.send(stock);
+        }else{
+            console.log("Authentication failed")
+            // Check format of this
+            res.send("Not authorized")
+        }
+        console.log("getting shop stock")
+
+        
 
     },
 
     async getSales(req,res){
-        console.log("getting shop stock")
-
         var stock = await Item.find({status:"sale"}).exec()
-            .catch(function(error){return 'Error occuredddd'});
+        .catch(function(error){return 'Error occuredddd'});
 
         res.send(stock);
+        
 
     }
 
