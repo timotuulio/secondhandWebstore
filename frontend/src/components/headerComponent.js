@@ -33,11 +33,14 @@ const Header =({salesAction,stockAction,ownSellablesAction,login,loginAction,log
                     <Button color="primary" onClick={userAddNewItemAction}>Sell product</Button>
                       {(() => {
                           if (user.role === ADMIN) {
-                              return <Button color="primary" onClick={allUsersAction}>All users</Button>;
+                              return <div><Button color="primary" onClick={offersAction}>Offers</Button>
+                                  <Button color="primary" onClick={stockAction}>Stock</Button>
+                                  <Button color="primary" onClick={allUsersAction}>All users</Button>
+                              </div>;
                           }else if(user.role === USER){
                             return <div><Button color="primary" onClick={ownSellablesAction}>Active offers</Button>;
                               <Button color="primary" onClick={salesAction}>Sale history</Button>;</div>
-                          
+
                           }else{
                             return <div><Button color="primary" onClick={offersAction}>Offers</Button>
                             <Button color="primary" onClick={stockAction}>Stock</Button></div>
