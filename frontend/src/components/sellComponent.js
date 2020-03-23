@@ -64,6 +64,7 @@ const SellItem = ({user,token,page,item,mainAction,ownSellablesAction},props) =>
 
   }
 
+  // This is for getting the modal closed without freezing
 function combineActions(action1,action2){
     action1();
     action2();
@@ -232,6 +233,8 @@ function combineActions(action1,action2){
                 {(() => {
                     if(page === 'EDITITEM') {
                         return <Button color="primary" onClick={toggle} id="confirm" block>Save changes</Button>
+                    }else if(page == 'ADDFORSALE'){
+                        return <Button color="primary" onClick={toggle} id="confirm" block>Confirm</Button>
                     }else{
                         return <Button color="primary" style={{visibility:'hidden'}} onClick={toggle} id="confirm" block>Confirm</Button>
                     }

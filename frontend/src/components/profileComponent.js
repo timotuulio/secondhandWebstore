@@ -1,9 +1,10 @@
 import React from 'react';
 import { Alert,Button, Form, FormGroup, Input,Card, CardHeader,CardBody,CardFooter } from 'reactstrap';
+import { loggedOutAction } from '../actions/actions';
 
 
 
-const Profile = ({token,user, updateProfileAction}) => {
+const Profile = ({mainAction,token,user, updateProfileAction,loggedOutAction}) => {
 
 
   const [name, setName] = React.useState("");
@@ -57,7 +58,16 @@ const Profile = ({token,user, updateProfileAction}) => {
   
 }
 
-
+function removeAccount(){
+ 
+  const deleteurl = "http://localhost:3001/api/user/"+user['_id'];
+  
+  fetch(deleteurl, {
+      method : "delete",
+      headers: {'Content-Type': 'application/json','Authorization': 'Bearer '+token},
+  }).then(
+      response => response.text()).then(res => mainAction(),loggedOutAction())
+}
 
 
 
@@ -72,7 +82,7 @@ const Profile = ({token,user, updateProfileAction}) => {
                 alignItems: "center"
             }}>
               
-        <Form onSubmit={submit} style={{width:"70%"}}>
+        <Form style={{width:"70%"}}>
           <h2 className="display-4"  style={{textAlign:"center"}}>Edit profile</h2>
           <hr className="my-2" />
          
@@ -80,7 +90,7 @@ const Profile = ({token,user, updateProfileAction}) => {
           <Card className="text-center">
             <CardHeader>
             <h3 className="display-5">{user.email}</h3>
-
+            
             </CardHeader>
               <CardBody>
               <FormGroup>Name:
@@ -105,14 +115,20 @@ const Profile = ({token,user, updateProfileAction}) => {
             </FormGroup>
 
               </CardBody>
-              <CardFooter>
-              <Button color="primary" size="lg" >Save changes</Button>
-              </CardFooter>
+              
+                <div>
+              <div><Button color="primary" size="lg" onClick={submit}>Save changes</Button></div><br/><br/>
+              <Button float="right" color="primary" size="lg" onClick={removeAccount}>Remove account</Button>
+              </div>
+              
+             
             </Card>
+           
             <Alert isOpen={visible} color="success">
   <h5 className="alert-heading">Data saved successfully!</h5>
 </Alert>
           </Form>
+         
           
           </div>
       );

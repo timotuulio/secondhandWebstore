@@ -10,7 +10,7 @@ import {
 } from '../actions/actions.js';
 import { SALE } from '../constants.js';
 import { Alert,Card, Button, CardHeader, CardFooter, CardBody, CardText } from 'reactstrap';
-
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 var item;
 function setData(data){
@@ -18,10 +18,27 @@ function setData(data){
 }
 
 
-function AllItems({login, loadState, loadedAction, loadingAction,page,user,token,editItemAction,addForSaleAction}) {
+function AllItems({login, loadState, loadedAction, loadingAction,page,user,token,editItemAction,addForSaleAction},props) {
+
+
+  const {
+    buttonLabel,
+    className
+  } = props;
+
+  const [modal, setModal] = React.useState(false);
+
+  const toggle = () => setModal(!modal);
+
+
+  const[itemname, setItemName] = React.useState();
+  const[itemDesc, setItemDesc] = React.useState();
+  const[itemPrice, setItemPrice] = React.useState();
+  const[itemID, setItemId] = React.useState();
 
   const [visible2, setVisible2] = React.useState(false)
   const [visible, setVisible] = React.useState(false)
+
   function alert2(){
       setVisible(true);
       window.setTimeout(()=>{
@@ -36,8 +53,21 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
       },3000)
    
 }
+
+  function checkItem(item){
+    //alert(item.title)
+    setItemName(item.title);
+    setItemDesc(item.description);
+    setItemPrice(item.price);
+    setItemId(item._id);
+
+  }
   
 
+  function toState(item){
+    checkItem(item);  
+    toggle()
+  }
 
 
   function deleteItem(e){
@@ -50,18 +80,27 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
   }
 
 
-  function buyItem(e) {
+  function buyItem(itemID) {
     alert2();
     //alert(e.target.value);
-    fetch('http://localhost:3001/api/buy/'+e.target.value,
+    fetch('http://localhost:3001/api/buy/'+itemID,
     {
       method: 'post',
       headers: {
         'Content-type':'application/json','authorization': 'Bearer ' + token},
-      body: JSON.stringify({"itemID":e.target.value, "buyerID": user['_id'] ,"asdasd":"asdsad"})}
-      ).then(res=>res.json()).then(data => loadingAction());
+      body: JSON.stringify({"itemID":itemID, "buyerID": user['_id']})}
+      ).then(() => toggle(),loadingAction());
+
+     
   }
 
+  
+  function combineActions(){
+    buyItem(itemID)
+
+
+    //loadingAction()
+  }
 
 /*
   function getUserName(ID){
@@ -95,7 +134,7 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
   }else if(page ==='STOCK'){
     currentPath = "items/stock";
   }else{
-    currentPath = "ad"
+    currentPath = "items/sales";
   }
 
 
@@ -163,7 +202,7 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
                 }else if (page === 'STOCK'){
                   return <div><Button color="primary" onClick={() => addForSaleAction(itm)}>Add to sales</Button></div>
                 }else if(login==='LOGGEDIN'){
-                  return <div><Button color="primary" value={itm._id} onClick={buyItem}>Buy</Button>
+                  return <div><Button color="primary" value={itm._id} onClick={() => toState(itm)}>Buy</Button>
                   </div>
                 }
               })()}
@@ -182,6 +221,20 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
         <div>Loading...</div>
       </div>)
   }
+
+  itemsToRender.push( <Modal isOpen={modal} toggle={toggle} className={className}>
+    <ModalHeader toggle={toggle}>Confirm payment</ModalHeader>
+    <ModalBody>
+  <div>Title: {itemname}</div>
+  <div>Description: {itemDesc}</div>
+  <div>Price: {itemPrice} €</div>
+    </ModalBody>
+    <ModalFooter>
+   
+      <Button color="primary" onClick={combineActions}>Confirm</Button>{' '}
+      <Button color="secondary" onClick={toggle}>Cancel</Button>
+    </ModalFooter>
+  </Modal>);
 
 
 

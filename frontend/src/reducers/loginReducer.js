@@ -22,11 +22,8 @@ function loginReducer(state = initialState, action) {
         return { ...state, login: LOGGEDOUT,user:null,token:null,role:QUEST};
     
         case UPDATEDATA:
-          console.log("updating data");
           return {...state, user:action.data};
     default:
-      console.log(action.data)
-      console.log(action.type)
       return state;
   }
 }

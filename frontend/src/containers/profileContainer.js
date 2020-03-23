@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import {
   mainAction,
   registerAction,
-  updateProfileAction
+  updateProfileAction,
+  loggedOutAction
 
 } from '../actions/actions.js';
 
@@ -23,7 +24,8 @@ const mapStateToProps = (state) => ({
   const mapDispatchToProps = (dispatch) => ({
     mainAction: () => dispatch(mainAction()),
     registerAction: () => dispatch(registerAction()),
-    updateProfileAction: (data) => dispatch(updateProfileAction(data))
+    updateProfileAction: (data) => dispatch(updateProfileAction(data)),
+    loggedOutAction: () => dispatch(loggedOutAction())
   });
 
   export default connect(mapStateToProps, mapDispatchToProps)(Profile);
