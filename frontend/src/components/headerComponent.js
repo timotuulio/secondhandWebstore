@@ -34,7 +34,7 @@ const Header = ({
                 color: "#007bff"
             }}>Paavos Boutique</NavbarBrand>
 
-        <Nav className="mr-auto" navbar="navbar">
+        <Nav className="mr-auto" navbar>
             <ButtonToolbar aria-label="Toolbar with button groups">
 
                 <ButtonGroup className="mr-2"></ButtonGroup>

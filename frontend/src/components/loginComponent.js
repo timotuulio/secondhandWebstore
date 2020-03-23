@@ -97,7 +97,7 @@ const Login = ({login, loginSuccessAction, loginFailedAction, loggedOutAction, r
                         </InputGroup>
                         <br></br>
 
-                        <Button block="block" color="primary" size="lg">Log in</Button>
+                        <Button block color="primary" size="lg">Log in</Button>
                     </CardBody>
 
                 </Card>

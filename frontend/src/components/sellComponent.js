@@ -258,13 +258,13 @@ const SellItem = ({
                 {
                     (() => {
                         if (page === 'EDITITEM') {
-                            return <Button color="primary" onClick={toggle} id="confirm" block="block">Save changes</Button>
+                            return <Button color="primary" onClick={toggle} id="confirm" block>Save changes</Button>
                         } else if (page === 'ADDFORSALE') {
-                            return <Button color="primary" onClick={toggle} id="confirm" block="block">Confirm</Button>
+                            return <Button color="primary" onClick={toggle} id="confirm" block>Confirm</Button>
                         } else {
                             return <Button color="primary" style={{
                                     visibility: 'hidden'
-                                }} onClick={toggle} id="confirm" block="block">Confirm</Button>
+                                }} onClick={toggle} id="confirm" block>Confirm</Button>
                         }
                     })()
                 }
