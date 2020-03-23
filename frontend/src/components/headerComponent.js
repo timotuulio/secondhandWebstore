@@ -48,6 +48,12 @@ const Header =({salesAction,stockAction,ownSellablesAction,login,loginAction,log
                       })()}
                     </ButtonGroup>
                     </div> ;
+            } else {
+            return <div>
+                    <ButtonGroup className="mr-2">
+                    <Button color="primary" onClick={mainAction}>Shop</Button>
+                    </ButtonGroup>
+                    </div>
             }
             })()}
 

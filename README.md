@@ -11,7 +11,12 @@ Tapio Nevalainen | Timo Tuulio
 <tapio.nevalainen@tuni.fi> | <timo.tuulio@tuni.fi>
 
 #### GitLab repository: <https://course-gitlab.tuni.fi/tieta12-2019-2020/x>
+---
 
+## TL;DR
+<div style="text-align: justify">
+This is a project for secondhand webstore. It includes signing in with different roles, selling and buying items and an Api that connects to a database.
+</div>
 ---
 
 ## Functionality
@@ -204,11 +209,14 @@ Redux was used for handling the state of the app.
 - pageReducer holds a state regarding on which page the user is on. In some cases it also holds info on the item, the user was editing or adding for sale.
 
 ---
-## Future improvements
+## Future improvements and missing functionality
+Here are pointed out some functionality that is still missing from the project.
+- Giving admin the possibility to change users info and role. Now there is a "Go to profile" button in the list of all users but it does nothing pressed.
+- Giving admin the possibility to see all the receipts.
+- Handling of the money is done from bank account and in a unrefined way.
+
 Here are explained some improvements that were considered to be added to the project but which we didn't have time.
 - Uploading images to items.
-- Giving admin the possibility to change users info and role.
-- Giving admin the possibility to see all the receipts.
 - UI elements could be improved in many parts of the project.
 - Better use of constants-file. Right now it isn't referred often and there are lots of string-values that could come straight from constants-file instead of being handwritten every time.
 - For localization purposes all text could come imported from a file. This way different languages could be easily implemented by just doing new files for different languages.
