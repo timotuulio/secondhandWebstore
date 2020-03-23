@@ -230,7 +230,7 @@ No automatic testing is implemented. All the code is tested manually.
 Bugs in the project:
 - When a user buys an item from an itemlist, the item stays for a few seconds in the list before getting removed from it. And sometimes the window freezes so that it becomes unscrollable until the whole page is reloaded. This has something to do with modal windows and was removed after removing the modal windows.
 - If a user edits a product he had previously offered, and then directly changes page to making a new offer (sell product -button), the text-fields are completed with the item that was edited previously.
-- In sale history Bought items are shown correctly but there is some problem with sold items. Sometimes they are added to sold recipes, sometimes not. 
+- In sale history Bought items are shown correctly but there is some problem with sold items. Sometimes they are added to sold recipes, sometimes not.
 
 
 ---
@@ -242,6 +242,7 @@ Here are pointed out some functionality that is still missing from the project.
 - There is no confirmation of buying items. We had a modal window solution for that but it had problems as mentioned above in "bugs".
 
 Here are explained some improvements that were considered to be added to the project but which we didn't have time.
+- There are quite a lot of console.logs still lingering there... Oh well.
 - There are still quite a few warnings running around when you run the program. Nothing major, but warnings all the same.
 - LoginComponent uses XHR to fetch data from api. This could be improved to use normal fetch instead like elsewhere in code.
 - Editing user profile the text-fields aren't validated in any way.
