@@ -26,7 +26,7 @@ function Receipts({loadState, loadedAction, loadingAction,page,user,token,editIt
 
 
     //fetch('http://localhost:3001/api/receipt/'+user['_id']).then(res=>res.json()).then(data => setData(data)).then(loadedAction);
-    fetch('http://localhost:3001/api/receipt/'+user['_id']).then(res=>res.json()).then(data => setData(data)).then(() => fetch('http://localhost:3001/api/receipt/'+user['_id'])).then(res=>res.json()).then(data => setBuys(data)).then(loadedAction)
+    fetch('http://localhost:3001/api/receipt/'+user['_id']).then(res=>res.json()).then(data => data.filter(receipt => receipt.seller===user['_id'])).then(data => setData(data)).then(() => fetch('http://localhost:3001/api/receipt/'+user['_id'])).then(res=>res.json()).then(data => data.filter(receipt => receipt.buyer===user['_id'])).then(data => setBuys(data)).then(loadedAction)
 
 
     const receiptsToRender =[];
@@ -127,7 +127,7 @@ return(
   <TabPane tabId="1">
     <Row>
       <Col sm="12">
-        <div><div>dsfsdfds</div></div>
+    <div><div>{receiptsToRender}</div></div>
       </Col>
     </Row>
   </TabPane>

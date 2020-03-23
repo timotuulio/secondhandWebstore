@@ -205,10 +205,24 @@ module.exports = {
 
 
         var item = await Item.findById(itemID).exec().catch(function(error){return 'Error occured'});
+
         var buyer = await User.findById(buyerID).exec().catch(function(error){return 'Error occured'});
 
-        var owner = await User.findById(item.ownerId).exec().catch(function(error){return 'Error occured'});
+        // User is buying
+        if(item.ownerId === 'SHOP'){
+            item.owner = buyerID;
+            item.status = 'SOLD';
 
+        // user is selling
+        }else{
+            var owner = await User.findById(item.ownerId).exec().catch(function(error){return 'Error occured'});
+
+            item.ownerId = 'SHOP';
+            item.status = 'SHOP_BOUGHT';
+
+        }
+
+       
 
         var date = new Date();
 
@@ -221,8 +235,7 @@ module.exports = {
 
         await receipt.save();
 
-        item.ownerId = 'SHOP';
-        item.status = 'SHOP_BOUGHT';
+        
         await item.save();
 
         /*
