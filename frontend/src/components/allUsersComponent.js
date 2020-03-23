@@ -14,9 +14,9 @@ function setData(data){
   user = data;
 }
 
-function AllUsers({loadState, loadedAction}) {
-  //const authKey = token
-  const authKey =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiNWU3MGVhOGU1M2VkN2YyMDc3YjljZDRlIiwiaWF0IjoxNTg0NDU4MzgyfQ.FCfdW5Piw2BuAGMmRDNB9QrBtcOStOwR_XxJQ5QCkPY"
+function AllUsers({loadState, loadedAction, token}) {
+  const authKey = token
+  //const authKey =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiNWU3MGVhOGU1M2VkN2YyMDc3YjljZDRlIiwiaWF0IjoxNTg0NDU4MzgyfQ.FCfdW5Piw2BuAGMmRDNB9QrBtcOStOwR_XxJQ5QCkPY"
   var obj = {
     method: 'GET',
     headers: {
@@ -83,12 +83,13 @@ function AllUsers({loadState, loadedAction}) {
             <CardText>Role: {usr.role}</CardText>
             <CardText>{usr.email}</CardText>
             {(() => {
-              if (usr.address!=='' && usr.address!=='undefined') {
+              if (usr.address!==undefined && usr.address!=='undefined') {
                 return <CardText>Address: {usr.address}</CardText>;
               }
             })()}
             {(() => {
-              if (usr.phoneNumber!=='' && usr.phoneNumber!=='undefined') {
+              if (usr.phoneNumber!==undefined && usr.phoneNumber!=='undefined') {
+                console.log("--------" + usr.phoneNumber)
                 return <CardText>Phonenumber: {usr.phoneNumber}</CardText>;
               }
             })()}
