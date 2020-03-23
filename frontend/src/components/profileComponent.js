@@ -22,7 +22,7 @@ const Profile = ({mainAction, token, user, updateProfileAction}) => {
 
     }
 
-    // take over its submit event.
+    // take over its submit event..
     let submit = (e) => {
         e.preventDefault();
 
