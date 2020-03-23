@@ -57,19 +57,19 @@ Our planned working directory is as follows:
 <pre><code>
 Directory
 - Api
---- controllers
------ itemController.js
------ receiptController.js
------ userController.js
---- Models
------ db.js
------ itemModel.js
------ receiptModel.js
------ userModel.js
---- Routes
------ api.js
---- app.js
---- package.json
+ |- controllers
+ | |- itemController.js
+ | |- receiptController.js
+ | |- userController.js
+ |- Models
+ |  |- db.js
+ |  |- itemModel.js
+ |  |- receiptModel.js
+ |  |- userModel.js
+ |- Routes
+ |  |- api.js
+ |- app.js
+ |- package.json
 - frontend
 --- Public
 ----- index.html
