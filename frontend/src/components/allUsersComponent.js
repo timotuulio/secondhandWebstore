@@ -5,7 +5,7 @@ import {
   mainAction,
   loadingAction
 } from '../actions/actions.js';
-import { Card, Button, CardHeader, CardBody, CardText } from 'reactstrap';
+import { Alert,Card, Button, CardHeader, CardBody, CardText } from 'reactstrap';
 import { USER, SHOPKEEPER, ADMIN } from '../stateNames.js'
 
 
@@ -14,7 +14,28 @@ function setData(data){
   user = data;
 }
 
-function AllUsers({loadState, loadedAction, token}) {
+function AllUsers({loadState, loadedAction, token,loadingAction}) {
+
+
+  const [visible2, setVisible2] = React.useState(false)
+  const [visible, setVisible] = React.useState(false)
+
+  function alert2(){
+      setVisible(true);
+      window.setTimeout(()=>{
+          setVisible(false)
+        },3000)
+     
+  }
+  function alert3(){
+    setVisible2(true);
+    window.setTimeout(()=>{
+        setVisible2(false)
+      },3000)
+   
+}
+
+
   const authKey = token
   //const authKey =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiNWU3MGVhOGU1M2VkN2YyMDc3YjljZDRlIiwiaWF0IjoxNTg0NDU4MzgyfQ.FCfdW5Piw2BuAGMmRDNB9QrBtcOStOwR_XxJQ5QCkPY"
   var obj = {
@@ -25,21 +46,23 @@ function AllUsers({loadState, loadedAction, token}) {
   }
   fetch('http://localhost:3001/api/user', obj).then(res=>res.json()).then(data => setData(data)).then(loadedAction);
 
-  /*const testUsers = [
+ 
+
+
+  function deleteUser(e){
+    fetch('http://localhost:3001/api/user/'+e.target.value,
     {
-        "_id": "5e6d1dd29339230cc6f8076c",
-        "name": "1",
-        "password": "A Blääg",
-        "__v": 0
-    },
-    {
-        "_id": "5e6d34d4f5b37b0ecc4821ac",
-        "name": "1290",
-        "password": "A secret JOeebix",
-        "__v": 0
-    }
-  ];*/
-  var usersToRender = /*testUsers*/[];
+      method: 'delete',
+      headers: {
+        'authorization': 'Bearer ' + token}}).then(res=>res.json()).then(data => loadingAction(),alert3());
+  }
+
+
+  var usersToRender = [];
+
+  usersToRender.push(<Alert isOpen={visible2} color="success">
+  <h5 className="alert-heading">Offer removed successfully!</h5>
+</Alert>)
 
   console.log(user);
   if (loadState==='LOADED') {
@@ -78,7 +101,7 @@ function AllUsers({loadState, loadedAction, token}) {
           marginBottom:"5px",
           alignSelf:"center"
         }}>
-          <CardHeader>{usr.name}</CardHeader>
+          <CardHeader>{usr.name} </CardHeader>
           <CardBody>
             <CardText>Role: {usr.role}</CardText>
             <CardText>{usr.email}</CardText>
@@ -93,7 +116,13 @@ function AllUsers({loadState, loadedAction, token}) {
                 return <CardText>Phonenumber: {usr.phoneNumber}</CardText>;
               }
             })()}
-            <Button onClick={goToProfile()}>Got to profile</Button>
+            <div>
+            <div><Button color="primary" onClick={goToProfile()}>Got to profile</Button></div>
+            <br/>
+            <Button color="primary" onClick={deleteUser} value={usr['_id']}>Delete user</Button>
+            </div>
+           
+           
           </CardBody>
         </Card>
       </div>
@@ -102,7 +131,7 @@ function AllUsers({loadState, loadedAction, token}) {
 }
 
 function goToProfile() {
-  console.log("This is useless")
+  //console.log("This is useless")
   //alert("Lol");
 }
 
