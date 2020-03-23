@@ -24,9 +24,17 @@ function Receipts({loadState, loadedAction, loadingAction,page,user,token,editIt
 
     }
 
+    var path;
+
+    if(user['role'] === 'Shopkeeper'){
+      path = 'SHOP';
+    }else{
+      path = user['_id']
+    }
+
 
     //fetch('http://localhost:3001/api/receipt/'+user['_id']).then(res=>res.json()).then(data => setData(data)).then(loadedAction);
-    fetch('http://localhost:3001/api/receipt/'+user['_id']).then(res=>res.json()).then(data => data.filter(receipt => receipt.seller===user['_id'])).then(data => setData(data)).then(() => fetch('http://localhost:3001/api/receipt/'+user['_id'])).then(res=>res.json()).then(data => data.filter(receipt => receipt.buyer===user['_id'])).then(data => setBuys(data)).then(loadedAction)
+    fetch('http://localhost:3001/api/receipt/'+path).then(res=>res.json()).then(data => data.filter(receipt => receipt.seller===user['_id'])).then(data => setData(data)).then(() => fetch('http://localhost:3001/api/receipt/'+user['_id'])).then(res=>res.json()).then(data => data.filter(receipt => receipt.buyer===user['_id'])).then(data => setBuys(data)).then(loadedAction)
 
 
     const receiptsToRender =[];

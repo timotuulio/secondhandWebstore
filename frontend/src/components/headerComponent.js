@@ -43,7 +43,7 @@ const Header =({salesAction,stockAction,ownSellablesAction,login,loginAction,log
 
                           }else{
                             return <div><Button color="primary" onClick={offersAction}>Offers</Button>
-                            <Button color="primary" onClick={stockAction}>Stock</Button></div>
+                            <Button color="primary" onClick={stockAction}>Stock</Button><Button color="primary" onClick={salesAction}>Sale history</Button></div>
                           }
                       })()}
                     </ButtonGroup>
@@ -62,7 +62,7 @@ const Header =({salesAction,stockAction,ownSellablesAction,login,loginAction,log
           </Nav>
           {(() => {
             if (login!=='LOGGEDIN') {
-              return <Button color="primary" onClick={loginAction}>Kirjaudu sisään</Button>;
+              return <Button color="primary" onClick={loginAction}>Log in</Button>;
 
             }else{
 

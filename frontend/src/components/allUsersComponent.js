@@ -60,11 +60,11 @@ function AllUsers({loadState, loadedAction, token,loadingAction}) {
 
   var usersToRender = [];
 
-  usersToRender.push(<Alert isOpen={visible2} color="success">
+  usersToRender.push(<Alert key="1" isOpen={visible2} color="success">
   <h5 className="alert-heading">Offer removed successfully!</h5>
 </Alert>)
 
-  console.log(user);
+  //console.log(user);
   if (loadState==='LOADED') {
       var singleRoleArray = [];
       singleRoleArray = user.filter(usr => usr.role === ADMIN);
@@ -79,7 +79,7 @@ function AllUsers({loadState, loadedAction, token,loadingAction}) {
   }
   else {
       usersToRender.push(
-          <div>
+          <div key="2">
               <p>Loading...</p>
           </div>)
   }
@@ -88,7 +88,7 @@ function AllUsers({loadState, loadedAction, token,loadingAction}) {
   function pushToArray(usr) {
 
     usersToRender.push(
-      <div style={{
+      <div  key={usr['_id']} style={{
         display: "flex",
         margin: "15px",
         justifyContent: "center",
