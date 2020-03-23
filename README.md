@@ -15,14 +15,26 @@ Tapio Nevalainen | Timo Tuulio
 
 ## TL;DR
 <div style="text-align: justify">
-This is a project for secondhand webstore. It includes signing in with different roles, selling and buying items and an Api that connects to a database.
+This is a project for secondhand webstore. It includes signing in with different roles, selling and buying items and an Api that connects everything to a database.
 </div>
+---
+
+## How to run
+<div style="text-align: justify">
+- Clone the project
+- Start the api by running command "node app" in Api-folder
+- Start the react app by running command "npm start" in frontend-folder. It should open your web-browser to see the program.
+- Create user, add some items in "Sell product", see them in "active offers"
+- Create a shopkeeper and buy the items in "Offers"-page and set them up to sales in "Stock"-page. The items can now be seen in the main/shop -page by everyone.
+- Go to the user and buy the items. Check the "Sales history"-page for your receipts.
+</div>
+
 ---
 
 ## Functionality
 
 <div style="text-align: justify">
-The project includes an api and the frontend for a second hand webstore. In the webstore users can sell their own items which the shop can then buy and sell back to the users. The backend includes mongoose and mongoDB and basic frontend is implemented with React, along with the Redux state design.User authentication is done with JSON webtoken.
+The project includes an api and the frontend for a second hand webstore. In the webstore users can sell their own items which the shop can then buy and sell back to the users. The backend includes mongoose and mongoDB and frontend that is implemented with React, along with the Redux state design. User authentication is done with JSON webtoken.
 // We will start by designing the database and Mongoose schemas that can be done without worrying about the frontend. After this API can be designed and implemented. Next, basic frontend is implemented with React, along with the Redux state design. Authentication is designed at this point; we are planning to use JSON webtoken authentication. Frontend is finalized and all the parts are tied together. Finally, some tests are implemented. See project timetable in the end of this file.
 
 </div>
@@ -177,13 +189,6 @@ Sales items | /items/sales
 Log in | /login
 Buy item | /buy/:id
 
-
----
-## Testing and bugs
-
-No automatic testing is implemented. All the code is tested manually.
-
-
 ---
 ## React and Redux  
 
@@ -207,13 +212,20 @@ Redux was used for handling the state of the app.
 - loadReducer has a value depending on if the api-fetches that the React-components do have loaded.
 - loginReducer holds states for if the user has logged in or not, the user data, JSON webtoken and the role of the user.
 - pageReducer holds a state regarding on which page the user is on. In some cases it also holds info on the item, the user was editing or adding for sale.
+---
+## Testing and bugs
+
+No automatic testing is implemented. All the code is tested manually.
+Bugs in the project:
+- When a user buys an item from the itemlist, the item stays for a few seconds in the list before getting removed from it. Or sometimes the window freezes so that it becomes unscrollable until the whole page is reloaded. This has something to do with modal windows.
+
 
 ---
 ## Future improvements and missing functionality
 Here are pointed out some functionality that is still missing from the project.
 - Giving admin the possibility to change users info and role. Now there is a "Go to profile" button in the list of all users but it does nothing pressed.
 - Giving admin the possibility to see all the receipts.
-- Handling of the money is done from bank account and in a unrefined way.
+- Handling of the money is done from bank account and in an unrefined way.
 
 Here are explained some improvements that were considered to be added to the project but which we didn't have time.
 - Uploading images to items.
