@@ -35,6 +35,9 @@ This is a project for secondhand webstore. It includes signing in with different
 
 <div style="text-align: justify">
 The project includes an api and the frontend for a second hand webstore. In the webstore users can sell their own items which the shop can then buy and sell back to the users. The backend includes mongoose and mongoDB and frontend that is implemented with React, along with the Redux state design. User authentication is done with JSON webtoken.
+
+Users:
+Users 
 // We will start by designing the database and Mongoose schemas that can be done without worrying about the frontend. After this API can be designed and implemented. Next, basic frontend is implemented with React, along with the Redux state design. Authentication is designed at this point; we are planning to use JSON webtoken authentication. Frontend is finalized and all the parts are tied together. Finally, some tests are implemented. See project timetable in the end of this file.
 
 </div>
