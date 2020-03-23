@@ -230,6 +230,7 @@ No automatic testing is implemented. All the code is tested manually.
 Bugs in the project:
 - When a user buys an item from an itemlist, the item stays for a few seconds in the list before getting removed from it. And sometimes the window freezes so that it becomes unscrollable until the whole page is reloaded. This has something to do with modal windows and was removed after removing the modal windows.
 - If a user edits a product he had previously offered, and then directly changes page to making a new offer (sell product -button), the text-fields are completed with the item that was edited previously.
+- In sale history Bought items are shown correctly but there is some problem with sold items. Sometimes they are added to sold recipes, sometimes not. 
 
 
 ---
