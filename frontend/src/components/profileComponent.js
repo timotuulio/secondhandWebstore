@@ -1,23 +1,10 @@
 import React from 'react';
-import { Alert,Button, Form, FormGroup, Input,Card, CardHeader,CardBody,CardFooter } from 'reactstrap';
+import { Alert,Button, Form, FormGroup, Input,Card, CardHeader,CardBody } from 'reactstrap';
 import { loggedOutAction, addBalanceAction } from '../actions/actions';
 
 
 
-const Profile = ({mainAction,token,user, updateProfileAction,loggedOutAction,addBalanceAction}) => {
-
-
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [radio, setRadio] = React.useState(false);
-  
-  const [nameOK, setNameOk] = React.useState(false);
-  const [emailOK, setEmailOk] = React.useState(false);
-  const [passwordOK, setPasswordOk] = React.useState(false);
-
-
-
+const Profile = ({mainAction,token,user, updateProfileAction}) => {
 
   const [visible, setVisible] = React.useState(false)
   function alert2(){
@@ -25,7 +12,7 @@ const Profile = ({mainAction,token,user, updateProfileAction,loggedOutAction,add
       window.setTimeout(()=>{
           setVisible(false)
         },3000)
-     
+
   }
 
 
@@ -44,7 +31,7 @@ const Profile = ({mainAction,token,user, updateProfileAction,loggedOutAction,add
 
   // Build body for the POST request
   var body  = JSON.stringify({"name":name,"phoneNumber":phone,"address":address,"bankAccount":bank});
-  
+
   // Use fetch to send the data
   // TODO: An if-system or something is needed so that when admin presses an user from all users -list he gets to the users profile and not to his own
   const url = "http://localhost:3001/api/user/"+user['_id'];
@@ -55,13 +42,13 @@ const Profile = ({mainAction,token,user, updateProfileAction,loggedOutAction,add
       body: body
   }).then(
       response => response.text()).then(res => updateProfileAction(JSON.parse(res),alert2()))
-  
+
 }
 
 function removeAccount(){
- 
+
   const deleteurl = "http://localhost:3001/api/user/"+user['_id'];
-  
+
   fetch(deleteurl, {
       method : "delete",
       headers: {'Content-Type': 'application/json','Authorization': 'Bearer '+token},
@@ -81,16 +68,16 @@ function removeAccount(){
             justifyContent: "center",
                 alignItems: "center"
             }}>
-              
+
         <Form style={{width:"70%"}}>
           <h2 className="display-4"  style={{textAlign:"center"}}>Edit profile</h2>
           <hr className="my-2" />
-         
+
           <br/><br/>
           <Card className="text-center">
             <CardHeader>
           <h3 className="display-5">{user.email} / Balance: {user.balance} €</h3><Button onClick={addBalanceAction} color="primary">Add balance</Button>
-            
+
             </CardHeader>
               <CardBody>
               <FormGroup>Name:
@@ -115,21 +102,21 @@ function removeAccount(){
             </FormGroup>
 
               </CardBody>
-              
+
                 <div>
               <div><Button color="primary" size="lg" onClick={submit}>Save changes</Button></div><br/><br/>
               <Button float="right" color="primary" size="lg" onClick={removeAccount}>Remove account</Button>
               </div>
-              
-             
+
+
             </Card>
-           
+
             <Alert isOpen={visible} color="success">
   <h5 className="alert-heading">Data saved successfully!</h5>
 </Alert>
           </Form>
-         
-          
+
+
           </div>
       );
 }

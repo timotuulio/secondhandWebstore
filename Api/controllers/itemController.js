@@ -183,7 +183,7 @@ module.exports = {
         }
 
 
-        
+
     },
 
     async getOffers(req,res){
@@ -193,32 +193,15 @@ module.exports = {
             .catch(function(error){return 'Error occured'});
 
             res.send(offers);
-            
+
         }else{
             console.log("Authentication failed")
             // Check format of this
             res.send("Not authorized")
         }
 
-<<<<<<< HEAD
-        var date = new Date();
-
-        var receipt = new Receipt();
-        receipt.title = item.title;
-        receipt.buyer = buyerID;
-        receipt.seller = item.ownerId;
-        receipt.amount = item.price;
-        receipt.date = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
-
-        await receipt.save();
 
 
-        await item.save();
-
-        res.send(item)
-=======
-
-        
     },
 
 
@@ -228,51 +211,50 @@ module.exports = {
 
             var itemID = req.body.itemID;
             var buyerID = req.body.buyerID;
-    
-    
-    
+
+
+
             var item = await Item.findById(itemID).exec().catch(function(error){return 'Error occured'});
-    
+
             var buyer = await User.findById(buyerID).exec().catch(function(error){return 'Error occured'});
-    
+
             // User is buying
             if(item.ownerId === 'SHOP'){
                 item.owner = buyerID;
                 item.status = 'SOLD';
-    
+
             // user is selling
             }else{
                 var owner = await User.findById(item.ownerId).exec().catch(function(error){return 'Error occured'});
-    
+
                 item.ownerId = 'SHOP';
                 item.status = 'SHOP_BOUGHT';
-    
+
             }
-    
-           
-    
+
+
+
             var date = new Date();
-    
+
             var receipt = new Receipt();
             receipt.title = item.title;
             receipt.buyer = buyerID;
             receipt.seller = item.ownerId;
             receipt.amount = item.price;
             receipt.date = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
-    
+
             await receipt.save();
-    
-            
+
+
             await item.save();
-    
+
             res.send(item)
         }else{
             console.log("Authentication failed")
             // Check format of this
             res.send("Not authorized")
-        }    
+        }
 
->>>>>>> cde85845f0235f07e89f864e65f4f59885ac8822
     },
 
     async getStock(req,res){
@@ -288,7 +270,7 @@ module.exports = {
         }
         console.log("getting shop stock")
 
-        
+
 
     },
 
@@ -297,7 +279,7 @@ module.exports = {
         .catch(function(error){return 'Error occuredddd'});
 
         res.send(stock);
-        
+
 
     }
 

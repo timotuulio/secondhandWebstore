@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Button, CardHeader, CardFooter, CardBody, CardText } from 'reactstrap';
-import { TabContent, TabPane, Nav, NavItem, NavLink, CardTitle, Row, Col } from 'reactstrap';
+import { Card, CardHeader, CardFooter, CardBody, CardText } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 
 var receipts;
@@ -49,14 +49,14 @@ function Receipts({loadState, loadedAction, loadingAction,page,user,token,editIt
             alignSelf:"center"
           }} >
         <CardHeader>Title: {itm.title}</CardHeader>
-            
+
             <CardBody>
               <CardText>Amount: {itm.amount} €</CardText>
               <CardText>Date: {itm.date}</CardText>
 
             </CardBody>
             <CardFooter>
-            {itm.seller === user['_id'] ? 'SOLD TO STORE' : 'BOUGHT FROM STORE' } 
+            {itm.seller === user['_id'] ? 'SOLD TO STORE' : 'BOUGHT FROM STORE' }
             </CardFooter>
           </Card>
         </div>
@@ -78,14 +78,14 @@ function Receipts({loadState, loadedAction, loadingAction,page,user,token,editIt
             alignSelf:"center"
           }} >
         <CardHeader>Title: {itm.title}</CardHeader>
-            
+
             <CardBody>
               <CardText>Amount: {itm.amount} €</CardText>
               <CardText>Date: {itm.date}</CardText>
 
             </CardBody>
             <CardFooter>
-            {itm.seller === user['_id'] ? 'SOLD TO STORE' : 'BOUGHT FROM STORE' } 
+            {itm.seller === user['_id'] ? 'SOLD TO STORE' : 'BOUGHT FROM STORE' }
             </CardFooter>
           </Card>
         </div>
@@ -145,6 +145,3 @@ return(
 }
 
 export default Receipts;
-
-
-

@@ -2,7 +2,7 @@
 import React from 'react';
 
 import store from '../store/store.js'
-import {Alert,Input, InputGroup, Card, CardHeader,CardBody,CardFooter, Button } from 'reactstrap';
+import {Alert,Input, InputGroup, Card,CardBody, Button } from 'reactstrap';
 
 import {
     mainAction,
@@ -46,7 +46,7 @@ let submit = (e,data) => {
             store.dispatch(mainAction());
             store.dispatch(loginSuccessAction(JSON.parse(response)));
             // This will show the main page
-            
+
         }
         // Set token and role to state
 
@@ -71,12 +71,12 @@ let submit = (e,data) => {
 
 
 const Login = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,registerAction}) => {
-  
 
-   
 
-    
- 
+
+
+
+
 
     return(<div style={{
         position: 'absolute', left: '50%', top: '50%',
@@ -92,7 +92,7 @@ const Login = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,regi
                 <Alert isOpen={login==='LOGINFAILED'} color="danger">
                                     Wrong email and/or password!
                                 </Alert>
-                    
+
                     <Card className="text-center">
 
                         <CardBody>
@@ -104,13 +104,13 @@ const Login = ({login,loginSuccessAction, loginFailedAction,loggedOutAction,regi
                                 <Input type="password" id="password" placeholder="Password" />
                             </InputGroup>
                             <br></br>
-                            
+
                              <Button block color="primary" size="lg" >Log in</Button>
                         </CardBody>
-                        
-                      
+
+
                     </Card>
-                   
+
                 </div>
             </form>
             <br/><br/>

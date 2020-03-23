@@ -7,7 +7,6 @@ import { USER, SHOPKEEPER, ADMIN } from '../stateNames.js'
 const Signup = ({mainAction,loginSuccessAction},props) => {
 
   const {
-    buttonLabel,
     className
   } = props;
 
@@ -22,7 +21,6 @@ let submit = (e,data) => {
   // Extract data from the form
   var phoneNumber = document.getElementById('phoneNumber').value;
   var address = document.getElementById('address').value;
-  var bankAccount = document.getElementById('bankAccount').value;
 
 
   var role;
@@ -51,14 +49,14 @@ let submit = (e,data) => {
         response.text().then(html=> {
           mainAction();
           loginSuccessAction(JSON.parse(html),toggle);
-            
+
         });
 
       // Put here how unsuccessfull registration is handled
       // Reasons might be missing required value
       }else if(response.status ==='400'){
 
-      
+
       // This will be the case of status 500 most of the time
       }else{
         response.text().then(res=> {
@@ -68,13 +66,13 @@ let submit = (e,data) => {
           }else{
             console.log("unknown error happened")
           }
-          
+
         });
-        
+
       }
-     
+
     })
-   
+
 }
 
 
@@ -87,7 +85,7 @@ let submit = (e,data) => {
     const [bank, setBank] = React.useState("");
     const [phone, setPhone] = React.useState("");
     const [address, setAddress] = React.useState("");
-    
+
     const [nameOK, setNameOk] = React.useState(false);
     const [emailOK, setEmailOk] = React.useState(false);
     const [passwordOK, setPasswordOk] = React.useState(false);
@@ -115,40 +113,40 @@ let submit = (e,data) => {
     }
 
     function checkEmail(e){
-        
+
         setEmail(e.target.value);
         var re = /\S+@\S+\.\S+/;
-        
-       
+
+
 
         if(!(re.test(e.target.value))){
             setEmailOk(false)
             document.getElementById('register').style.visibility = 'hidden';
-          
-        
+
+
         }else{
           setEmailOk(true)
           if(nameOK === true && passwordOK === true && radio===true){
             document.getElementById('register').style.visibility = 'visible';
           }
         }
-           
-        
+
+
     }
 
     function checkPassword(e){
         setPassword(e.target.value);
         if(e.target.value.length > 7){
             setPasswordOk(true)
-        
+
             if(nameOK === true && emailOK === true && radio === true){
               document.getElementById('register').style.visibility = 'visible';
             }
-          
+
         }else{
             setPasswordOk(false);
             document.getElementById('register').style.visibility = 'hidden';
-        }       
+        }
     }
 
 
@@ -162,7 +160,7 @@ let submit = (e,data) => {
     function checkAddress(e){
       setAddress(e.target.value);
     }
-    
+
 
 
 
@@ -225,7 +223,7 @@ let submit = (e,data) => {
         <FormFeedback invalid="true">Role must be selected</FormFeedback>
       </FormGroup>
       <Button block style={{visibility:"hidden"}} id="register" color="primary" size="lg" onClick={toggle}>Register</Button>
-      
+
           <Modal isOpen={modal} toggle={toggle} className={className}>
             <ModalHeader toggle={toggle}>Cofirm registration</ModalHeader>
             <ModalBody>
@@ -244,7 +242,7 @@ let submit = (e,data) => {
 
         </CardBody>
 
-  
+
       </Card>
     </Form>
 

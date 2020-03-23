@@ -18,7 +18,7 @@ const SellItem = ({user,token,page,item,mainAction,ownSellablesAction},props) =>
     const [descOK, setDescOk] = React.useState(item ? true : false);
     const [priceOK, setPriceOk] = React.useState(item ? true : false);
 
-  
+
 
     const {
         className
@@ -26,7 +26,7 @@ const SellItem = ({user,token,page,item,mainAction,ownSellablesAction},props) =>
 
       const [modal, setModal] = React.useState(false);
       const toggle = () => setModal(!modal);
-      
+
       // take over its submit event.
     let submitNew = (e) => {
         e.preventDefault();
@@ -88,7 +88,7 @@ function combineActions(action1,action2){
       // Build body for the put request
       var body  = JSON.stringify({"title":title,"description":description,"price":price,"status":SALE});
 
-  
+
       const url = "http://localhost:3001/api/item/"+item._id;
       fetch(url, {
         method : "put",
@@ -230,7 +230,7 @@ function combineActions(action1,action2){
                 {(() => {
                     if(page === 'EDITITEM') {
                         return <Button color="primary" onClick={toggle} id="confirm" block>Save changes</Button>
-                    }else if(page == 'ADDFORSALE'){
+                    }else if(page === 'ADDFORSALE'){
                         return <Button color="primary" onClick={toggle} id="confirm" block>Confirm</Button>
                     }else{
                         return <Button color="primary" style={{visibility:'hidden'}} onClick={toggle} id="confirm" block>Confirm</Button>

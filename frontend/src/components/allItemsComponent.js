@@ -8,9 +8,8 @@ import {
   stockAction,
   addForSaleAction
 } from '../actions/actions.js';
-import { SALE } from '../constants.js';
 import { Alert,Card, Button, CardHeader, CardFooter, CardBody, CardText } from 'reactstrap';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+//import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 var item;
 function setData(data){
@@ -31,11 +30,6 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
   const toggle = () => setModal(!modal);
 */
 
-  const[itemname, setItemName] = React.useState();
-  const[itemDesc, setItemDesc] = React.useState();
-  const[itemPrice, setItemPrice] = React.useState();
-  const[itemID, setItemId] = React.useState();
-
   const [visible2, setVisible2] = React.useState(false)
   const [visible, setVisible] = React.useState(false)
 
@@ -44,25 +38,16 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
       window.setTimeout(()=>{
           setVisible(false)
         },3000)
-     
+
   }
   function alert3(){
     setVisible2(true);
     window.setTimeout(()=>{
         setVisible2(false)
       },3000)
-   
+
 }
 
-  function checkItem(item){
-    //alert(item.title)
-    setItemName(item.title);
-    setItemDesc(item.description);
-    setItemPrice(item.price);
-    setItemId(item._id);
-
-  }
-  
 
 
   function deleteItem(e){
@@ -86,7 +71,7 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
       body: JSON.stringify({"itemID":e.target.value, "buyerID": user['_id']})}
       ).then(() => loadingAction());
 
-     
+
   }
 
 
@@ -115,7 +100,7 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
 
     }
 
-  
+
 
   const itemsToRender =[<div key={33} style={{
     display: "flex",
@@ -206,7 +191,7 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
   <div>Price: {itemPrice} €</div>
     </ModalBody>
     <ModalFooter>
-   
+
       <Button color="primary" onClick={() => buyItem(itemID)}>Confirm</Button>{' '}
       <Button color="secondary" onClick={toggle}>Cancel</Button>
     </ModalFooter>

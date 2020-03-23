@@ -41,10 +41,10 @@ Users:
 Users can buy items, add new items and offer them to the shop, edit and remove items they already have offered (but which have not yet been bought), edit and remove their own profile, add money to their balance and see items they have sold and bought from the store.
 
 Shopkeepers:
-Shopkeepers can
+Shopkeepers can do what users can and also see items that users have offered to the shop, buy them, see items that are in stock (shop has bought them but not yet added to sale), edit stockitems and add them to be sold.
 
-
-// We will start by designing the database and Mongoose schemas that can be done without worrying about the frontend. After this API can be designed and implemented. Next, basic frontend is implemented with React, along with the Redux state design. Authentication is designed at this point; we are planning to use JSON webtoken authentication. Frontend is finalized and all the parts are tied together. Finally, some tests are implemented. See project timetable in the end of this file.
+Admins:
+Admins can do what shopkeepers can but they can also see a list of all the users.
 
 </div>
 
