@@ -123,7 +123,7 @@ function Receipts({
         //return  (<div><div> <h2 className="display-4"  >Receipts</h2><hr className="my-2" /></div><div>{receiptsToRender}</div></div>)
 
         return (<div>
-            <Nav tabs="tabs">
+            <Nav tabs>
                 <NavItem>
                     <NavLink className={classnames({
                             active: activeTab === '1'

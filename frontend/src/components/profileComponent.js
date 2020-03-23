@@ -104,13 +104,7 @@ const Profile = ({mainAction, token, user, updateProfileAction}) => {
                         <Input type="text" name="address" id="address" placeholder="Address" defaultValue={user.address}/>
                     </FormGroup>
 
-                    Password:
-                    <FormGroup>
-                        <Input type="password" name="password" id="password1" placeholder="Password"/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Input type="password" name="password" id="password2" placeholder="Password"/>
-                    </FormGroup>
+        
 
                 </CardBody>
 
