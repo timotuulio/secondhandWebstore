@@ -20,7 +20,7 @@ function setData(data){
 
 function AllItems({login, loadState, loadedAction, loadingAction,page,user,token,editItemAction,addForSaleAction},props) {
 
-
+/*
   const {
     buttonLabel,
     className
@@ -29,7 +29,7 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
   const [modal, setModal] = React.useState(false);
 
   const toggle = () => setModal(!modal);
-
+*/
 
   const[itemname, setItemName] = React.useState();
   const[itemDesc, setItemDesc] = React.useState();
@@ -64,11 +64,6 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
   }
   
 
-  function toState(item){
-    checkItem(item);  
-    toggle()
-  }
-
 
   function deleteItem(e){
 
@@ -80,16 +75,16 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
   }
 
 
-  function buyItem(itemID) {
+  function buyItem(e) {
     alert2();
     //alert(e.target.value);
-    fetch('http://localhost:3001/api/buy/'+itemID,
+    fetch('http://localhost:3001/api/buy/'+e.target.value,
     {
       method: 'post',
       headers: {
         'Content-type':'application/json','authorization': 'Bearer ' + token},
-      body: JSON.stringify({"itemID":itemID, "buyerID": user['_id']})}
-      ).then(() => toggle(),loadingAction());
+      body: JSON.stringify({"itemID":e.target.value, "buyerID": user['_id']})}
+      ).then(() => loadingAction());
 
      
   }
@@ -177,7 +172,7 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
                 }else if (page === 'STOCK'){
                   return <div><Button color="primary" onClick={() => addForSaleAction(itm)}>Add to sales</Button></div>
                 }else if(login==='LOGGEDIN'){
-                  return <div><Button color="primary" value={itm._id} onClick={() => toState(itm)}>Buy</Button>
+                  return <div><Button color="primary" value={itm._id} onClick={buyItem}>Buy</Button>
                   </div>
                 }
               })()}
@@ -197,6 +192,7 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
       </div>)
   }
 
+/*
   itemsToRender.push( <Modal isOpen={modal} toggle={toggle} className={className}>
     <ModalHeader toggle={toggle}>Confirm payment</ModalHeader>
     <ModalBody>
@@ -211,7 +207,7 @@ function AllItems({login, loadState, loadedAction, loadingAction,page,user,token
     </ModalFooter>
   </Modal>);
 
-
+*/
 
 
 
