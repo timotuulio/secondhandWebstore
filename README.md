@@ -1,5 +1,3 @@
-## TODO: How stock and users and all that zhass works
-
 # WWW Programming Part 2 Coursework Project plan
 ## Course project group information
 #### Group Name: X
