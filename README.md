@@ -18,10 +18,15 @@ This is a project for secondhand webstore. It includes signing in with different
 ## How to run
 <div style="text-align: justify">
 - Clone the project
+
 - Start the api by running command "node app" in Api-folder
+
 - Start the react app by running command "npm start" in frontend-folder. It should open your web-browser to see the program.
+
 - Create user, add some items in "Sell product", see them in "active offers"
+
 - Create a shopkeeper and buy the items in "Offers"-page and set them up to sales in "Stock"-page. The items can now be seen in the main/shop -page by everyone.
+
 - Go to the user and buy the items. Check the "Sales history"-page for your receipts.
 </div>
 
@@ -253,18 +258,3 @@ Here are explained some improvements that were considered to be added to the pro
 - Security measures could be added.
 - Automatic testing.
 - If some list is empty there should be a message that there is nothing in the list instead of showing nothing (for example the main page is empty if there are no items in sale).
----
-## Project timetable and division of work    
-
-All parts of the project were done more or less equally and both partisipants worked on all parts of the project. In the table below the "Person responsible" is in name only.
-Due date | Functionality | Person responsible | Current status | Completed
------------- | ------------- | ------------- | -------------| -------------
-**1.3.2020** | Initial Project plan | Tapio,Timo | DONE | &#9745;
-**4.3.2020** | Database model design | Tapio | ***In progress*** | &#9744;
-**7.3.2020** | React setup | Timo | ***In progress*** | &#9744;
-**9.3.2020** | Redux state design | Timo | Todo |&#9744;
-**11.3.2020** | Authentication design and implementation | Tapio | Todo |&#9744;
-**13.3.2020** | Finalize frontend | Timo | Todo | &#9744;
-**15.3.2020** | Combine database,state, and frontend functionality | Tapio,Timo | Todo | &#9744;
-**18.3.2020** | Test implementation | Tapio | Todo | &#9744;
-**20.3.2020** | Return work | - | Todo | &#9744;
