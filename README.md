@@ -17,6 +17,7 @@ This is a project for secondhand webstore. It includes signing in with different
 
 ## How to run
 <div style="text-align: justify">
+
 - Clone the project
 
 - Start the api by running command "node app" in Api-folder
