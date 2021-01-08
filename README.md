@@ -54,6 +54,7 @@ Admins can do what shopkeepers can but they can also see a list of all the users
 
 ---
 ## Pages and navigation
+*Note! This graph was made with Mermaid. Gitlab could present the graph but seems like github doesn't have the support. You can copy-paste the code from below to the page https://mermaidjs.github.io/mermaid-live-editor to see the graph.
 The site includes a static navigation bar that has links to main page (The "shop" -button) and most other pages. Depending on the users authentication only some navigation links are shown. On the graph this is marked with letters. U for user, S for shopkeeper and A for admin. Note that shopkeepers authetication includes the users authentication.
 ``` mermaid
 graph TD
